@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ERROR | E_WARNING );
+error_reporting(E_ALL);
 ini_set('display_errors',1);
 try {
 
@@ -33,8 +33,8 @@ try {
 	 * Start the session the first time some component request the session service
 	 */
 	$di->set('session', function() use($di) {
-		$domain = '.' .  $di->get('domain');
-		session_set_cookie_params(3600,'/',$domain,false,true);
+		//$domain = '.' .  $di->get('domain');
+		//session_set_cookie_params(3600,'/',$domain,false,true);
 		$session = new \Phalcon\Session\Adapter\Files();
 		$session->start();
 		return $session;

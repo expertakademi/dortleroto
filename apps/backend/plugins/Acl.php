@@ -23,7 +23,7 @@ class Acl extends Plugin
 		
 		$acl = new \Phalcon\Acl\Adapter\Memory();
 		$acl->setDefaultAction(\Phalcon\Acl::DENY);
-		$sessionRole = $this->sessionObj->role ? $this->sessionObj->role : 'guest';
+		$sessionRole = $this->sessionObj->rol ? $this->sessionObj->rol : 'guest';
 		
 		/*Rolleri tanımlıyoruz*/
 		$roles = array(
@@ -39,13 +39,17 @@ class Acl extends Plugin
 		switch($sessionRole){
 			case "guest":
 				$controllers = array(
-					'index'     => array('*'),
+					'index'     => array('index'),
+					'giris'		=> array('index', 'girisYap'),
+					'test'	 	=> array('*')
 				);
 				$r = 'guest';
 			break;
 			case "admin":
 				$controllers = array(
 				'index'		=> array('*'),
+				'giris' 	=> array('index'),
+				'test'	 	=> array('*')
 				);
 				$r= 'admin';
 			break;

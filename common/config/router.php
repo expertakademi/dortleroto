@@ -35,6 +35,11 @@
 			'module'	=> 'backend'	
 	));
 	$admin->setPrefix('/admin');
+	
+	$admin->add('', array(
+			'controller' => 'index',
+			'action' => 'index',
+	));
 	$admin->add('/:controller', array(
 			'controller' => 1,
 			'action'	 => 'index'

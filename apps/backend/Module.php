@@ -89,10 +89,10 @@ class Module
 		 */
 		$di->set('db', function() {
 			return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-				"host" => '',
-				"username" => '',
-				"password" => '',
-				"dbname" => '',
+				"host" => '31.210.54.34',
+				"username" => 'publicUsr',
+				"password" => 'public@123**',
+				"dbname" => 'dortlerOto',
 				"charset" => 'utf8'
 			));
 		});
