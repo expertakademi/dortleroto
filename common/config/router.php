@@ -25,6 +25,13 @@
 			'action'	 => 2,
 			'params' 	 => 3
 	));
+	$frontend->add('/deneme/([a-zA-Z0-9_-]+)-([0-9]+)',array(
+			'controller'	=> 'test',
+			'action'	 => 'index',
+			'permalink'  => 1,
+			'id'		 =>2
+	
+	));
 	$router->mount($frontend);
 	
 	## FrontEnd ##

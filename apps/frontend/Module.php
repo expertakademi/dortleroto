@@ -48,7 +48,7 @@ class Module
 				//Override parameters
 				$dispatcher->setParams($keyParams);
 			});
-			$acl = new Acl('frontend');
+			$acl = new \Modules\Frontend\Plugins\Acl('frontend');
 			$eventsManager->attach('dispatch', $acl);
 				
 			$dispatcher = new MvcDispatcher();
@@ -89,13 +89,14 @@ class Module
 		 */
 		$di->set('db', function() {
 			return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-				"host" => '',
-				"username" => '',
-				"password" => '',
-				"dbname" => '',
+				"host" => '31.210.54.34',
+				"username" => 'publicUsr',
+				"password" => 'public@123**',
+				"dbname" => 'dortlerOto',
 				"charset" => 'utf8'
 			));
 		});
+		
 		
 		$di->set('transactions', function(){
 			return new \Phalcon\Mvc\Model\Transaction\Manager();

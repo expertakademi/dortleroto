@@ -7,6 +7,7 @@
 			"errorLogin" 		=> "Giriş bilgileriniz hatalı.",
 			"successLogin" 		=> "Başarı ile giriş yapıldı.",
 			"sessionTimeOut"    => "Oturum süreniz sona ermiş yeniden giriş yapınız.",
+			"succesAdd"  		=> "Yeni bir %name% eklediniz. ",
 
 			//validation messages
 			"notEmpty" 			=> "%name% boş bırakılamaz.",

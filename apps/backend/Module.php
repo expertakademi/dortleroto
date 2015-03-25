@@ -48,7 +48,7 @@ class Module
 				//Override parameters
 				$dispatcher->setParams($keyParams);
 			});
-			$acl = new Acl('backend');
+			$acl = new \Modules\Backend\Plugins\Acl('Backend');
 			$eventsManager->attach('dispatch', $acl);
 				
 			$dispatcher = new MvcDispatcher();

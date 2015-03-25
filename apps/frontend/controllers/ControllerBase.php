@@ -4,7 +4,16 @@ namespace Modules\Frontend\Controllers;
 class ControllerBase extends \Phalcon\Mvc\Controller
 {	
 	protected function initialize(){
-
+		$this->assets
+			->addCss('frontend/assets/css/bootstrap.min.css')
+			->addCss('frontend/assets/css/site.css')
+			->addCss('frontend/assets/css/font-awesome.min.css')
+			->addCss('frontend/assets/css/jquery-ui.css');
+		$this->assets
+			->addJs('frontend/assets/js/jquery-1.11.2.min.js')
+			->addJs('frontend/assets/js/jquery-ui.js')
+			->addJs('frontend/assets/js/bootstrap.min.js')
+			->addJs('frontend/assets/js/app.js');
 	}
 	protected function checkAjaxReq(){
 		if ($this->request->isAjax() != true) :

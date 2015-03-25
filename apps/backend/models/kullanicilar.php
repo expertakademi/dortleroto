@@ -1,6 +1,6 @@
 <?php
 namespace Modules\Backend\Models;
-class kullanicilar extends BaseModel{
+class kullanicilar extends ModelBase{
 	protected function initialize(){
 		parent::initialize();
 	}

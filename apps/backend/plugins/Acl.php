@@ -49,6 +49,12 @@ class Acl extends Plugin
 				$controllers = array(
 				'index'		=> array('*'),
 				'giris' 	=> array('index'),
+				'kategori'  => array ('ekle', 'ekleAjax'),
+				'marka' 	=> array ('ekle', 'ekleAjax'),
+				'seri' 		=> array ('ekle', 'ekleAjax', 'markayaGoreGetir'),
+				'model'		=> array ('ekle', 'ekleAjax', 'seriyeGoreGetir'),
+				'ilan'		=> array ('ekle', 'ekleAjax'),
+				'slider'	=> array ('ekle'),
 				'test'	 	=> array('*')
 				);
 				$r= 'admin';

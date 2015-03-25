@@ -18,7 +18,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addCss('backend/assets/global/css/plugins.css')
 			->addCss('backend/assets/layout/css/layout.css')
 			->addCss('backend/assets/layout/css/themes/darkblue.css')
-			->addCss('backend/assets/layout/css/custom.css');
+			->addCss('backend/assets/layout/css/custom.css')
+			->addCss('backend/assets/global/plugins/formvalidation/dist/css/formValidation.min.css');
 		$this->assets
 			->addJs('backend/assets/global/plugins/jquery.min.js')
 			->addJs('backend/assets/global/plugins/jquery-migrate.min.js')
@@ -33,7 +34,13 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addJs('backend/assets/global/scripts/metronic.js')
 			->addJs('backend/assets/layout/scripts/layout.js')
 			->addJs('backend/assets/layout/scripts/quick-sidebar.js')
-			->addJs('backend/assets/layout/scripts/demo.js');
+			->addJs('backend/assets/layout/scripts/demo.js')
+			->addJs('backend/assets/global/plugins/jquery-form/jquery.form.min.js')
+			->addJs('backend/assets/global/plugins/formvalidation/dist/js/formValidation.min.js')
+			->addJs('backend/assets/global/plugins/formvalidation/dist/js/framework/bootstrap.min.js')
+			->addJs('backend/assets/global/plugins/formvalidation/dist/js/language/tr_TR.js')
+			->addJs('backend/assets/js/app.js')
+			->addJs('backend/assets/js/form.js');
 	}
 	protected function checkAjaxReq(){
 		if ($this->request->isAjax() != true) :
