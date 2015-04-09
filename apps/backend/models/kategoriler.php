@@ -4,6 +4,19 @@ use Phalcon\Mvc\Model\Validator\StringLength;
 class kategoriler extends ModelBase{
 	protected function initialize(){
 		parent::initialize();
+		$this->hasMany("id", "Modules\Backend\Models\ilanlar", "kategori_id", array(
+				"foreignKey" => array(
+						"message" => parent::diGet('message')->_("foreignKeyDelete",array("name"=>"kategori","table"=>"ilanlar"))
+				)
+		));
+	}
+	public function getir($id){
+		return self::findFirst(array(
+				"conditions"=>"id = ?1",
+				"bind" => array(
+						1 => $id
+				)
+		));
 	}
 	public function tumunuGetir(){
 		return self::find();
@@ -20,7 +33,36 @@ class kategoriler extends ModelBase{
 		endif;
 		return json_encode($response);
 	}
-	
+	public function duzenle($params){
+		$kategori = $this->getir($params['id']);
+		$kategori->ad = $params['kategoriAdi'];
+		if($kategori->update() == false ):
+			$response['status'] = 'error';
+			$response['message'] = parent::mesajParcala($kategori);
+		else:
+			$response['status'] = 'success';
+			$response['message'] = parent::diGet('message')->_('succesEdit');
+		endif;
+		return json_encode($response);
+	}
+	public function sil($id){
+		$kategori = $this->getir($id);
+		if($kategori->delete() == false ):
+			$response['status'] = 'error';
+			$response['message'] = parent::mesajParcala($kategori);
+		else:
+			$response['status'] = 'success';
+			$response['message'] = parent::diGet('message')->_('succesRemove');
+		endif;
+		return json_encode($response);
+	}
+	public function dataTable(){
+		$results = self::find(array(
+				"columns"=>"id as DT_RowId,ad"
+		))->toArray();
+		$data = array("data"=>$results);
+		return json_encode($data);
+	}
 	## validate ##
 	private function validation(){
 		$this->validate(new StringLength(array(

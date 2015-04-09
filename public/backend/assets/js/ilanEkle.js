@@ -4,8 +4,8 @@ var ilanEkle = function(){
 	var modelSelect = "[name='model']";
 	return{
 		markaSec: function(){
-			jQuery(markaSelect).change(function(){
-				var secilen = jQuery(markaSelect).find("option:selected").val();
+			jQuery('body').on("change",markaSelect,function(){
+				var secilen = jQuery(this).find("option:selected").val();
 				if(secilen== ""){
 					ilanEkle.selectSifirla(seriSelect,'Marka Seçiniz');
 				}else{

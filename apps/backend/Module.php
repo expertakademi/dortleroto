@@ -28,27 +28,30 @@ class Module
 	public function registerServices($di)
 	{
 
-		/**
-		 * Read configuration
-		 */
 		$di->set('dispatcher', function(){
 			//Create an EventsManager
 			$eventsManager = new EventsManager();
 				
 			//Attach a listener
 			$eventsManager->attach("dispatch:beforeDispatchLoop", function($event, $dispatcher) {
-					
 				$keyParams = array();
 				$params = $dispatcher->getParams();
-				//Explode each parameter as key,value pairs
+				// Route da parametre gelmediği için böyle çözdüm şimdilik
+				if(array_key_exists(0,$params)):
+					//Explode each parameter as key,value pairs
 					foreach ($params as $number => $value) {
 						$parts = explode(':', $value);
+						if(isset($parts[1])):
 						$keyParams[$parts[0]] = $parts[1];
-					}					
-				//Override parameters
-				$dispatcher->setParams($keyParams);
+						endif;
+					}
+					//Override parameters
+					$dispatcher->setParams($keyParams);
+				else:
+					$dispatcher->setParams($params);
+				endif;
 			});
-			$acl = new \Modules\Backend\Plugins\Acl('Backend');
+			$acl = new Acl('backend');
 			$eventsManager->attach('dispatch', $acl);
 				
 			$dispatcher = new MvcDispatcher();

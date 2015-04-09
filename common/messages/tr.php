@@ -8,6 +8,10 @@
 			"successLogin" 		=> "Başarı ile giriş yapıldı.",
 			"sessionTimeOut"    => "Oturum süreniz sona ermiş yeniden giriş yapınız.",
 			"succesAdd"  		=> "Yeni bir %name% eklediniz. ",
+			"succesEdit"  		=> "Düzenlendi.",
+			"succesRemove"  	=> "Silindi.",
+				
+				
 
 			//validation messages
 			"notEmpty" 			=> "%name% boş bırakılamaz.",
@@ -17,5 +21,6 @@
 			"alreadyUsed" 		=> "Girilen %name% daha önce kullanılmış.",
 			"check" 			=> "Lütfen kontrol ediniz.",
 			"notSamePassword" 	=> "Girilen şifreler uyuşmamaktadır.",
+			"foreignKeyDelete"  => "Bu %name% %table% tarafından kullanımda olduğundan silinemez"
 	);
 ?>

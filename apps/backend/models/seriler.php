@@ -8,6 +8,19 @@ class seriler extends ModelBase{
 			'alias' 	 => 'markalar',
 			'foreignKey' => true
 		));
+		$this->hasMany("id", "Modules\Backend\Models\ilanlar", "seri_id", array(
+				"foreignKey" => array(
+						"message" => parent::diGet('message')->_("foreignKeyDelete",array("name"=>"seri","table"=>"ilanlar"))
+				)
+		));
+	}
+	public function getir($id){
+		return self::findFirst(array(
+				"conditions"=>"id = ?1",
+				"bind" => array(
+						1 => $id
+				)
+		));
 	}
 	/**
 	 * Yeni bir araç serisi ekler
@@ -27,6 +40,30 @@ class seriler extends ModelBase{
 		endif;
 		return json_encode($response);
 	}
+	public function duzenle($params){
+		$seri = $this->getir($params['id']);
+		$seri->ad = $params['seriAdi'];
+		$seri->marka = $params['marka'];
+		if($seri->update() == false ):
+			$response['status'] = 'error';
+			$response['message'] = parent::mesajParcala($seri);
+		else:
+			$response['status'] = 'success';
+			$response['message'] = parent::diGet('message')->_('succesEdit');
+		endif;
+		return json_encode($response);
+	}
+	public function sil($id){
+		$seri = $this->getir($id);
+		if($seri->delete() == false ):
+			$response['status'] = 'error';
+			$response['message'] = parent::mesajParcala($seri);
+		else:
+			$response['status'] = 'success';
+			$response['message'] = parent::diGet('message')->_('succesRemove');
+		endif;
+		return json_encode($response);
+	}
 	/**
 	 * Girilen markaya ait araç serilerini getirir
 	 * @param int $markaId
@@ -40,7 +77,10 @@ class seriler extends ModelBase{
 				)	
 		));
 	}
-	
+	public function dataTable(){
+		$dt = new serilerDatatable();
+		return $dt->dataTable();
+	}
 	## validate ##
 	private function validation(){
 		$this->validate(new StringLength(array(
@@ -59,5 +99,14 @@ class seriler extends ModelBase{
 		$this->permalink = parent::diGet('helper')->permalink($this->ad);
 	}
 
+}
+class serilerDatatable extends ModelBase{
+	public function dataTable(){
+		$results = self::find(array(
+				"columns"=>"id as DT_RowId,ad,marka_adi"
+		))->toArray();
+		$data = array("data"=>$results);
+		return json_encode($data);
+	}
 }	
 ?>

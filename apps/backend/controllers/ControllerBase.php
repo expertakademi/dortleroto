@@ -1,6 +1,6 @@
 <?php
-
 namespace Modules\Backend\Controllers;
+use Phalcon\Mvc\View;
 class ControllerBase extends \Phalcon\Mvc\Controller
 {	
 	protected function initialize(){
@@ -19,7 +19,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addCss('backend/assets/layout/css/layout.css')
 			->addCss('backend/assets/layout/css/themes/darkblue.css')
 			->addCss('backend/assets/layout/css/custom.css')
-			->addCss('backend/assets/global/plugins/formvalidation/dist/css/formValidation.min.css');
+			->addCss('backend/assets/global/plugins/formvalidation/dist/css/formValidation.min.css')
+			->addCss('backend/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css');
 		$this->assets
 			->addJs('backend/assets/global/plugins/jquery.min.js')
 			->addJs('backend/assets/global/plugins/jquery-migrate.min.js')
@@ -39,8 +40,13 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addJs('backend/assets/global/plugins/formvalidation/dist/js/formValidation.min.js')
 			->addJs('backend/assets/global/plugins/formvalidation/dist/js/framework/bootstrap.min.js')
 			->addJs('backend/assets/global/plugins/formvalidation/dist/js/language/tr_TR.js')
+			->addJs('backend/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js')
+			->addJs('backend/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+			->addJs('backend/assets/global/plugins/jquery.mask.min.js')
 			->addJs('backend/assets/js/app.js')
-			->addJs('backend/assets/js/form.js');
+			->addJs('backend/assets/js/form.js')
+			->addJs('backend/assets/js/modal.js')
+			->addJs('backend/assets/js/dataTables.js');
 	}
 	protected function checkAjaxReq(){
 		if ($this->request->isAjax() != true) :
@@ -64,6 +70,11 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		$this->view->disable();
 		$this->checkAjaxReq();
 		$this->csrfCheck();
+	}
+	protected function disableMain(){
+		$this->view->disableLevel(array(
+				View::LEVEL_MAIN_LAYOUT => true
+		));
 	}
 	
 	

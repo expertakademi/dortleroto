@@ -149,54 +149,29 @@
 					</a>
 				</li>
 				<li>
-					<a href="javascript:;">
-					<i class="fa fa-tags"></i>
-					<span class="title">Kategoriler</span>
-					<span class="arrow "></span>
+					<a href="{{url('admin/kategori/yonet')}}">
+						<i class="fa fa-tags"></i>
+						<span class="title">Kategori Yönetimi</span>
 					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="{{url('admin/kategori/ekle')}}">
-							Ekle</a>
-						</li>
-					</ul>
 				</li>
 				<li>
 					<a href="javascript:;">
 					<i class="fa fa-copyright"></i>
-					<span class="title">Markalar</span>
+					<span class="title">Araç Sınıflandırma</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{url('admin/marka/ekle')}}">
-							Ekle</a>
+							<a href="{{url('admin/marka/yonet')}}">
+							Markaları Yönet</a>
 						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="fa fa-car"></i>
-					<span class="title">Seriler</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
 						<li>
-							<a href="{{url('admin/seri/ekle')}}">
-							Ekle</a>
+							<a href="{{url('admin/seri/yonet')}}">
+							Serileri Yönet</a>
 						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="fa fa-car"></i>
-					<span class="title">Modeller</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
 						<li>
-							<a href="{{url('admin/model/ekle')}}">
-							Ekle</a>
+							<a href="{{url('admin/model/yonet')}}">
+							Modelleri Yönet</a>
 						</li>
 					</ul>
 				</li>
@@ -216,13 +191,30 @@
 				<li>
 					<a href="javascript:;">
 					<i class="fa fa-picture-o"></i>
-					<span class="title">Anasayfa Slider</span>
+					<span class="title">Slider</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{url('')}}">
-							Ekle</a>
+							<a href="{{url('admin/slider/yonet')}}">
+							Yönet</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;">
+					<i class="fa fa-user"></i>
+					<span class="title">Müşteri Yönetimi</span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="{{url('admin/musteri/ekle')}}">
+							Yeni Müşteri</a>
+						</li>
+						<li>
+							<a href="{{url('admin/musteri/yonet')}}">
+							Müşteri Yönetimi</a>
 						</li>
 					</ul>
 				</li>
@@ -259,6 +251,13 @@
 	</div>
 </div>
 <!-- END FOOTER -->
+<div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {{assets.outputJs()}}
 <script>
       jQuery(document).ready(function() {    

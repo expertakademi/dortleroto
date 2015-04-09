@@ -37,10 +37,10 @@
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-3 navbar-right">
-                            <ul class="giris pull-right nav">
+                            <!-- <ul class="giris pull-right nav">
                                 <li><a href="#"><i class="fa fa-user"></i>Üye Ol</a></li>
                                 <li><a href="#"><i class="fa fa-lock"></i>Üye Girişi</a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="mobile-menu">
@@ -322,20 +322,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         {{assets.outputJs()}}
         <script>
-	       $(function() {
-	           $( "#slider-range" ).slider({
-	               range: true,
-	               min: 0,
-	               max: 500,
-	               values: [ 75, 300 ],
-	               slide: function( event, ui ) {
-	                   $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-	               }
-	           });
-	           $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	           " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	       });
-			app.setBase("{{url('')}}")
+			app.setBase("{{url('')}}");
         </script>
     </body>
 </html>

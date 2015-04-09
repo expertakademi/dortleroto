@@ -49,12 +49,15 @@ class Acl extends Plugin
 				$controllers = array(
 				'index'		=> array('*'),
 				'giris' 	=> array('index'),
-				'kategori'  => array ('ekle', 'ekleAjax'),
-				'marka' 	=> array ('ekle', 'ekleAjax'),
-				'seri' 		=> array ('ekle', 'ekleAjax', 'markayaGoreGetir'),
-				'model'		=> array ('ekle', 'ekleAjax', 'seriyeGoreGetir'),
+				'kategori'  => array ('ekle','ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'yonet', 'dataTableListele'),
+				'marka' 	=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'dataTableListele'),
+				'seri' 		=> array ('yonet', 'ekle', 'ekleAjax','duzenle', 'duzenleAjax', 'sil', 'silAjax', 'markayaGoreGetir', 'dataTableListele'),
+				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele'),
 				'ilan'		=> array ('ekle', 'ekleAjax'),
-				'slider'	=> array ('ekle'),
+				'musteri'	=> array ('ekle','ekleAjax','duzenle','duzenleAjax','sil',
+					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
+					'ekleNot','ekleNotAjax','duzenleNot','duzenleNotAjax','silNot','silNotAjax'),
+				'slider'	=> array ('yonet', 'dataTableListele'),
 				'test'	 	=> array('*')
 				);
 				$r= 'admin';

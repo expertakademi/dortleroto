@@ -50,7 +50,9 @@ var form = function (){
 			form.showMessage($form,responseText);
 			if(responseText.status=="success"){
 				form.btnSuccess($form);
-				form.checkReload($form);				
+				form.checkReload($form);
+				form.checkDtReload($form);
+				form.checkDtRemove($form);
 			}else{
 				form.btnDefault($form);
 			}
@@ -80,6 +82,18 @@ var form = function (){
 			var data = $form.data();
 			if(data.reload){
 				app.pageReload();
+			}
+		},
+		checkDtReload : function ($form){
+			var data = $form.data();
+			if(data.dtReload){
+				dataTables.reloadDataTable(data.dtId);
+			}
+		},
+		checkDtRemove :  function ($form){
+			var data = $form.data();
+			if(data.dtRemove){
+				dataTables.removeRow(data.dtId,data.dtRowId);
 			}
 		},
 		summernote : function(){

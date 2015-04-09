@@ -9,14 +9,14 @@ var index = function () {
            jQuery( "#slider-range" ).slider({
                range: true,
                min: 0,
-               max: 500,
-               values: [ 75, 300 ],
+               max: 500000,
+               values: [ 0, 150000 ],
                slide: function( event, ui ) {
-                   jQuery( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                   jQuery( "#amount" ).val(ui.values[ 0 ] + " TL" + " - " + ui.values[ 1 ] + " TL" );
                }
            });
-           jQuery( "#amount" ).val( "$" + jQuery( "#slider-range" ).slider( "values", 0 ) +
-           " - $" + jQuery( "#slider-range" ).slider( "values", 1 ) );
+           jQuery( "#amount" ).val( jQuery( "#slider-range" ).slider( "values", 0 ) + " TL" +
+           " - " + jQuery( "#slider-range" ).slider( "values", 1 ) + " TL" );
 		},
 		markaSec: function(){
 			jQuery(markaSelect).change(function(){
