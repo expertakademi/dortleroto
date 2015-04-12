@@ -1,3 +1,17 @@
+.header-logo{
+	position:absolute;
+	z-index:999;
+	max-height:135px;
+	margin-top:-10px;
+	margin-left:4em;
+}
 .vitrin-baslik{
 	height:35px;
+}
+.arac-listele{
+	cursor:pointer;
+}
+.thumbnails-carousel img{
+	width:125px;
+	height:100px;
 }

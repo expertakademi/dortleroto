@@ -13,7 +13,6 @@ var app = function(){
 		alertHide : function(){
 			jQuery("body").on("click","[data-hide='alert']",function(){
 				jQuery(this).parent(".alert").addClass("hide");
-				console.log("test");
 			});
 		},
 		stickyFooter :  function (){

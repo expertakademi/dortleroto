@@ -9,6 +9,10 @@ class ilanlar extends ModelBase{
 				array(
 						"alias"=>"ilanResimleri"
 				));
+		$this->hasOne("id","Modules\Backend\Models\ilanAciklamalari","ilan_id",
+				array(
+						"alias"=>"ilanAciklamalari"
+				));
 		$this->hasMany("kategori_id","Modules\Backend\Models\kategoriler","id",
 				array(
 						"alias"=>"kategoriler"
@@ -31,6 +35,7 @@ class ilanlar extends ModelBase{
 			// İlan Ekle
 			$ilan = new ilanlar();
 			$ilan->baslik = $params['baslik'];
+			$ilan->permalink = parent::diGet('helper')->permalink($params['baslik']);
 			$ilan->kategori_id = $params['kategori'];
 			$ilan->marka_id= $params['marka'];
 			$ilan->seri_id = $params['seri'];
@@ -46,6 +51,7 @@ class ilanlar extends ModelBase{
 			$ilan->cekis_id = $params['cekis'];
 			$ilan->vites_id = $params['vites'];
 			$ilan->kasa_id =$params['kasa'];
+			$ilan->hasarsiz = $params['hasar'];
 			$ilan->eklenme_tarihi = date('Y-m-d H:i:s');
 			$ilan->aktif=1;
 			if($ilan->create() == false):
@@ -60,6 +66,15 @@ class ilanlar extends ModelBase{
 			if($ilanLog->create() == false ):
 				$transaction->rollback(parent::mesajParcala($ilanLog));
 			endif;
+			
+			//Aciklama
+			$ilanAciklama = new ilanAciklamalari();
+			$ilanAciklama->ilan_id =  $ilan->id;
+			$ilanAciklama->aciklama  = $params['aciklama'];
+			if($ilanAciklama->create() == false ):
+				$transaction->rollback(parent::mesajParcala($ilanAciklama));
+			endif;
+			
 			
 			// Resimler
 			$files = parent::diGet('request')->getUploadedFiles();

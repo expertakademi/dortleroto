@@ -14,6 +14,7 @@ class IndexController extends ControllerBase
     			"kategoriler" 	=>(new kategoriler)->tumunuGetir(),
     			"markalar"	  	=>(new markalar)->tumunuGetir(),
     			"sonEklenenler" =>(new ilanlar)->anaSayfaSon(0,8),
+    			"hasarsizSon"	=> (new ilanlar)->hasarsizSon(0,8),
     			"slider"		=>(new slider)->anaSayfaSlider(),
     			"peugeotSeriler" =>(new seriler)->markayaPermalinkGoreGetir("peugeot")
     	));

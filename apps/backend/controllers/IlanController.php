@@ -25,11 +25,17 @@ class IlanController extends ControllerBase{
 				"kasalar"		=> (new kasalar)->tumunuGetir()
 		));
 		$this->assets
-			->addCss('backend/assets/global/plugins/bootstrap-fileinput2/css/fileinput.min.css');
+			->addCss('backend/assets/global/plugins/bootstrap-fileinput2/css/fileinput.min.css')
+			->addCss("backend/assets/global/plugins/summernote/dist/summernote.css");
 		$this->assets
 			->addJs("backend/assets/js/ilanEkle.js")
 			->addJs('backend/assets/global/plugins/bootstrap-fileinput2/js/fileinput.min.js')
-			->addJs('backend/assets/global/plugins/bootstrap-fileinput2/js/fileinput_locale_tr.js');
+			->addJs('backend/assets/global/plugins/bootstrap-fileinput2/js/fileinput_locale_tr.js')
+			->addJs("backend/assets/global/plugins/summernote/dist/summernote.js?ver=0.02")
+			->addJs("backend/assets/global/plugins/summernote/plugin/summernote-ext-video.js")
+			->addJs("backend/assets/global/plugins/summernote/plugin/summernote-ext-fontstyle.js")
+			->addJs("backend/assets/global/plugins/summernote/lang/summernote-tr-TR.js");
+		
 	}
 	public function ekleAjaxAction(){
 		parent::ajaxForm();

@@ -78,6 +78,7 @@ class Module
 			$compiler->addFunction('replace', 'str_replace');
 			$compiler->addFunction('rtrim', 'rtrim');
 			$compiler->addFunction('ltrim', 'ltrim');
+			$compiler->addFunction('substr', 'substr');
 			return $volt;
 		});
 		/**

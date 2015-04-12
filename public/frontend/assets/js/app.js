@@ -10,6 +10,9 @@ var app = function(){
 		pageReload :  function (){
 			window.location.href=window.location.href;
 		},
+		goPage : function(url){
+			window.location.href = url;
+		},
 		init : function(){
 		}
 	}

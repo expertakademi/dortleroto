@@ -110,7 +110,7 @@ var form = function (){
 				           ['color', ['color']],
 				           ['para', ['ul', 'ol', 'paragraph']],
 				           ['height', ['height']],
-				           ['insert', ['link', 'picture', 'video', 'table', 'hr']],
+				           ['insert', ['hr']],
 				           ['misc', ['fullscreen', 'help', 'codeview']]
 				]
 			});

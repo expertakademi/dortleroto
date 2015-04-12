@@ -1,16 +1,16 @@
-<div class="col-md-12 margin-bottom-1">
-                    <ol class="breadcrumb no-margin margin-bottom-05">
+<div class="col-md-12 margin-bottom-1" style="margin-top:10px;">
+                    <!--  <ol class="breadcrumb no-margin margin-bottom-05">
                       <li><a href="#">Home</a></li>
                       <li><a href="#">Library</a></li>
                       <li class="active">Data</li>
                       <a class="pull-right"><i class="fa fa-share-alt padding-right-05"></i>Paylaş</a> 
 
-                    </ol>
+                    </ol>-->
                     <h3  class="margin-bottom-05 pull-left no-margin">
-                        <span class="detay-baslik">Volkswagen Jetta 1.4 TSI Comfortline</span>
-                        <strong class="kirmizi">120.000 TL</strong>
+                        <span class="detay-baslik">{{ilan.baslik}}</span>
+                        <strong class="kirmizi">{{ilan.fiyat}} TL</strong>
                     </h3> 
-                    <p class="pull-right padding-top-05">İlan No:<span class="kirmizi"> <b>217516</b></span></p>
+                    <p class="pull-right padding-top-05">İlan No:<span class="kirmizi"> <b>{{ilan.id}}</b></span></p>
 
                     <div class="col-md-12 col-xs-12 col-sm-12 border-bottom-e5"></div>
                     <div class="clearfix"></div> 
@@ -20,12 +20,11 @@
                     <div  style="background: #fff; padding:15px;border:1px solid #d9d9d9;border-bottom:3px solid #e3e3e7">
                         <div id="detay" class="carousel slide detay" data-ride="carousel" data-interval="false">
                             <div class="carousel-inner">
-                                <div class="item active srle">
-                                    <img src="{{url('frontend/uploads/car.jpg')}}" alt="car.jpg" class="img-responsive">
+                            	{% for resim in ilanResimleri %}
+                                <div class="item {%if loop.first %}active srle {%endif%}">
+                                    <img src="{{url(resim.resim_link)}}" alt="car.jpg" class="img-responsive">
                                 </div>
-                                <div class="item">
-                                    <img src="{{url('frontend/uploads/car.jpg')}}" alt="car.jpg" class="img-responsive">
-                                </div>
+                                {% endfor %}
                             </div>
 
                             <a class="left carousel-control" href="#detay" role="button" data-slide="prev">
@@ -38,17 +37,15 @@
                             </a>
 
                             <ul class="thumbnails-carousel clearfix hidden-xs hidden-sm">
-                                <li><img src="{{url('frontend/uploads/car_thum.jpg')}}" alt="1_tn.jpg"></li>
-                                <li><img src="{{url('frontend/uploads/car_thum.jpg')}}" alt="1_tn.jpg"></li>
-                                <li><img src="{{url('frontend/uploads/car_thum.jpg')}}" alt="1_tn.jpg"></li>
-                                <li><img src="{{url('frontend/uploads/car_thum.jpg')}}" alt="1_tn.jpg"></li>
+                            	{% for resim in ilanResimleri %}
+                                	<li data-target="#detay" data-slide-to="{{loop.index -1 }}"><img  src="{{url(resim.resim_link)}}" alt="1_tn.jpg"></li>
+                                {% endfor %}
                             </ul>
                             
                             <ol class="carousel-indicators">
-                                <li data-target="#detay" data-slide-to="0" class="active"></li>
-                                <li data-target="#detay" data-slide-to="1"></li>
-                                <li data-target="#detay" data-slide-to="2"></li>
-                                <li data-target="#detay" data-slide-to="3"></li>
+                           	 	{% for resim in ilanResimleri %}
+                                <li data-target="#detay" data-slide-to="{{loop.index -1 }}" class="{%if loop.first %}active {%endif%}"></li>
+                                {% endfor %}
                             </ol>
                         </div>
                         
@@ -62,63 +59,68 @@
                 <div class="col-md-3 col-xs-12 margintop-xs-2 padding-md-0">
                     <div class="arama detay-list ic-padding">
                         <p class="kirmizi no-margin margin-bottom-05">
-                            <a href="#" class="kirmizi">İstanbul</a> / 
-                            <a href="#" class="kirmizi">Bakırköy </a> / 
-                            <a href="#" class="kirmizi">Yeşilköy Mah.</a>
+                            <a href="#" class="kirmizi">Adana</a> / 
+                            <a href="#" class="kirmizi">Yeni Mahalle </a>  
                         </p>
                         <table class="table">
                             <tr>
                                 <td class="text-nowrap">İlan Tarihi</td>
-                                <td>05.12.2014</td>
+                                <td>{{ilan.eklenme_tarihi}}</td>
                             </tr>
                             <tr>
                                 <td>Marka</td>
-                                <td>Mercedes - Benz </td>
+                                <td>{{ilan.marka_adi}} </td>
                             </tr>
                             <tr>
                                 <td>Seri</td>
-                                <td>CLS  </td>
+                                <td>{{ilan.seri_adi}}  </td>
                             </tr>
                             <tr>
                                 <td>Model</td>
-                                <td>CLS 350 CDI BlueEfficiency </td>
+                                <td>{{ilan.model_adi}} </td>
                             </tr>
                             <tr>
                                 <td>Yıl</td>
-                                <td>2014 </td>
+                                <td>{{ilan.yil}} </td>
                             </tr>
                             <tr>
                                 <td>Yakıt</td>
-                                <td>Dizel </td>
+                                <td>{{ilan.yakit_adi}} </td>
                             </tr><tr>
                                 <td>Vites</td>
-                                <td>Otomatik </td>
+                                <td>{{ilan.vites_adi}} </td>
                             </tr><tr>
                                 <td>Km</td>
-                                <td class="kirmizi">30.500 </td>
+                                <td class="kirmizi">{{ilan.kilometre}}</td>
                             </tr><tr>
                                 <td>Renk</td>
-                                <td>Beyaz </td>
+                                <td>{{ilan.renk_adi}} </td>
                             </tr>
                             <tr>
                                 <td>Kasa Tipi</td>
-                                <td>Sedan </td>
+                                <td>{{ilan.kasa_adi}} </td>
                             </tr>
                             <tr>
                                 <td class="text-nowrap">Motor Hacmi</td>
-                                <td>2501 - 3000 cm3 </td>
+                                <td>{{ilan.hacim_adi}} cm3 </td>
                             </tr>                            
                             <tr>
                                 <td>Motor Gücü</td>
-                                <td>251 - 275 HP </td>
+                                <td>{{ilan.guc_adi}} </td>
                             </tr>
                             <tr>
                                 <td>Çekiş</td>
-                                <td>4WD (Sürekli) </td>
+                                <td>{{ilan.cekis_adi}} </td>
                             </tr>
                             <tr>
                                 <td>Garanti</td>
-                                <td>Evet </td>
+                                <td>
+                                {% if ilan.garanti == 1 %}
+                                	Evet
+                                {% else %}
+                                	Hayır
+                                {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="text-nowrap">Plaka / Uyruk</td>
@@ -183,14 +185,7 @@
                             <div class="tab-pane active" id="tab_default_1">
                                 <h3 class="tab-baslik">Açıklama</h3>
                                 <div class="padding-15">
-                                    <p><b>SAHİBİNDEN 208 GTİ</b></p>
-                                    <p>Aracım bakımlı ve temiz olup kaza veya boya bulunmamaktadır.</p>
-                                    <p>Kapalı garaj arabası olan aracımın ilk bakımı yetkili serviste yapılmıştır.</p>
-                                    <p>Garantisi devam eden aracım için takas düşünmüyorum.</p>
-                                    <p>
-                                        Duis autem eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
-                                    </p> 
-                                    <hr>                             
+									{{ilan.aciklama}}                          
                                 </div>  
                                 <h3 class="tab-baslik">Özellikler</h3>
                                 <div class="padding-15">

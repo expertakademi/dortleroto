@@ -16,6 +16,12 @@ class helper extends Component  {
 		$response->send();
 		exit;
 	}
+	public function goUrl($url){
+		$response = new Response();
+		$response->redirect($url);
+		$response->send();
+		exit;
+	}
 	public function resultToJson($phalconResult){
 		return json_encode($phalconResult->toArray(), JSON_NUMERIC_CHECK);
 	}
@@ -33,8 +39,8 @@ class helper extends Component  {
     * @return string
     */
     public function permalink($string){
-      $find = array('Ç', 'Ş', 'Ğ', 'Ü', 'İ', 'Ö', 'ç', 'ş', 'ğ', 'ü', 'ö', 'ı', '+', '#');
-      $replace = array('c', 's', 'g', 'u', 'i', 'o', 'c', 's', 'g', 'u', 'o', 'i', 'plus', 'sharp');
+      $find = array('Ç', 'Ş', 'Ğ', 'Ü', 'İ', 'Ö', 'ç', 'ş', 'ğ', 'ü', 'ö', 'ı', '+', '#', ',', '.');
+      $replace = array('c', 's', 'g', 'u', 'i', 'o', 'c', 's', 'g', 'u', 'o', 'i', 'plus', 'sharp','', '');
       $string = strtolower(str_replace($find, $replace, $string));
       $string = preg_replace("@[^A-Za-z0-9\-_\.\+]@i", ' ', $string);
       $string = trim(preg_replace('/\s+/', ' ', $string));

@@ -19,10 +19,10 @@
     <body>
         <div class="container-fluid ust">
             <div class="container">
-                <div class="row" style="margin-top:10px;">
+                <div class="row" style="margin-top:10px;margin-bottom:10px;">
                     <div class="hidden-xs">
                         <div class="col-sm-3 col-md-3">
-                            <h4>Logo</h4>
+                            <a href="{{url('')}}"><img src="{{url('frontend/assets/img/logo.png')}}" class="header-logo img-responsive"></a>
                         </div>
                         <div class="col-sm-5 col-md-5 ">
                         	<form action="{{url('ara/ustAra')}}" method="post">
@@ -76,7 +76,7 @@
             <div class="container">
                 <div class="row">
                     <nav class="navbar navbar-default hidden-xs">
-                        <div class="collapse navbar-collapse" id="menu">
+                        <div class="col-md-offset-3 collapse navbar-collapse" id="menu">
                             <ul class="nav navbar-nav">
                                 <li>
                                     <span class="fa-stack padding-top-15">

@@ -6,7 +6,7 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{url('admin/ilan/ekleAjax')}}" class="form-fv horizontal-form" method="post" enctype="multipart/form-data">
+		<form action="{{url('admin/ilan/ekleAjax')}}" class="form-fv horizontal-form" method="post" enctype="multipart/form-data" data-summernote="true">
 			<div class="form-body">
 				<h3 class="form-section">Temel Bilgiler</h3>
 				<div class="row">
@@ -167,6 +167,24 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Hasar Durumu</label>
+							<select name="hasar" class="form-control" required>
+								<option value="">Seçiniz</option>
+								<option value="0">Hasarlı</option>
+								<option value="1">Hasarsız</option>
+							</select>
+						</div>
+					</div>
+				</div><!-- row -->
+				<h3 class="form-section">İlan Açıklaması</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+	                    	<textarea name="aciklama"class="form-control summernote"></textarea>
+	               		</div>
+					</div>
 				</div><!-- row -->
 				<h3 class="form-section">Resimler</h3>
 				<div class="row">
@@ -176,7 +194,7 @@
 	                    	<input type="hidden" name="kapak" value="">
 	               		</div>
 					</div>
-				</div>
+				</div><!-- row -->
 			</div>
 			<div class="form-actions">
 				<div class="row">
@@ -210,5 +228,6 @@ window.onload = function(){
 		
         previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
 	});
+	form.summernote();
 }
 </script>

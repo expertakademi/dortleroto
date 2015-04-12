@@ -121,12 +121,13 @@
              <h4 class="text-center">En Son Eklenenler</h4> 
          </div>
          {% for sonIlan in sonEklenenler %}
-	         <div class="col-xs-6 col-sm-3 col-md-3">
+         	{% set link = url('ilan/'~sonIlan.permalink ~ '-' ~ sonIlan.id)%}
+	         <div class="col-xs-6 col-sm-3 col-md-3" onClick="app.goPage('{{link}}')">
 	             <div class="thumbnail arac-listele">
 	                 <img src="{{url(sonIlan.kapak_foto)}}" class="img-responsive">
-	                 <p><a href="#" class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>
+	                 <p><a class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>
 	                 <div class="caption">
-	                     <p class="font-17 vitrin-baslik">{{sonIlan.baslik}}</p>
+	                     <p class="font-17 vitrin-baslik"><a href="#" title="{{sonIlan.baslik}}">{{substr(sonIlan.baslik,0,30)}}</a></p>
 	                     <p class="gri text-right border-top no-margin padding-top-15">
 	                         <span class="km-icon iconset"></span><span> {{sonIlan.kilometre}} km</span>
 	                     </p>
@@ -137,16 +138,17 @@
          <div class="clearfix"></div>
          <div class="col-md-12 hidden-xs">
              <div class="baslik iconset center-block">
-                 <h4 class="text-center">En Son Eklenenler</h4> 
+                 <h4 class="text-center">Hasarsızlar</h4> 
              </div>
          </div>
-         {% for sonIlan in sonEklenenler %}
+         {% for sonIlan in hasarsizSon %}
+         	{% set link = url('ilan/'~sonIlan.permalink ~ '-' ~ sonIlan.id)%}
 	         <div class="col-xs-6 col-sm-3 col-md-3">
 	             <div class="thumbnail arac-listele">
-	                 <img src="{{url('frontend/uploads/car.jpg')}}" class="img-responsive">
-	                 <p><a href="#" class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>
+	                 <img src="{{url(sonIlan.kapak_foto)}}" class="img-responsive">
+	                 <p><a class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>
 	                 <div class="caption">
-	                     <p class="font-17">{{sonIlan.baslik}}</p>
+	                     <p class="font-17 vitrin-baslik"><a href="#" title="{{sonIlan.baslik}}">{{substr(sonIlan.baslik,0,30)}}</a></p>
 	                     <p class="gri text-right border-top no-margin padding-top-15">
 	                         <span class="km-icon iconset"></span><span> {{sonIlan.kilometre}} km</span>
 	                     </p>
@@ -154,8 +156,6 @@
 	             </div>
 	         </div>
          {% endfor %}
-
-
 
          <div class="col-md-12">
              <div class="form-group">

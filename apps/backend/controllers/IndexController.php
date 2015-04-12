@@ -10,7 +10,11 @@ class IndexController extends ControllerBase
 	    	$this->response->redirect('admin/giris');
 	    endif;
 	    $this->view->title= "Özet";
-
+        $this->assets
+                ->addJs('backend/assets/global/plugins/flot/jquery.flot.min.js')
+                ->addJs('backend/assets/global/plugins/flot/jquery.flot.resize.min.js')
+                ->addJs('backend/assets/global/plugins/flot/jquery.flot.categories.js')
+                ->addJs('backend/assets/js/ozet.js');
     }
     public function testAction(){
 	    $this->helper->goBase();

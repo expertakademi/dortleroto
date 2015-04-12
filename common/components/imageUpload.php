@@ -93,8 +93,13 @@ class imageUpload extends Component{
 	public function thumbUpload($fileLocation,$prefix=null,$resize=null){
 		$directory = $this->getDirectory($prefix);
 		$fileDirectory = $this->getPublicDirectory();
-		$upload = new \upload($fileDirectory. $fileLocation);
-		
+		$copyDirectory = substr($fileDirectory.$fileLocation, 0, -17);
+		$newName = uniqid() .'.jpg';
+		$copy = copy($fileDirectory.$fileLocation, $copyDirectory.$newName);
+		if($copy == false):
+			return false;
+		endif;
+		$upload = new \upload($copyDirectory. $newName);
 		//Yeni İsim;
 		$newName = uniqid();
 		$upload->file_new_name_body = $newName;

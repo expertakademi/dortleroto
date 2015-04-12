@@ -1,6 +1,7 @@
 <?php 
 namespace Modules\Frontend\Controllers;
-use Modules\Frontend\Models\ilanlarAra;
+use Modules\Frontend\Models\ilanlarAra,
+	Modules\Frontend\Models\ilanlar;
 class AraController extends ControllerBase{
 	public function aramaYapAction(){
 		$this->view->disable();
@@ -28,6 +29,13 @@ class AraController extends ControllerBase{
 		$this->view->disable();
 		$aranan = $this->request->getPost("aranan");
 		if(is_numeric($aranan)):
+			$ilan = (new ilanlar)->ilanGetir(null,$aranan);
+			if($ilan):
+				$this->response->redirect("ilan/{$ilan->permalink}-{$ilan->id}");
+			else:
+				$aranan = urlencode($aranan);
+				$this->response->redirect('ara/listele/kelime:'. $aranan);
+			endif;
 		else:
 			$aranan = urlencode($aranan);
 			$this->response->redirect('ara/listele/kelime:'. $aranan);
