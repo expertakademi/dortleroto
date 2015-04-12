@@ -28,13 +28,13 @@ var index = function () {
 				}
 			});
 		},
-		seriGetir : function (markaId){
+		seriGetir : function (markaPerma){
 			index.selectSifirla(seriSelect,'Tüm Modeller');
-			$.getJSON( app.getBase()+'seri/markayaGoreGetir/markaId:'+markaId, function( data ) {
+			$.getJSON( app.getBase()+'seri/markayaPermalinkGoreGetir/markaPerma:'+markaPerma, function( data ) {
 				$.each(data, function(key,value) {   
 				     jQuery(seriSelect)
 			         .append($("<option></option>")
-			         .attr("value",value.id)
+			         .attr("value",value.permalink)
 			         .text(value.ad));	
 				});
 			});

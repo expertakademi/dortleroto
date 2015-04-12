@@ -13,11 +13,17 @@ class seriler extends ModelBase{
 	 * @param int $markaId
 	 * @return phalcon result
 	 */
-	public function markayaGoreGetir($markaId){
+	public function markayaPermalinkGoreGetir($markaPermalink){
+		$marka = markalar::findFirst(array(
+				"conditions"=>"permalink = ?1",
+				"bind"=>array(
+						1=>$markaPermalink
+				)	
+		));
 		return self::find(array(
 				"conditions"=>"marka_id=?1",
 				"bind" => array(
-						1=>$markaId
+						1=>$marka->id
 				)	
 		));
 	}

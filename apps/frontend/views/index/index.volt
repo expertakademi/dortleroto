@@ -3,7 +3,7 @@
          <ul class="list-group ">
              <li class="list-group-item kategori"><a href="#">Kategoriler</a></li>
              {% for kategori in kategoriler %}
-            	<li class="list-group-item"><a href="#">{{kategori.ad}}</a></li>
+            	<li class="list-group-item"><a href="{{url('ara/listele/kategori:'~kategori.permalink)}}">{{kategori.ad}}</a></li>
              {% endfor %}
          </ul>
      </div>
@@ -11,10 +11,10 @@
          <ul class="list-group">
              <li class="list-group-item kategori"><a href="#">Hızlı Arama</a><div class="iconset araba"></div></li>
              
-             <li class="list-group-item marka"><a href="#">Peugeot</a></li>
-             <li class="list-group-item active"><a href="#"><span class="list"></span>206</a></li>
-             <li class="list-group-item"><a href="#"><span class="list"></span>207</a></li>
-             <li class="list-group-item"><a href="#"><span class="list"></span>307</a></li>
+             <li class="list-group-item marka"><a href="{{url('ara/listele/marka:peugeot')}}">Peugeot</a></li>
+             {% for item in peugeotSeriler %}
+            	 <li class="list-group-item "><a href="{{url('ara/listele/marka:peugeot/seri:'~item.permalink)}}"><span class="list"></span>{{item.ad}}</a></li>
+			{% endfor %}
          </ul>
      </div>
      <div class="col-md-12 hidden-xs hidden-sm avantajli-ilan no-padding">
@@ -82,12 +82,12 @@
                      <li class="list-group-item kategori"><a href="#">Arama Yap</a></li>
                      <div class="iconset gri-araba"></div>
                  </ul>
-                 <form>
+                 <form method="post" action="{{url('ara/aramaYap')}}">
                      <div class="form-group">
-                         <select class="form-control">
+                         <select name="kategori" class="form-control">
                              <option value="">Tüm Kategoriler</option>
 							 {% for kategori in kategoriler %}
-							 	<option value="{{kategori.id}}">{{kategori.ad}}</option>
+							 	<option value="{{kategori.permalink}}">{{kategori.ad}}</option>
 							 {% endfor %}
                          </select>
                      </div>
@@ -95,7 +95,7 @@
                          <select name="marka" class="form-control">
                              <option value="">Tüm Markalar</option>
                              {% for marka in markalar %}
-                             	<option value="{{marka.id}}">{{marka.ad}}</option>
+                             	<option value="{{marka.permalink}}">{{marka.ad}}</option>
                              {% endfor %}
 
                          </select>
@@ -107,9 +107,8 @@
                      </div>
                      <div class="form-group">
                          <label for="fiyat">Fiyat</label>
-
                          <div id="slider-range"></div>   
-                         <input type="text" class="fiyat" id="amount" readonly>
+                         <input type="text" class="fiyat" name="fiyat" id="amount" readonly>
                      </div>
                      <button type="submit" class="btn btn-default btn-block kirmizi-btn">ARA</button>
                  </form>
@@ -124,10 +123,10 @@
          {% for sonIlan in sonEklenenler %}
 	         <div class="col-xs-6 col-sm-3 col-md-3">
 	             <div class="thumbnail arac-listele">
-	                 <img src="{{url('frontend/uploads/car.jpg')}}" class="img-responsive">
+	                 <img src="{{url(sonIlan.kapak_foto)}}" class="img-responsive">
 	                 <p><a href="#" class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>
 	                 <div class="caption">
-	                     <p class="font-17">{{sonIlan.baslik}}</p>
+	                     <p class="font-17 vitrin-baslik">{{sonIlan.baslik}}</p>
 	                     <p class="gri text-right border-top no-margin padding-top-15">
 	                         <span class="km-icon iconset"></span><span> {{sonIlan.kilometre}} km</span>
 	                     </p>

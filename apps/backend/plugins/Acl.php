@@ -53,11 +53,11 @@ class Acl extends Plugin
 				'marka' 	=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'dataTableListele'),
 				'seri' 		=> array ('yonet', 'ekle', 'ekleAjax','duzenle', 'duzenleAjax', 'sil', 'silAjax', 'markayaGoreGetir', 'dataTableListele'),
 				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele'),
-				'ilan'		=> array ('ekle', 'ekleAjax'),
+				'ilan'		=> array ('ekle', 'ekleAjax','yonet','dataTableListele'),
 				'musteri'	=> array ('ekle','ekleAjax','duzenle','duzenleAjax','sil',
 					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
 					'ekleNot','ekleNotAjax','duzenleNot','duzenleNotAjax','silNot','silNotAjax'),
-				'slider'	=> array ('yonet', 'dataTableListele'),
+				'slider'	=> array ('ekle','ekleAjax','duzenle', 'duzenleAjax','sil','silAjax', 'yonet', 'dataTableListele'),
 				'test'	 	=> array('*')
 				);
 				$r= 'admin';

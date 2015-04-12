@@ -7,7 +7,8 @@ class slider extends ModelBase{
 	public function anaSayfaSlider(){
 		return self::find(array(
 				"conditions"=>"aktif = 1 ",
-				"order" => "siralama DESC"
+				"order" => "id DESC, siralama DESC",
+				"limit" => 4
 		));
 	}
 }

@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors',1);
+ini_set ( "memory_limit", "40M");
+require __DIR__ . '/../vendor/autoload.php';
 try {
 
 	/**
@@ -24,7 +26,7 @@ try {
 	});
 	$di->set('url', function() {
 		$url = new \Phalcon\Mvc\Url();
-		$url->setBaseUri('/');
+		$url->setBaseUri('http://31.210.54.34/');
 		return $url;
 	});
 

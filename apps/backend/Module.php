@@ -107,6 +107,10 @@ class Module
 		$di->set('helper', function(){
     		return new \Modules\Common\Components\helper();
 		}, true);
+	
+		$di->set('imageUpload', function(){
+			return new \Modules\Common\Components\imageUpload();
+		}, true);
 		
 
 	}

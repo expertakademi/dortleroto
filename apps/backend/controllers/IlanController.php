@@ -25,13 +25,26 @@ class IlanController extends ControllerBase{
 				"kasalar"		=> (new kasalar)->tumunuGetir()
 		));
 		$this->assets
-			->addJs("backend/assets/js/ilanEkle.js");
+			->addCss('backend/assets/global/plugins/bootstrap-fileinput2/css/fileinput.min.css');
+		$this->assets
+			->addJs("backend/assets/js/ilanEkle.js")
+			->addJs('backend/assets/global/plugins/bootstrap-fileinput2/js/fileinput.min.js')
+			->addJs('backend/assets/global/plugins/bootstrap-fileinput2/js/fileinput_locale_tr.js');
 	}
 	public function ekleAjaxAction(){
 		parent::ajaxForm();
 		$params = $this->request->getPost();
 		$ilan = new ilanlar();
 		echo $ilan->yeni($params);
+	}
+	
+	public function yonetAction(){
+		$this->view->title= "İlan Yönetimi";
+	}
+	
+	public function dataTableListeleAction(){
+		$this->view->disable();
+		echo (new ilanlar)->dataTable();
 	}
 }
 ?>

@@ -7,7 +7,7 @@ class ilanlar extends ModelBase{
 	
 	public function anaSayfaSon($offset,$number){
 		return self::find(array(
-				"columns"  	 => "id, baslik, permalink, fiyat, kilometre",
+				"columns"  	 => "id, baslik, permalink, fiyat, kilometre,kapak_foto",
 				"conditions" => "aktif = 1",
 				"order"		 => "eklenme_tarihi DESC",
 				"limit"		 => array(

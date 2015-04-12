@@ -25,9 +25,9 @@
 			'action'	 => 2,
 			'params' 	 => 3
 	));
-	$frontend->add('/deneme/([a-zA-Z0-9_-]+)-([0-9]+)',array(
-			'controller'	=> 'test',
-			'action'	 => 'index',
+	$frontend->add('/ilan/([a-zA-Z0-9_-]+)-([0-9]+)',array(
+			'controller'	=> 'ilan',
+			'action'	 => 'goruntule',
 			'permalink'  => 1,
 			'id'		 =>2
 	

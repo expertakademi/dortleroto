@@ -147,7 +147,7 @@ var dataTables = function (){
 	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
 	            },
 		        "deferRender": true,
-		        "aaSorting": [[2,'desc'], [1,'asc']],
+		        "aaSorting": [[2,'asc'], [1,'asc']],
 		        "aoColumns": [
 		                      {
 					               "sTitle" : "Açıklama",
@@ -244,6 +244,66 @@ var dataTables = function (){
 					        	  "mData": function (data){
 					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/musteri/duzenleNot/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
 					        		  var sil = '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/musteri/silNot/id:'+data.DT_RowId+'" data-form="true">Sil</button>';
+					        		  return duzenle + sil;
+					        	  }
+					          }
+		        ]
+		    });
+		},
+		ilanlar : function (id){
+		    jQuery('#ilanlarTable').dataTable( {
+		        "ajax": app.getBase() + "admin/ilan/dataTableListele",
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "İlan No",
+					               "mData": "id" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Başlık",
+					               "mData": "baslik" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Kategori",
+					               "mData": "kategori_adi" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Marka",
+					               "mData": "marka_adi" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Model",
+					               "mData": "model_adi" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Aktif",
+					               "mData": "aktif",
+					               "mRender" : function(data){
+					            	   if(data == 1){
+					            		   return "Aktif";
+					            	   }else{
+					            		   return "Pasif";
+					            	   }
+					               }
+					               
+					          },
+					          {
+					        	  "sTitle" : "Yönet",
+					        	  "bSearchable": false,
+					        	  "bSortable"  : false,
+					        	  "sClass": 'col-md-2',
+					        	  "mData": function (data){
+					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/duzenle/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
+					        		  var sil = '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/sil/id:'+data.DT_RowId+'" data-form="true">Sil</button>';
 					        		  return duzenle + sil;
 					        	  }
 					          }

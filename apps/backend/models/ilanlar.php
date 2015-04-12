@@ -1,8 +1,27 @@
 <?php 
 namespace Modules\Backend\Models;
+use Modules\Common\Components\imageUpload,
+	Modules\Backend\Models\ilanResimleri;
 class ilanlar extends ModelBase{
 	protected function initialize(){
 		parent::initialize();
+		$this->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
+				array(
+						"alias"=>"ilanResimleri"
+				));
+		$this->hasMany("kategori_id","Modules\Backend\Models\kategoriler","id",
+				array(
+						"alias"=>"kategoriler"
+				));
+		$this->hasMany("marka_id","Modules\Backend\Models\markalar","id",
+				array(
+						"alias"=>"markalar"
+				));
+		$this->hasMany("model_id","Modules\Backend\Models\modeller","id",
+				array(
+						"alias"=>"modeller"
+				));
+		
 	}
 	public function yeni($params){
 		try {
@@ -32,7 +51,6 @@ class ilanlar extends ModelBase{
 			if($ilan->create() == false):
 				$transaction->rollback(parent::mesajParcala($ilan));
 			endif;
-			
 			//İlan Log
 			$ilanLog = new ilanLoglari();
 			$ilanLog->ilan_id = $ilan->id;
@@ -43,6 +61,39 @@ class ilanlar extends ModelBase{
 				$transaction->rollback(parent::mesajParcala($ilanLog));
 			endif;
 			
+			// Resimler
+			$files = parent::diGet('request')->getUploadedFiles();
+			$kapak = $params['kapak'];
+			$imageUpload = new imageUpload();
+			$resimler = $imageUpload->multipleUpload($files,'ilan',array("x"=>550,"y"=>450),$kapak);
+			if($resimler['list'] == false):
+				$transaction->rollback("Resimler yüklenemedi.");
+			endif;
+			//Resimleri Ekle
+			$resim = array();
+			foreach ($resimler['list'] as $key=>$item){
+				$resim[$key] =  new ilanResimleri();
+				$resim[$key]->resim_link = $item;
+			}
+			$ilan->ilanResimleri = $resim;
+			if($ilan->update() == false ):
+				$transaction->rollback(parent::mesajParcala($ilan));
+			endif;
+			
+			//Kapak Resmi
+			if($resimler['thumb']!=""):
+				$kapak = $imageUpload->thumbUpload($resimler['thumb'],'thumbnail',array("x"=>200,"y"=>200));
+			else:
+				$kapak = $imageUpload->thumbUpload($resimler['list'][0],'thumbnail',array("x"=>200,"y"=>200));
+			endif;
+			if($kapak['status']!="success"):
+				$transaction->rollback("Kapak Resmi Yüklenemedi");
+			else:
+				$ilan->kapak_foto=$kapak['link'];
+				if($ilan->update() == false ):
+					$transaction->rollback(parent::mesajParcala($ilan));
+				endif;
+			endif;
 			//Eklendi
 			$transaction->commit();
 			$response['status']= 'success';
@@ -53,6 +104,20 @@ class ilanlar extends ModelBase{
 				$response['message']= $e->getMessage();
 			}
 			return json_encode($response);
+	}
+	public function dataTable(){
+		$datatable = new ilanlarDatatable();
+		return $datatable->dataTable();
+	}
+	
+}
+class ilanlarDatatable extends ModelBase {
+	public function dataTable(){
+		$results = self::find(array(
+				"columns"=>"id, id as DT_RowId, baslik, permalink, kategori_adi, marka_adi, model_adi, aktif"
+		))->toArray();
+		$data = array("data"=>$results);
+		return json_encode($data);
 	}
 }
 ?>

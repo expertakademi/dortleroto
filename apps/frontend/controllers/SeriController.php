@@ -2,13 +2,13 @@
 namespace Modules\Frontend\Controllers;
 use Modules\Frontend\Models\seriler;
 class SeriController extends ControllerBase{
-	public function markayaGoreGetirAction(){
+	public function markayaPermalinkGoreGetirAction(){
 		parent::checkAjaxReq();
 		$this->view->disable();
-		$markaId = $this->dispatcher->getParam("markaId");
-		if(isset($markaId)):
+		$markaPerma = $this->dispatcher->getParam("markaPerma");
+		if(isset($markaPerma)):
 			$seri = new seriler();
-			echo $this->helper->resultToJson($seri->markayaGoreGetir($markaId));
+			echo $this->helper->resultToJson($seri->markayaPermalinkGoreGetir($markaPerma));
 		else:
 			die($this->message->_('accessDenied'));
 		endif;

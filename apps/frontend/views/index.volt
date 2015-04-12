@@ -25,16 +25,14 @@
                             <h4>Logo</h4>
                         </div>
                         <div class="col-sm-5 col-md-5 ">
+                        	<form action="{{url('ara/ustAra')}}" method="post">
                             <div class="input-group ara">
-                                <input type="text" class="form-control" placeholder="Kelime, ilan no">
+                                <input type="text" name="aranan" class="form-control" placeholder="Kelime, ilan no">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                </span>  
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default no-back" type="button">Detaylı Ara</button>
-                                </span>                      
-
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                </span>                       
                             </div>
+                            </form>
                         </div>
                         <div class="col-sm-4 col-md-3 navbar-right">
                             <!-- <ul class="giris pull-right nav">
@@ -63,7 +61,7 @@
 
                             <div class="collapse navbar-collapse" id="menus">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="active"><a href="#">Anasayfa</a></li>
+                                    <li class="active"><a href="{{url('')}}">Anasayfa</a></li>
                                     <li><a href="#">Hakkımızda</a></li>
                                     <li><a href="#">Araba</a></li>
                                     <li><a href="#">Ticari</a></li>
@@ -100,7 +98,7 @@
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="active"><a href="#">Anasayfa</a></li>
+                                <li class="active"><a href="{{url('')}}">Anasayfa</a></li>
                                 <li><a href="#">Hakkımızda</a></li>
                                 <li><a href="#">Araba</a></li>
                                 <li><a href="#">Ticari</a></li>

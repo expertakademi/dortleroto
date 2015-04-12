@@ -53,9 +53,18 @@ var ilanEkle = function(){
 		    .append('<option value="">'+text+'</option>')
 		    .val('');
 		},
+		kapakSec : function (){
+			jQuery("body").on("click",".file-preview-image",function(){
+				jQuery(".file-preview-frame").css("border","none");
+				jQuery(this).parent(".file-preview-frame")
+				.css({"border":"1px solid red"});
+				jQuery("[name='kapak']").val(jQuery(this).attr("title"));
+			})
+		},
 		init :  function(){
 			ilanEkle.markaSec();
 			ilanEkle.seriSec();
+			ilanEkle.kapakSec();
 		}
 	}
 }();

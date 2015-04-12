@@ -72,7 +72,12 @@ class Module
 					"compiledExtension" => ".compiled",
 					"compileAlways" => true
 			));
-		
+			//load function php
+			$compiler = $volt->getCompiler();
+			$compiler->addFunction('in_array', 'in_array');
+			$compiler->addFunction('replace', 'str_replace');
+			$compiler->addFunction('rtrim', 'rtrim');
+			$compiler->addFunction('ltrim', 'ltrim');
 			return $volt;
 		});
 		/**

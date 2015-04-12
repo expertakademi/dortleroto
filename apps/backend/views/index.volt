@@ -186,6 +186,10 @@
 							<a href="{{url('admin/ilan/ekle')}}">
 							Ekle</a>
 						</li>
+						<li>
+							<a href="{{url('admin/ilan/yonet')}}">
+							İlan Yönetimi</a>
+						</li>
 					</ul>
 				</li>
 				<li>

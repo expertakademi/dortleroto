@@ -3,7 +3,7 @@ namespace Modules\Common\Components;
 use Phalcon\Mvc\User\Component,
 	Phalcon\Http\Request,
 	Phalcon\Http\Response;
-class helper  {
+class helper extends Component  {
 	public function goBase(){
 		$response = new Response();
 		$response->redirect("");

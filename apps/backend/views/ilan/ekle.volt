@@ -6,7 +6,7 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{url('admin/ilan/ekleAjax')}}" class="form-fv horizontal-form" method="post">
+		<form action="{{url('admin/ilan/ekleAjax')}}" class="form-fv horizontal-form" method="post" enctype="multipart/form-data">
 			<div class="form-body">
 				<h3 class="form-section">Temel Bilgiler</h3>
 				<div class="row">
@@ -167,6 +167,15 @@
 							</select>
 						</div>
 					</div>
+				</div><!-- row -->
+				<h3 class="form-section">Resimler</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+	                    	<input id="resimler" name="resim[]" type="file" multiple="true" required>
+	                    	<input type="hidden" name="kapak" value="">
+	               		</div>
+					</div>
 				</div>
 			</div>
 			<div class="form-actions">
@@ -190,3 +199,16 @@
 		<!-- END FORM-->
 	</div>
 </div>
+<script type="text/javascript">
+window.onload = function(){
+	$("#resimler").fileinput({
+		showUpload: false,
+		showCaption: false,
+		browseClass: "btn btn-primary btn-lg",
+		allowedFileTypes : ['image'],
+		
+		
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+	});
+}
+</script>

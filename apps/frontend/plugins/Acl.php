@@ -41,7 +41,9 @@ class Acl extends Plugin
 			case "guest":
 				$controllers = array(
 					'index'     => array('*'),
-					'seri'		=> array('markayaGoreGetir'),
+					'seri'		=> array('markayaPermalinkGoreGetir'),
+					'ara'		=> array('listele','aramaYap','ustAra'),
+					'ilan'		=> array('goruntule'),
 					'test'		=> array('*')
 				);
 				$r = 'guest';
@@ -55,7 +57,10 @@ class Acl extends Plugin
 			case "admin":
 				$controllers = array(
 				'index'		=> array('*'),
-				'seri'		=> array('markayaGoreGetir'),
+				'seri'		=> array('markayaPermalinkGoreGetir'),
+				'ara'		=> array('listele','aramaYap','ustAra'),
+				'ilan'		=> array('goruntule'),
+				'test'		=> array('*')
 				);
 				$r= 'admin';
 			break;
