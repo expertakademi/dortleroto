@@ -36,7 +36,7 @@
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="<?php echo $this->url->get('admin'); ?>">
-			<img src="<?php echo $this->url->get('backend/assets/layout/img/logo.png'); ?>" alt="logo" class="logo-default"/>
+			<img src="<?php echo $this->url->get('backend/assets/layout/img/logodortler.png'); ?>" alt="logo" style="margin-top:5px;"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -61,34 +61,8 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
-							<i class="icon-user"></i> My Profile </a>
-						</li>
-						<li>
-							<a href="page_calendar.html">
-							<i class="icon-calendar"></i> My Calendar </a>
-						</li>
-						<li>
-							<a href="inbox.html">
-							<i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
-							3 </span>
-							</a>
-						</li>
-						<li>
-							<a href="page_todo.html">
-							<i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
-							7 </span>
-							</a>
-						</li>
-						<li class="divider">
-						</li>
-						<li>
-							<a href="extra_lock.html">
-							<i class="icon-lock"></i> Lock Screen </a>
-						</li>
-						<li>
 							<a href="login.html">
-							<i class="icon-key"></i> Log Out </a>
+							<i class="icon-key"></i> Çıkış Yap </a>
 						</li>
 					</ul>
 				</li>
@@ -143,7 +117,7 @@
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start ">
-					<a href="javascript:;">
+					<a href="<?php echo $this->url->get('admin'); ?>">
 						<i class="icon-home"></i>
 						<span class="title">Özet</span>
 					</a>
@@ -230,7 +204,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#">
+							<a href="<?php echo $this->url->get('admin/pazarlama/topluEmail'); ?>">
 							Toplu E-Mail</a>
 						</li>
 						<li>

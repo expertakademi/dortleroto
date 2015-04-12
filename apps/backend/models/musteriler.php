@@ -83,5 +83,11 @@ class musteriler extends ModelBase{
 		endif;
 		return json_encode($response);
 	}
+	public function musteriCepTelefonları(){
+		return self::find(array(
+				"columns"=>"cep_telefon",
+				"conditions"=>"cep_telefon IS NOT NULL",
+		));
+	}
 }
 ?>

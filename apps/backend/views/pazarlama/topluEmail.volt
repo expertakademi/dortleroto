@@ -1,7 +1,7 @@
 <div class="portlet light bg-inverse">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject font-red-sunglo bold uppercase">Toplu Sms</span>
+			<span class="caption-subject font-red-sunglo bold uppercase">Toplu Email</span>
 		</div>
 		<div class="actions">
 
@@ -9,17 +9,23 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form class="form-fv form-horizontal" action="{{url('admin/pazarlama/topluSmsAjax')}}" method="post" >
+		<form class="form-fv form-horizontal" action="{{url('admin/pazarlama/topluSmsAjax')}}" method="post" data-summernote="true" >
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Başlık</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="baslik" 
+						maxlength="155" minlength="10" data-fv-stringlength-utf8bytes="true"required>
+					</div>
+				</div>
+			</div>
 			<div class="form-body">
 				<div class="form-group">
 					<label class="col-md-3 control-label">Mesajınız</label>
 					<div class="col-md-8">
-						<textarea class="form-control" name="mesaj" 
-						maxlength="155" minlength="10" data-fv-stringlength-utf8bytes="true"required></textarea>
-						<span class="help-block">Türkçe karakterler 2 karakter yer kaplamaktadır. Min 10 Max 155 Karakter girilebilir.</span>
+						<textarea class="form-control summernote" required></textarea>
 					</div>
 				</div>
-
 			</div>
 			<div class="form-actions">
 				<div class="row">
@@ -42,3 +48,8 @@
 		<!-- END FORM-->
 	</div>
 </div>
+<script>
+window.onload =  function (){
+	form.summernote();
+}
+</script>

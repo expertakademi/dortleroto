@@ -112,6 +112,9 @@ class Module
 			return new \Modules\Common\Components\imageUpload();
 		}, true);
 		
+		$di->set('topluSms', function(){
+			return new \Modules\Common\Components\topluSms();
+		}, true);
 
 	}
 
