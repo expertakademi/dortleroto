@@ -143,7 +143,7 @@
          </div>
          {% for sonIlan in hasarsizSon %}
          	{% set link = url('ilan/'~sonIlan.permalink ~ '-' ~ sonIlan.id)%}
-	         <div class="col-xs-6 col-sm-3 col-md-3">
+	         <div class="col-xs-6 col-sm-3 col-md-3" onClick="app.goPage('{{link}}')">
 	             <div class="thumbnail arac-listele">
 	                 <img src="{{url(sonIlan.kapak_foto)}}" class="img-responsive">
 	                 <p><a class="btn btn-default btn-xs fiyat-btn" role="button">{{sonIlan.fiyat}} <i class="fa fa-try"></i></a></p>

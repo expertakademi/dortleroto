@@ -58,6 +58,7 @@ class Acl extends Plugin
 					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
 					'ekleNot','ekleNotAjax','duzenleNot','duzenleNotAjax','silNot','silNotAjax'),
 				'slider'	=> array ('ekle','ekleAjax','duzenle', 'duzenleAjax','sil','silAjax', 'yonet', 'dataTableListele'),
+				'pazarlama'	=> array('topluSms','topluSmsAjax'),
 				'test'	 	=> array('*')
 				);
 				$r= 'admin';

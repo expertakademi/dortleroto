@@ -283,7 +283,8 @@
                                     </div>
                                     <div class="cont-col2">
                                         <div class="desc">
-                                             Arabam.com'dan yeni mesaj var.
+                                             Arabam.com'dan yeni mesaj var. <span class="label label-sm label-info ">
+                                            Cevapla <i class="fa fa-share"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -304,15 +305,15 @@
                                     </div>
                                     <div class="cont-col2">
                                         <div class="desc">
-                                             New order received with <span class="label label-sm label-success">
-                                            Reference Number: DR23923 </span>
+                                             Yeni görüşme talebi <span class="label label-sm label-success">
+                                            Araç: "2014 508 ACCESS 1.6 E-HDI OTOMATİK ORJİNAL" </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col2">
                                 <div class="date">
-                                     30 mins
+                                     30 dk
                                 </div>
                             </div>
                         </li>

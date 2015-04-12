@@ -143,7 +143,7 @@
          </div>
          <?php $v101370398038445032331iterator = $hasarsizSon; $v101370398038445032331incr = 0; $v101370398038445032331loop = new stdClass(); $v101370398038445032331loop->length = count($v101370398038445032331iterator); $v101370398038445032331loop->index = 1; $v101370398038445032331loop->index0 = 1; $v101370398038445032331loop->revindex = $v101370398038445032331loop->length; $v101370398038445032331loop->revindex0 = $v101370398038445032331loop->length - 1; ?><?php foreach ($v101370398038445032331iterator as $sonIlan) { ?><?php $v101370398038445032331loop->first = ($v101370398038445032331incr == 0); $v101370398038445032331loop->index = $v101370398038445032331incr + 1; $v101370398038445032331loop->index0 = $v101370398038445032331incr; $v101370398038445032331loop->revindex = $v101370398038445032331loop->length - $v101370398038445032331incr; $v101370398038445032331loop->revindex0 = $v101370398038445032331loop->length - ($v101370398038445032331incr + 1); $v101370398038445032331loop->last = ($v101370398038445032331incr == ($v101370398038445032331loop->length - 1)); ?>
          	<?php $link = $this->url->get('ilan/' . $sonIlan->permalink . '-' . $sonIlan->id); ?>
-	         <div class="col-xs-6 col-sm-3 col-md-3">
+	         <div class="col-xs-6 col-sm-3 col-md-3" onClick="app.goPage('<?php echo $link; ?>')">
 	             <div class="thumbnail arac-listele">
 	                 <img src="<?php echo $this->url->get($sonIlan->kapak_foto); ?>" class="img-responsive">
 	                 <p><a class="btn btn-default btn-xs fiyat-btn" role="button"><?php echo $sonIlan->fiyat; ?> <i class="fa fa-try"></i></a></p>

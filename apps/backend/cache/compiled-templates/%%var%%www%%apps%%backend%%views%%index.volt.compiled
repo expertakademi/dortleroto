@@ -222,6 +222,23 @@
 						</li>
 					</ul>
 				</li>
+				<li>
+					<a href="javascript:;">
+					<i class="fa fa-users"></i>
+					<span class="title">Pazarlama </span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="#">
+							Toplu E-Mail</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url->get('admin/pazarlama/topluSms'); ?>">
+							Toplu SMS</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
