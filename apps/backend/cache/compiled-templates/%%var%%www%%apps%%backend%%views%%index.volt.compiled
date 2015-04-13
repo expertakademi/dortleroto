@@ -164,6 +164,10 @@
 							<a href="<?php echo $this->url->get('admin/ilan/yonet'); ?>">
 							İlan Yönetimi</a>
 						</li>
+                        <li>
+                            <a href="<?php echo $this->url->get('admin/ilan/hesapla'); ?>">
+                            Fiyat Hesapla</a>
+                        </li>
 					</ul>
 				</li>
 				<li>

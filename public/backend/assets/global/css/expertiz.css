@@ -1,0 +1,26 @@
+.araba{background:url('../img/expertizf.png');cursor:pointer}
+
+.sol,.orta,.sag{float:left;}
+.sol{width:110px}
+
+.tampon{width:160px;height:37px;background-position:-98px 0px;}
+.tampon:hover{background-position:-456px 0px}
+
+.soloncamurluk{width:100px;height:109px;background-position:0px -34px;float:left;margin-left:-5px;margin-bottom:-2px}
+.soloncamurluk:hover{background-position:-358px -34px;}
+
+.solonkapi{width:103px;height:115px;background-position:-5px -140px;float:left}
+.solonkapi:hover{background-position:-363px -140px}
+
+.solarkakapi{width:115px;height:68px;background-position:-13px -253px;float:left;margin-left:8px}
+.solarkakapi:hover{background-position:-371px -253px}
+
+.solarkacamurluk{width:100px;height:110px;background-position:-0px -320px;float:left;margin-left:-5px;margin-top:-2px}
+.solarkacamurluk:hover{background-position:-358px -320px}
+
+
+.kaput{width:166px;height:107px;background-position:-95px -38px;float:left}
+.kaput:hover{background-position:-453px -38px;}
+
+.sagoncamurluk{width:96px;height:104px;background-position:-262px -37px;float:left;}
+.sagoncamurluk:hover{background-position:-620px -37px;}

@@ -373,6 +373,12 @@ var ozet = {
                 disableDragging : false,
                 header: h,
                 editable: true,
+                dayClick : function(date,jsEvent,view){
+                    $('#tarih').val(date.format());
+                    //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    //alert('Current view: ' + view.name);
+                    $('#takvimModal').modal();
+                },
                 events: [{
                     title: '#261 Noter işlemleri',
                     start: new Date(y, m, 1),

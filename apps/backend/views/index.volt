@@ -164,6 +164,10 @@
 							<a href="{{url('admin/ilan/yonet')}}">
 							İlan Yönetimi</a>
 						</li>
+                        <li>
+                            <a href="{{url('admin/ilan/hesapla')}}">
+                            Fiyat Hesapla</a>
+                        </li>
 					</ul>
 				</li>
 				<li>

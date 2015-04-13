@@ -124,6 +124,12 @@ class ilanlar extends ModelBase{
 		$datatable = new ilanlarDatatable();
 		return $datatable->dataTable();
 	}
+	public function ilanGetir($id){
+		$sql = "CALL ilan_getir({$id})";
+		$ilan = new self();
+		$result = (object) $ilan->getReadConnection()->query($sql)->fetch();
+		return $result;
+	}
 	
 }
 class ilanlarDatatable extends ModelBase {

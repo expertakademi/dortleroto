@@ -300,12 +300,61 @@ var dataTables = function (){
 					        	  "sTitle" : "Yönet",
 					        	  "bSearchable": false,
 					        	  "bSortable"  : false,
-					        	  "sClass": 'col-md-2',
+					        	  "sClass": 'col-md-3',
 					        	  "mData": function (data){
+					        		  var goruntule = '<a class="btn green" href="'+app.getBase()+'admin/ilan/goruntule/id:'+data.DT_RowId+'">Detay</a>';
 					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/duzenle/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
 					        		  var sil = '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/sil/id:'+data.DT_RowId+'" data-form="true">Sil</button>';
-					        		  return duzenle + sil;
+					        		  return goruntule + duzenle + sil;
 					        	  }
+					          }
+		        ]
+		    });
+		},
+		ilanNotlari : function (id){
+		    jQuery('#ilanNotlariTable').dataTable( {
+		        "ajax": app.getBase() + "admin/ilan/ilanNotDataTable/id:"+id,
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+	            "searching" : false,
+	            "lengthChange":false,
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "Not",
+					               "mData": "aciklama" 
+					               
+					          }
+		        ]
+		    });
+		},
+		ilanGorusmeleri : function (id){
+		    jQuery('#ilanGorusmeleriTable').dataTable( {
+		        "ajax": app.getBase() + "admin/ilan/ilanGorusmeDataTable/id:"+id,
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+	            "searching" : false,
+	            "lengthChange":false,
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "Ad",
+					               "mData": "ad" 
+					               
+					          },
+		                      {
+					               "sTitle" : "telefon",
+					               "mData": "telefon" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Not",
+					               "mData": "aciklama" 
+					               
 					          }
 		        ]
 		    });
