@@ -5,19 +5,16 @@
 			İlan Görüntüle </span>
 		</div>
 		<div class="actions">
+			{% if satis == false %}
 			<div class="btn-group">
 				<a class="btn btn-sm red" href="#" data-toggle="dropdown" aria-expanded="false">
 				 <i class="fa fa-try"></i> Satış <i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu pull-right">
-					<li>
-						<a href="#">
-						<i class="fa fa-pencil"></i> Ekle </a>
-					</li>
-					<li>
-						<a href="#">
-						<i class="fa fa-eye"></i> Görüntüle </a>
-					</li>
+						<li>
+							<a class="load-modal" data-target="#generalModal" data-href="{{url('admin/ilan/ekleSatis/id:'~ilan.id)}}" data-form="true">
+							<i class="fa fa-pencil"></i> Ekle </a>
+						</li>
 				</ul>
 			</div>
 			<div class="btn-group">
@@ -25,17 +22,23 @@
 				 <i class="fa fa-car"></i> Ekspertiz <i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu pull-right">
+					{%if ekspertiz %}	
 					<li>
-						<a href="#">
-						<i class="fa fa-pencil"></i> Ekle </a>
-					</li>
-					<li>
-						<a href="#">
+						<a href="{{url(ekspertiz.link)}}" target="blank">
 						<i class="fa fa-eye"></i> Görüntüle </a>
 					</li>
+					{%else%}
+						<li>
+							<a class="load-modal" data-target="#generalModal" data-href="{{url('admin/ilan/ekleEkspertiz/id:'~ilan.id)}}" data-form="true">
+							<i class="fa fa-pencil"></i> Ekle </a>
+						</li>
+					{%endif%}
+
 				</ul>
 			</div>
 			<button class="btn blue load-modal" data-target="#generalModal" data-href="{{url('admin/ilan/kaporaGoruntule/id:'~ilan.id)}}" data-form="true"><i class="fa fa-ticket"></i> Kapora </button>
+			{% endif %}
+
 		</div>
 	</div>
 	<div class="portlet-body">
@@ -113,12 +116,15 @@
 				<div class="col-md-9 value">
 					 {% if ilan.aktif == 1 %}
 					 	Aktif
+					 {% elseif ilan.aktif == 2 %}
+					 	<span class="text-danger">Satıldı</span>
 					 {% else %}
 					 	Pasif
 					 {% endif %}
 				</div>
 			</div>
 		</div>
+		{% if satis == false %}
 		<div class = "col-md-12">
 			<div class="row static-info">
 					{% if kapora == null %}
@@ -164,6 +170,7 @@
 
 			</div>
 		</div>
+		{%endif%}
 		<div class="clearfix"></div>
 	</div>
 </div>

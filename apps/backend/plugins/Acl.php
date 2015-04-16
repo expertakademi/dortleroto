@@ -55,7 +55,7 @@ class Acl extends Plugin
 				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele'),
 				'ilan'		=> array ('ekle', 'ekleAjax','yonet','dataTableListele','hesapla','goruntule','ilanNotDataTable', 
 					'ekleNot', 'ekleNotAjax','ekleGorusme','ekleGorusmeAjax','ilanGorusmeDataTable','kaporaGoruntule',
-					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis'),
+					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis','ekleEkspertiz','ekleEkspertizAjax'),
 				'musteri'	=> array ('ekle','ekleAjax','duzenle','duzenleAjax','sil',
 					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
 					'ekleNot','ekleNotAjax','duzenleNot','duzenleNotAjax','silNot','silNotAjax'),

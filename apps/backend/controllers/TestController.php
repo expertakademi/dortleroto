@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Backend\Controllers;
-use Modules\Backend\Models\ilanlar;
+use Modules\Backend\Models\ilanlar,
+    Modules\Backend\Plugins\Sahibinden;
 class TestController extends ControllerBase{
 	public function indexAction(){
 		$this->view->disable();
@@ -28,5 +29,14 @@ class TestController extends ControllerBase{
 		$response['message'] = 'test';
 		echo json_encode($response);
 	}
+    public function sahibindenAction(){
+        $sahibinden = new sahibinden();
+        error_reporting(E_ALL);
+        $user = 'PrinceAli';
+        $pass = 'impossible';
+
+        $sahibinden->login($user, $pass);
+        $sahibinden->publish("mercedes 2008 e 200 dizel","Mercedes","Sahibinden satılık kazasız boyasız", 50000, 1, 100000, array("test.jpg"));
+    }
 }
 ?>

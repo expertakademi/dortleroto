@@ -13,7 +13,8 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\ilanNotlari,
 	Modules\Backend\Models\ilanGorusmeleri,
 	Modules\Backend\Models\ilanKapora,
-	Modules\Backend\Models\satislar;
+	Modules\Backend\Models\satislar,
+	Modules\Backend\Models\ilanEkspertiz;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
 		$this->view->setVars(array(
@@ -62,7 +63,8 @@ class IlanController extends ControllerBase{
 		else:
 			$this->view->kapora = null;
 		endif;
-		$satis = (new satislar)->getir($id);
+		$this->view->satis = (new satislar)->getir($id);
+		$this->view->ekspertiz = (new ilanEkspertiz)->getir($id);
 		
 	}
 
@@ -135,10 +137,19 @@ class IlanController extends ControllerBase{
 		$this->view->id = $id;
 	}
 	public function ekleSatisAjaxAction(){
-		
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new satislar)->yeni($params);
 	}
-	public function goruntuleSatisAction(){
-		
+	public function ekleEkspertizAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id");
+		$this->view->id = $id;
+	}
+	public function ekleEkspertizAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new ilanEkspertiz)->yeni($params);
 	}
 	
 }

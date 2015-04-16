@@ -347,7 +347,7 @@ var dataTables = function (){
 					               
 					          },
 		                      {
-					               "sTitle" : "telefon",
+					               "sTitle" : "Telefon",
 					               "mData": "telefon" 
 					               
 					          },
