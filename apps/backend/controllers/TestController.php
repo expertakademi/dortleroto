@@ -25,18 +25,15 @@ class TestController extends ControllerBase{
 			
 	}
 	public function testAction(){
-		$response['status'] = 'success';
-		$response['message'] = 'test';
-		echo json_encode($response);
+
 	}
     public function sahibindenAction(){
         $sahibinden = new sahibinden();
-        error_reporting(E_ALL);
         $user = 'PrinceAli';
         $pass = 'impossible';
 
         $sahibinden->login($user, $pass);
-        $sahibinden->publish("mercedes 2008 e 200 dizel","Mercedes","Sahibinden satılık kazasız boyasız", 50000, 1, 100000, array("test.jpg"));
+        $sahibinden->publish("mercedes 2008 e 200 dizel","Performans canavarı mercedes e 200","Sahibinden satılık kazasız boyasız performans canavarı aracımı ihtiyaçtan dolayı satıyorum.", 50000, 1, 100000, array("/var/www/public/uploads/ilan/2015/04/552848c36f2d4.jpg"));
     }
 }
 ?>

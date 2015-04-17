@@ -1,7 +1,6 @@
 <?php 
 namespace Modules\Backend\Plugins;
-ini_set("display_errors","on");
-error_reporting(E_ALL);
+use ArrayObject;
 class Sahibinden{ 
 private $ch, $headers, $meta, $verbose;
 
@@ -9,6 +8,7 @@ private $ch, $headers, $meta, $verbose;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_INTERFACE, "185.17.136.30");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
@@ -50,7 +50,7 @@ private $ch, $headers, $meta, $verbose;
         // start session and get hidden params
         $content = $this->http_req('https://secure.sahibinden.com/giris');
         $hidden = array();
-        file_put_contents('/var/www/apps/backend/plugins/form.html', $content);
+        file_put_contents('/var/www/apps/backend/plugins/temp/form.html', $content);
         if (!preg_match_all('/(<input type="hidden"[^>]*>)/s', $content, $matches)) die('form problem');
         foreach ($matches[1] as $param) {
             if (preg_match('/name="([^"]*)" value="([^"]*)"/', $param, $matches)) {
@@ -244,6 +244,7 @@ private $ch, $headers, $meta, $verbose;
         // step 2, submit
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/classifieds?language=tr', json_encode($ad));
         $data = json_decode($content, true);
+        echo "err:".$content;
         if (!isset($data['success']) || $data['success'] != true) {
             die('error: '.$data['error']);
         }
@@ -251,6 +252,7 @@ private $ch, $headers, $meta, $verbose;
         // step 3, finalize
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/classifieds/'.$id.'/finalize', '');
         $data = json_decode($content, true);
+       
         if (!isset($data['success']) || $data['success'] != true) {
             die('error: '.$data['error']);
         }
