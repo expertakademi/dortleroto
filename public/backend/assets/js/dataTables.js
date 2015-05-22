@@ -303,7 +303,7 @@ var dataTables = function (){
 					        	  "sClass": 'col-md-3',
 					        	  "mData": function (data){
 					        		  var goruntule = '<a class="btn green" href="'+app.getBase()+'admin/ilan/goruntule/id:'+data.DT_RowId+'">Detay</a>';
-					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/duzenle/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
+					        		  var duzenle = '<a class="btn yellow" href="'+app.getBase()+'admin/ilan/duzenle/id:'+data.DT_RowId+'">Düzenle</a>';
 					        		  var sil = '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/sil/id:'+data.DT_RowId+'" data-form="true">Sil</button>';
 					        		  return goruntule + duzenle + sil;
 					        	  }
@@ -355,9 +355,101 @@ var dataTables = function (){
 					               "sTitle" : "Not",
 					               "mData": "aciklama" 
 					               
+					          },
+		                      {
+					               "sTitle" : "Tarih",
+					               "mData": "tarih" 
+					               
 					          }
 		        ]
 		    });
-		}
+		},
+		gorevler : function (){
+		    jQuery('#gorevlerTable').dataTable( {
+		        "ajax": app.getBase() + "admin/gorev/dataTableListele",
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "Açıklama",
+					               "mData": "aciklama" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Tarih",
+					               "mData": "tarih" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Birim",
+					               "mData": "tip" ,
+					               "mRender" : function (data){
+					            	   	return app.capitalizeFirstLetter(data);
+					            	}
+					               
+					          },
+		                      {
+					               "sTitle" : "Durum",
+					               "mData": "durum",
+					               "mRender" : function(data){
+					            	   if(data == 1){
+					            		   return "Tamamlandı";
+					            	   }else{
+					            		   return "Bekliyor";
+					            	   }
+					               }
+					               
+					          }
+		                      
+		        ]
+		    } );
+		},
+		ziyaretler : function (type){
+		    jQuery('#ziyaretlerTable').dataTable( {
+		        "ajax": app.getBase() + "admin/chart/sosyalDataTable/type:"+type,
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "Ziyaret Sayısı",
+					               "mData": "ziyaret" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Tarih",
+					               "mData": "tarih" 
+					               
+					          }         
+		        ]
+		    } );
+		},
+		reklamlar : function (type){
+		    jQuery('#reklamlarTable').dataTable( {
+		        "ajax": app.getBase() + "admin/chart/reklamDataTable/type:"+type,
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "Ziyaret Sayısı",
+					               "mData": "ziyaret" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Tarih",
+					               "mData": "tarih" 
+					               
+					          }         
+		        ]
+		    } );
+		},
 	}
 }();

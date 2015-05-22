@@ -4,7 +4,6 @@ class ilanlarAra extends ModelBase{
 	public function listele($params){
 		$builder = $this->getModelsManager()->createBuilder();
 		$builder->from("Modules\Frontend\Models\ilanlarAra");
-		//$builder->where('id!=""');
 		//Kategori
 		if(isset($params["kelime"])):
 			$kelime = urldecode($params['kelime']);
@@ -89,9 +88,14 @@ class ilanlarAra extends ModelBase{
 			$builder->inWhere('vites_permalink', $vitesler);
 		endif;
 		//Kasa
-		if(isset($params["vites"])) :
+		if(isset($params["kasa"])) :
 			$kasalar = explode(",",$params['kasa']);
 			$builder->inWhere('kasa_permalink', $kasalar);
+		endif;
+		//Tarih
+		if(isset($params['tarih'])):
+			$timeRange =date('Y-m-d H:i:s', strtotime("-{$params['tarih']} days"));
+			$builder->andWhere('eklenme_tarihi >= :tarih:', array("tarih"=>$timeRange));
 		endif;
 		if(!isset($params['sayfa'])){
 			$params['sayfa']=1;
@@ -99,7 +103,7 @@ class ilanlarAra extends ModelBase{
 		
 		$paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
 				"builder" => $builder,
-				"limit"=> 2,
+				"limit"=> 20,
 				"page" => $params['sayfa']
 		));
 		return $paginator->getPaginate();

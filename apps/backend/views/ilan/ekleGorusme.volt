@@ -26,6 +26,18 @@
 				<input type="hidden" name="ilan_id" value="{{ilan.id}}">
 			</div>
 		</div>
+		<div class="form-group">
+				<label class="control-label col-md-3">Görüşme Tarihi</label>
+				<div class="col-md-8">
+					<div class="input-group date form_datetime">
+						<input type="text" name="tarih" size="16" readonly="" class="form-control">
+						<span class="input-group-btn">
+						<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</div>
+		</div>
 	</div>
 </div>
 <div class="modal-footer">

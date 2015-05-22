@@ -102,7 +102,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccd2026', e
     .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border:none !important; background:url(../img/slider.png) !important; height:1.45em !important}
     .ui-widget-header{background: #CD2026 !important}
     .ui-widget-content{background:#EFEFEF !important;border: 1px solid #D9D9D9 !important;}
-    #amount.fiyat{border:none; color:#333; font-weight: normal; padding-top:1em;}
+    #amount.fiyat, .range-value{border:none; color:#333; font-weight: normal; padding-top:1em;}
 
     .kirmizi-btn{border:none;background:#CD2026; padding:10px 12px;color:#fff; font-size:1.1em}
     .kirmizi-btn:hover , kirmizi-btn:focus{background:#CD2026; color:#fff;}

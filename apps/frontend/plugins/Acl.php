@@ -44,6 +44,7 @@ class Acl extends Plugin
 					'seri'		=> array('markayaPermalinkGoreGetir'),
 					'ara'		=> array('listele','aramaYap','ustAra'),
 					'ilan'		=> array('goruntule'),
+					'mesaj'		=> array('gonder','ekleAjax'),
 					'test'		=> array('*')
 				);
 				$r = 'guest';
@@ -60,6 +61,7 @@ class Acl extends Plugin
 				'seri'		=> array('markayaPermalinkGoreGetir'),
 				'ara'		=> array('listele','aramaYap','ustAra'),
 				'ilan'		=> array('goruntule'),
+				'mesaj'		=> array('gonder','ekleAjax'),
 				'test'		=> array('*')
 				);
 				$r= 'admin';

@@ -7,6 +7,9 @@ var app = function(){
 		setBase: function($uri){
 			baseUri = $uri;
 		},
+		goPage :  function(url){
+			window.location.href = url;
+		},
 		pageReload :  function (){
 			window.location.href=window.location.href;
 		},
@@ -19,6 +22,28 @@ var app = function(){
 			var footerHeight =  jQuery('footer').height();
 			footerHeight +=35; 
 			jQuery("body").css("margin-bottom",footerHeight)
+		},
+		loadGetContent : function (target,link){
+			jQuery.get( '/'+ link, function( data ) {
+					jQuery(target).html(data);
+			});
+		},
+		deleteDom : function (target){
+			jQuery(target).remove();
+		},
+		capitalizeFirstLetter : function(string) {
+		    return string.charAt(0).toUpperCase() + string.slice(1);
+		},
+		sleep : function(milliseconds) {
+		  var start = new Date().getTime();
+		  for (var i = 0; i < 1e7; i++) {
+		    if ((new Date().getTime() - start) > milliseconds){
+		      break;
+		    }
+		  }
+		},
+		arrayToStringList : function (arr) {
+			   return "'" + arr.join("','") + "'";
 		},
 		init : function(){
 			app.alertHide();

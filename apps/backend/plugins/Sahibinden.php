@@ -65,8 +65,7 @@ private $ch, $headers, $meta, $verbose;
             'rememberMe' => 'on'
         );
         $params = array_merge($hidden, $params);
-        $content = $this->http_req('https://secure.sahibinden.com/req/', $params);
-
+        $content = $this->http_req('https://secure.sahibinden.com/giris', $params);
         // fetch script bundle to extract keys for headers
         if (!preg_match('/src="([^"]*?app_[^"]*?)"/', $content, $m)) die('auth failed');
         $content = $this->http_req('https://banaozel.sahibinden.com'.$m[1]);
@@ -283,6 +282,101 @@ private $ch, $headers, $meta, $verbose;
             's2' => strlen($buffer),
             'contents' => $buffer,
         );
+    }
+    /**
+    * This function used to find unread messages.
+    * returns the link that brings us to message details.
+    * @return array of URLS that we will iterate 
+    */
+    private function findUnreadMessages(){
+        $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/topics?viewType=LIST');
+        $data = json_decode($content, true);
+        if (!$data['response'] || !$data['response']['topics']) die('no results');
+        $new = array();
+        foreach ($data['response']['topics'] as $topic) {
+            foreach ($topic['messages'] as $msg) {
+                if ($msg['unread'] == true) $new[] = 'https://banaozel.sahibinden.com/sahibinden-ral/rest/my/topics/'.$msg['relatedId'].'/thread/'.$msg['threadId'];
+            }
+        }
+        return $new;
+    }
+    /**
+    * This function will visit the URL given and
+    * gather the message details.  
+    * @param mixed $url
+    * @return array(
+    *   "ilan"=>(string) Related Ad's title,
+    *   "gonderenAd"=>(string) Sender's name,
+    *   "gonderenTel"=>(string) Sender's phone,
+    *   "tarih"=>(string) Send time of latest message,
+    *   "message"=>(string) Message content,
+    *   "url"=>(string) this is the URL for conversation. You may need this for replying.
+    * )
+    */
+    private function getMessageContent($url){
+        $content = $this->http_req($url);
+        $data = json_decode($content, true);
+        if (!$data['response']) die('response error');
+        $resp = $data['response'];
+
+        // 1 last message, stub for multiple?
+        $msg_num = 1; 
+        $msg_new = array_slice($resp['messages'], $msg_num * -1);
+
+        $result = array();
+        foreach ($msg_new as $msg) {
+            $result= array(
+                'ilan'        => $resp['classified']['title'],
+                'gonderenAd'  => $msg['correspondentUser']['name'],
+                'gonderenTel' => $msg['correspondentUser']['phone'],
+                'tarih'       => $msg['date'],
+                'message'     => $msg['content'],
+                'thread'      => array(
+                    'rel_type' => $msg['relatedType'],
+                    'rel_id'   => $msg['relatedId'],
+                    'id'       => $msg['threadId'],
+                ),
+            );
+        }
+        return $result;
+    }
+    /**
+    * This dude runs our findUnreadMessages and then iterates urls,
+    * runs getMessageContent for each url and returns 2D array as result set.
+    * Last function for message pulling.
+    */
+    public function getMessages(){
+        $messageLinks = $this->findUnreadMessages();
+        $result = array();
+        foreach($messageLinks as $link){
+            $result[] = $this->getMessageContent($link);
+        }
+        return $result;
+    }
+    /**
+    * We will use this function to reply incoming messages.
+    * http://prntscr.com/6urcvn
+    * @param string $url this is the value we gathered from getMessageContent
+    */
+    public function reply($thread, $message){
+        echo "replying...\n";
+        if (!$thread['rel_type']) die('something is wrong');
+        $response = array(
+            'relatedType' => $thread['rel_type'],
+            'relatedId'   => $thread['rel_id'],
+            'messages'    => array(
+                array(
+                    'threadId' => $thread['id'],
+                    'content'  => $message,
+                )
+            )
+        );
+        $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/topics', json_encode($response));
+        $data = json_decode($content, true);
+        if (!$data['success'] || $data['success'] != true) {
+            die("error, response: $content");
+        }
+        echo 'ok';
     }
 }
 ?>

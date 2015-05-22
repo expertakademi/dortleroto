@@ -29,8 +29,13 @@ var form = function (){
 				if(jQuery(e.target).data('summernote')){
 					form.summernoteCode();
 				}
+				var clear = null;
+				if(jQuery(e.target).data('clear')){
+					clear= true;
+				}
 		        jQuery(e.target).ajaxSubmit({
 		        	dataType	: 'json',
+		        	clearForm	: clear,
 		        	beforeSubmit : form.showRequest,
 		        	success : form.showResponse 
 		        });
@@ -44,15 +49,13 @@ var form = function (){
 			
 		},
 		showResponse : function(responseText, statusText, xhr, $form){
-			//Debug Canlıda kaldır
-			console.log(xhr);
-			//Debug
 			form.showMessage($form,responseText);
 			if(responseText.status=="success"){
 				form.btnSuccess($form);
 				form.checkReload($form);
 				form.checkDtReload($form);
 				form.checkDtRemove($form);
+				form.checkCallback($form);
 			}else{
 				form.btnDefault($form);
 			}
@@ -62,10 +65,26 @@ var form = function (){
 			jQuery(formElement).find('button[type="submit"]').html(image);
 		},
 		btnSuccess : function ($form){
-			$form.find('button[type="submit"]').html('Gönderildi').attr("disabled","disabled");
+			var btn = $form.find('button[type="submit"]');
+			btn = jQuery(btn[1]);
+			var data = btn.data();
+			if(data.text){
+				$form.find('button[type="submit"]').html(data.text).attr("disabled","disabled");
+
+			}else{
+				$form.find('button[type="submit"]').html('Gönderildi').attr("disabled","disabled");
+			}
 		},
 		btnDefault :  function ($form){
-			$form.find('button[type="submit"]').html('Gönder').removeClass("disabled").removeAttr("disabled");
+			var btn = $form.find('button[type="submit"]');
+			btn = jQuery(btn[1]);
+			var data = btn.data();
+			if(data.text){
+				$form.find('button[type="submit"]').html(data.text).attr("disabled","disabled");
+
+			}else{
+				$form.find('button[type="submit"]').html('Gönderildi').attr("disabled","disabled");
+			}
 		},
 		showMessage : function($form,responseText){
 			var $alert = $form.find('.alert')
@@ -94,6 +113,12 @@ var form = function (){
 			var data = $form.data();
 			if(data.dtRemove){
 				dataTables.removeRow(data.dtId,data.dtRowId);
+			}
+		},
+		checkCallback :  function($form){
+			var data = $form.data();
+			if(data.callback != ''){
+				eval(data.callback);
 			}
 		},
 		summernote : function(){

@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(E_ALL ^ E_DEPRECATED);
 ini_set('display_errors',1);
 ini_set ( "memory_limit", "40M");
 require __DIR__ . '/../vendor/autoload.php';
@@ -22,11 +22,11 @@ try {
 	 * The URL component is used to generate all kind of urls in the application
 	 */
 	$di->set('domain',function(){
-		return '31.210.54.34';
+		return 'dortlerikinciel.com.tr';
 	});
 	$di->set('url', function() {
 		$url = new \Phalcon\Mvc\Url();
-		$url->setBaseUri('http://31.210.54.34/');
+		$url->setBaseUri('http://dortlerikinciel.com.tr/');
 		return $url;
 	});
 

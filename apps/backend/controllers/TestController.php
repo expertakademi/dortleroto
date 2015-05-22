@@ -1,7 +1,9 @@
 <?php
 namespace Modules\Backend\Controllers;
 use Modules\Backend\Models\ilanlar,
-    Modules\Backend\Plugins\Sahibinden;
+    Modules\Backend\Plugins\Sahibinden,
+    Modules\Backend\Plugins\Arabam,
+	Modules\Backend\Models\satislar;
 class TestController extends ControllerBase{
 	public function indexAction(){
 		$this->view->disable();
@@ -25,7 +27,9 @@ class TestController extends ControllerBase{
 			
 	}
 	public function testAction(){
-
+		$this->view->disable();
+		echo $this->helper->yuzdeOrtalama(0,0);
+		
 	}
     public function sahibindenAction(){
         $sahibinden = new sahibinden();
@@ -33,7 +37,33 @@ class TestController extends ControllerBase{
         $pass = 'impossible';
 
         $sahibinden->login($user, $pass);
-        $sahibinden->publish("mercedes 2008 e 200 dizel","Performans canavarı mercedes e 200","Sahibinden satılık kazasız boyasız performans canavarı aracımı ihtiyaçtan dolayı satıyorum.", 50000, 1, 100000, array("/var/www/public/uploads/ilan/2015/04/552848c36f2d4.jpg"));
+ 
+
+        //$newMessages = $sahibinden->getMessages();
+        //$sahibinden->reply($newMessages[0]['thread'],"Levent hoja da selam söyledi");
+        //print_r($newMessages);
+        //$sahibinden->publish("Test advertisement for Hayk","Pejo yakıt cimrisi vs.. vs..","Sahibinden satılık kazasız boyasız performans canavarı aracımı ihtiyaçtan dolayı satıyorum.", 50000, 1, 100000, array("/var/www/public/uploads/ilan/2015/04/552848c36f2d4.jpg"));
+    }
+    public function arabamAction(){
+        $user = 'mehmet@eterna.com.tr';
+        $pass = 'Dort8765';
+        $arabam = new Arabam();
+        $arabam->login($user, $pass);
+
+        /*
+            $newMessages = $arabam->getMessages();
+            
+            if (count($newMessages) == 0) {
+                echo 'no new messages';
+                exit;
+            }
+
+            // reply to first message
+            $arabam->reply($newMessages[0]['msg_id'], "Ok i accept your offer bla.. bla.. bla..");
+        */
+
+        $arabam->publish("Advertisement for Hayk ","My car is great please buy it", 50000, 1, 100000, array('/var/www/public/uploads/ilan/2015/04/552848c36f2d4.jpg'));
+ 
     }
 }
 ?>

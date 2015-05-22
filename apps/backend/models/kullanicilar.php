@@ -15,7 +15,9 @@ class kullanicilar extends ModelBase{
 		$sessionObj->rol = $kullanici->rol;
 			
 	}
-	
+	public function tumunuGetir(){
+		return self::find();	
+	}
 	public function girisYap($params){
 
 		$kullaniciAdi = $params['kullaniciAdi'];

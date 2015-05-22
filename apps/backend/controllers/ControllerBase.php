@@ -76,6 +76,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 				View::LEVEL_MAIN_LAYOUT => true
 		));
 	}
+
 	
 	
 }

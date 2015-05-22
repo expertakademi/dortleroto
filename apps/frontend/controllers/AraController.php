@@ -1,7 +1,15 @@
 <?php 
 namespace Modules\Frontend\Controllers;
 use Modules\Frontend\Models\ilanlarAra,
-	Modules\Frontend\Models\ilanlar;
+	Modules\Frontend\Models\ilanlar,
+	Modules\Frontend\Models\vitesler,
+	Modules\Frontend\Models\kasalar,
+	Modules\Frontend\Models\yakitlar,
+	Modules\Frontend\Models\motorHacimleri,
+	Modules\Frontend\Models\motorGucleri,
+	Modules\Frontend\Models\renkler,
+	Modules\Frontend\Models\cekisler
+	;
 class AraController extends ControllerBase{
 	public function aramaYapAction(){
 		$this->view->disable();
@@ -9,7 +17,8 @@ class AraController extends ControllerBase{
 		$query = "";
 		foreach($params as $name=>$item):
 			if($item != ""):
-				if($name == "fiyat"):
+				//SliderRange
+				if(($name == "fiyat") or ($name=="yil") or ($name=="km")):
 					$item = str_replace(array("TL"," "),"",$item);
 					$temp = split("-",$item);
 					$min = $temp['0'];
@@ -18,8 +27,17 @@ class AraController extends ControllerBase{
 					$maxName = "max". ucfirst($name);
 					$query .="{$minName}:{$min}/";
 					$query .="{$maxName}:{$max}/";
-				else:
-					$query .="{$name}:{$item}/";
+				//Text
+				else:				
+					//Multiple
+					if(is_array($item)):
+						//Hepsi
+						if($item[0] == ""):
+							continue;
+						endif;
+						$item = implode(",",$item);
+					endif;
+					$query .="{$name}:{$item}/";	
 				endif;
 			endif;
 		endforeach;
@@ -46,8 +64,19 @@ class AraController extends ControllerBase{
 		$params = $this->dispatcher->getParams();
 		$ilanAra = new ilanlarAra();
 		$page = $ilanAra->listele($params);
-		$this->view->page = $page;
-		$this->view->params = $params;
+		$this->view->setVars(array(
+				'page' => $page,
+				'params' => $params,
+				'yakitlar'=> (new yakitlar)->tumunuGetir(),
+				'vitesler'=> (new vitesler)->tumunuGetir(),
+				'kasalar'=> (new kasalar)->tumunuGetir(),
+				'hacimler'=> (new motorHacimleri)->tumunuGetir(),
+				'gucler'=> (new motorGucleri)->tumunuGetir(),
+				'renkler'=> (new renkler)->tumunuGetir(),
+				'cekisler'=> (new cekisler)->tumunuGetir()
+		));
+		$this->assets
+			->addJs('frontend/assets/js/ara.js');
 	}
 }
 ?>

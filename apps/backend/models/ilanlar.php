@@ -25,7 +25,14 @@ class ilanlar extends ModelBase{
 				array(
 						"alias"=>"modeller"
 				));
+		$this->hasOne("id","Modules\Backend\Models\ilanKapora","ilan_id",
+				array(
+						"alias"=>"ilanKapora"
+				));
 		
+	}
+	public function getir($id){
+		return self::findFirst($id);
 	}
 	public function yeni($params){
 		try {
@@ -34,12 +41,14 @@ class ilanlar extends ModelBase{
 			$transaction = $manager->get();
 			// İlan Ekle
 			$ilan = new ilanlar();
+			$ilan->setTransaction($transaction);
 			$ilan->baslik = $params['baslik'];
 			$ilan->permalink = parent::diGet('helper')->permalink($params['baslik']);
 			$ilan->kategori_id = $params['kategori'];
 			$ilan->marka_id= $params['marka'];
 			$ilan->seri_id = $params['seri'];
 			$ilan->model_id = $params['model'];
+			$ilan->temsilci_id = $params['temsilci'];
 			$ilan->yil = $params['yil'];
 			$ilan->fiyat = $params['fiyat'];
 			$ilan->kilometre = $params['kilometre'];
@@ -59,6 +68,7 @@ class ilanlar extends ModelBase{
 			endif;
 			//İlan Log
 			$ilanLog = new ilanLoglari();
+			$ilanLog->setTransaction($transaction);
 			$ilanLog->ilan_id = $ilan->id;
 			$ilanLog->kullanici_id = parent::diGet('sessionObj')->kullaniciId;
 			$ilanLog->islem = 'ekleme';
@@ -69,6 +79,7 @@ class ilanlar extends ModelBase{
 			
 			//Aciklama
 			$ilanAciklama = new ilanAciklamalari();
+			$ilanAciklama->setTransaction($transaction);
 			$ilanAciklama->ilan_id =  $ilan->id;
 			$ilanAciklama->aciklama  = $params['aciklama'];
 			if($ilanAciklama->create() == false ):
@@ -120,6 +131,64 @@ class ilanlar extends ModelBase{
 			}
 			return json_encode($response);
 	}
+	public function duzenle($params){
+		 try {
+		 //Transaction Başlat
+		 $manager = parent::diGet('transactions');
+		 $transaction = $manager->get();
+		 $ilan = $this->getir($params['id']);
+		 $ilan->setTransaction($transaction);
+		 $ilan->baslik = $params['baslik'];
+		 $ilan->permalink = parent::diGet('helper')->permalink($params['baslik']);
+		 $ilan->kategori_id = $params['kategori'];
+		 $ilan->marka_id= $params['marka'];
+		 $ilan->seri_id = $params['seri'];
+		 $ilan->model_id = $params['model'];
+		 $ilan->yil = $params['yil'];
+		 $ilan->fiyat = $params['fiyat'];
+		 $ilan->kilometre = $params['kilometre'];
+		 $ilan->garanti = $params['garanti'];
+		 $ilan->yakit_id = $params['yakit'];
+		 $ilan->renk_id = $params ['renk'];
+		 $ilan->motor_hacim_id = $params['hacim'];
+		 $ilan->motor_guc_id = $params['guc'];
+		 $ilan->cekis_id = $params['cekis'];
+		 $ilan->vites_id = $params['vites'];
+		 $ilan->kasa_id =$params['kasa'];
+		 $ilan->hasarsiz = $params['hasar'];
+		 $ilan->guncellenme_tarihi = date('Y-m-d H:i:s');
+		 if($ilan->update() == false):
+		 	$transaction->rollback(parent::mesajParcala($ilan));
+		 endif;
+		 //İlan Log
+		 $ilanLog = new ilanLoglari();
+		 $ilanLog->setTransaction($transaction);
+		 $ilanLog->ilan_id = $ilan->id;
+		 $ilanLog->kullanici_id = parent::diGet('sessionObj')->kullaniciId;
+		 $ilanLog->islem = 'guncelleme';
+		 $ilanLog->tarih = date('Y-m-d H:i:s');
+		 if($ilanLog->create() == false ):
+		 	$transaction->rollback(parent::mesajParcala($ilanLog));
+		 endif;
+		 //Aciklama
+		 $ilanAciklama = new ilanAciklamalari();
+		 $ilanAciklama->setTransaction($transaction);
+		 $ilanAciklama->ilan_id =  $ilan->id;
+		 $ilanAciklama->aciklama  = $params['aciklama'];
+		 if($ilanAciklama->update() == false ):
+		 	$transaction->rollback(parent::mesajParcala($ilanAciklama));
+		 endif;
+		 //Güncelle
+			 $transaction->commit();
+			 $response['status']= 'success';
+			 $response['message'] = parent::diGet('message')->_('successEdit');
+		 } catch (TxFailed $e) {
+		 //Güncellenemedi
+		 	$response['status']='error';
+		 	$response['message']= $e->getMessage();
+		 }
+		 return json_encode($response);
+	}
 	public function dataTable(){
 		$datatable = new ilanlarDatatable();
 		return $datatable->dataTable();
@@ -129,6 +198,32 @@ class ilanlar extends ModelBase{
 		$ilan = new self();
 		$result = (object) $ilan->getReadConnection()->query($sql)->fetch();
 		return $result;
+	}
+	public function sil($params){
+		try {
+			//Transaction Başlat
+			$manager = parent::diGet('transactions');
+			$transaction = $manager->get();
+			$ilan = $this->getir($params['id']);
+			$ilan->setTransaction($transaction);
+			if($ilan->delete() == false ):
+				$transaction->rollback(parent::mesajParcala($ilan));
+			endif;
+			$iU = new imageUpload;
+			$iU->deleteImage($ilan->kapak_foto);
+			foreach($ilan->ilanResimleri as $resim){
+				$iU->deleteImage($resim->resim_link);
+			}
+			//Silindi
+			$transaction->commit();
+			$response['status']= 'success';
+			$response['message'] = parent::diGet('message')->_('successRemove');
+		} catch (TxFailed $e) {
+			//Silinemedi
+			$response['status']='error';
+			$response['message']= $e->getMessage();
+		}
+		return json_encode($response);
 	}
 	
 }

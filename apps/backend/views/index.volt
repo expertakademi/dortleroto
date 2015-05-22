@@ -217,6 +217,12 @@
 						</li>
 					</ul>
 				</li>
+				<li class="start ">
+					<a href="{{url('admin/mesaj/inbox')}}">
+						<i class="fa fa-inbox"></i>
+						<span class="title">Mesajlar</span>
+					</a>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

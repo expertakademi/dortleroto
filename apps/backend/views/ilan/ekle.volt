@@ -57,6 +57,17 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
+							<label class="control-label">Temsilci</label>
+							<select name="temsilci" class="form-control" required>
+								<option value="">Seçiniz</option>
+								{% for temsilci in temsilciler %}
+									<option value="{{temsilci.id}}">{{temsilci.ad}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
 							<label class="control-label">Yıl</label>
 							<input type="text" name="yil" class="form-control" 
 							data-fv-integer="true" min="1950" max="{{date('Y')}}" required>
@@ -190,7 +201,12 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-	                    	<input id="resimler" name="resim[]" type="file" multiple="true" required>
+	                    	<input id="resimler" name="resim[]" type="file" multiple="true" 
+	                    	data-fv-file="true" 
+	                    	data-fv-file-maxsize="1048576"
+	                    	data-fv-file-message="Her bir resim max 1 MB olabilir ve en fazla 10 resim yüklenebilir."
+	                    	data-fv-file-maxfiles="10"	
+	                    	required>
 	                    	<input type="hidden" name="kapak" value="">
 	               		</div>
 					</div>

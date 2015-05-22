@@ -127,7 +127,6 @@ class imageUpload extends Component{
 			$response['link'] = str_replace('/../../public/','',$link);
 			return $response;
 		else:
-			
 			return false;
 		endif;
 	}

@@ -146,10 +146,10 @@
                 <div class="col-md-3 ">
                     <div class="clearfix"></div>
                     <div class="padding-15 col-md-12 no-magin col-sm-6 sahip-bilgi bilgi margintop-xs-2">
-                        <h3 class="beyaz margin-top-0 padding-bottom-02 border-bottom-beyaz">Yusuf Emre Balcı</h3>
-                        <p class="beyaz font18"><i class="fa fa-phone padding-right-05 fa-lg"></i><strong>+90 212 652 86 22</strong> </p>
-                        <p class="beyaz font18"><i class="fa fa-mobile padding-right-05 fa-lg"></i><strong> +90 538 652 63 69</strong> </p>
-                        <button class="btn btn-default btn-medium btn-block">Mesaj Gönder</button>
+                        <h3 class="beyaz margin-top-0 padding-bottom-02 border-bottom-beyaz">{{ilan.temsilci_ad}}</h3>
+                        <p class="beyaz font18"><i class="fa fa-phone padding-right-05 fa-lg"></i><strong>0{{helper.formatPhoneNumber(ilan.temsilci_telefon)}} ({{ilan.temsilci_dahili}})</strong> </p>
+                        <p class="beyaz font18"><i class="fa fa-mobile padding-right-05 fa-lg"></i><strong>0{{helper.formatPhoneNumber(ilan.temsilci_cep)}}</strong> </p>
+                        <button class="btn btn-default btn-medium btn-block load-modal" data-target="#generalModal" data-href="{{url('mesaj/gonder/id:'~ilan.id)}}" data-form="true">Mesaj Gönder</button>
                     </div>
                     <div class="col-md-12 col-sm-6 no-padding sahip-bilgi margin-top-1 sm-margin">
                         <ul class="list-group margin-bottom-10">

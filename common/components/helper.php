@@ -75,5 +75,70 @@ class helper extends Component  {
     
     	return $phoneNumber;
     }
+    
+    public function formatPicker($dateTime){
+    	$date = $parts = preg_split('/\s+/', $dateTime);
+    	$date2 = preg_split('/[-]/', str_replace(" ","",$date[0]));
+    	return "{$date2[2]}-{$date2[1]}-{$date2[0]} - {$date[1]}";
+    }
+    public function turkishLirasFormat($number,$ondalik=true){
+    	if($ondalik):
+			return number_format($number, 2, ',', '.');
+    	else:
+ 			return $number = number_format($number);
+    	endif;
+    }
+    public function yuzdeKac($a,$b){
+    	$c = $a / 100;
+    	return round($b / $c);
+    }
+    public function yuzdeOrtalama($a,$b){
+    	if($a == 0 ):
+    		return (100 * $b);
+    	elseif($b == 0 ):
+    		return -1 * ($a * 100);
+    	else:
+    		if($a > $b):
+				return ($b * 100)/$a * -1;
+    		elseif($b > $a):
+    			return (100 * $b)/$a - 100 ;
+    		endif;
+    	endif;
+    }
+    
+    /**
+     * Datetime biçiminde verilen tarihin ne kadar zaman önce olduğunu hesaplar.
+     * @param datetime $datetime
+     * @param boolean $full eğer true olursa tüm ayrıntısını dönderir false olursa en büyük zamanı.
+     * @retun string
+     */
+    public function timeAgo($datetime, $full = false) {
+    	$now = new \DateTime;
+    	$ago = new \DateTime($datetime);
+    	$diff = $now->diff($ago);
+    
+    	$diff->w = floor($diff->d / 7);
+    	$diff->d -= $diff->w * 7;
+    
+    	$string = array(
+    			'y' => 'yıl',
+    			'm' => 'ay',
+    			'w' => 'hafta',
+    			'd' => 'gün',
+    			'h' => 'saat',
+    			'i' => 'dakika',
+    			's' => 'saniye',
+    	);
+    	foreach ($string as $k => &$v) {
+    		if ($diff->$k) {
+    			$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+    		} else {
+    			unset($string[$k]);
+    		}
+    	}
+    
+    	if (!$full) $string = array_slice($string, 0, 1);
+    	return $string ? implode(', ', $string) . '' : 'Şimdi';
+    }
 }
 ?>

@@ -55,12 +55,21 @@ class Acl extends Plugin
 				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele'),
 				'ilan'		=> array ('ekle', 'ekleAjax','yonet','dataTableListele','hesapla','goruntule','ilanNotDataTable', 
 					'ekleNot', 'ekleNotAjax','ekleGorusme','ekleGorusmeAjax','ilanGorusmeDataTable','kaporaGoruntule',
-					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis','ekleEkspertiz','ekleEkspertizAjax'),
+					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis','ekleEkspertiz','ekleEkspertizAjax',
+					'duzenle',' duzenleAjax', 'resimEkle', 'resimDuzenle','resimEkleAjax','resimSil','resimSilAjax',
+					'kapakDegistir','kapakDegistirAjax','sil', 'silAjax'),
 				'musteri'	=> array ('ekle','ekleAjax','duzenle','duzenleAjax','sil',
 					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
 					'ekleNot','ekleNotAjax','duzenleNot','duzenleNotAjax','silNot','silNotAjax'),
 				'slider'	=> array ('ekle','ekleAjax','duzenle', 'duzenleAjax','sil','silAjax', 'yonet', 'dataTableListele'),
 				'pazarlama'	=> array('topluSms','topluSmsAjax','topluEmail'),
+				'gorev'		=> array('ekle','ekleAjax','listele','tamamla','tamamlaAjax','duzenle','duzenleAjax',
+					 'sil', 'silAjax','dataTable','dataTableListele'),
+				'chart'     => array('satis','sosyal','sosyalDetay','sosyalDataTable', 'reklam', 
+					'reklamDetay', 'reklamDataTable', 'erisim'),
+				'yazisma'	=> array('listele', 'ekleAjax'),
+				'mesaj'		=> array('inbox','goruntule','ekleAjax'),
+				'takvim'	=> array('index','ekle','ekleAjax','tasi'),
 				'test'	 	=> array('*')
 				);
 				$r= 'admin';

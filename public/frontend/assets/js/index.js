@@ -10,6 +10,7 @@ var index = function () {
                range: true,
                min: 0,
                max: 500000,
+               step: 1000,
                values: [ 0, 150000 ],
                slide: function( event, ui ) {
                    jQuery( "#amount" ).val(ui.values[ 0 ] + " TL" + " - " + ui.values[ 1 ] + " TL" );

@@ -4,8 +4,20 @@
              <li class="list-group-item kategori"><a href="#">Filtrele</a></li>
          </ul>
          <div class="col-md-12 filtrele">
-             <form>
-                 <div class="model-sec">
+             <form method="post" action="{{url('ara/aramaYap')}}">
+                 {% if params['kategori'] is defined %}
+                 	<input type="hidden" name="kategori" value="{{params['kategori']}}">
+                 {% endif %}
+                 {% if params['marka'] is defined %}
+                 	<input type="hidden" name="marka" value="{{params['marka']}}">
+                 {% endif %}
+                 {% if params['seri'] is defined %}
+                 	<input type="hidden" name="seri" value="{{params['seri']}}">
+                 {% endif %}
+                 {% if params['model'] is defined %}
+                 	<input type="hidden" name="model" value="{{params['model']}}">
+                 {% endif %}
+                <!--  <div class="model-sec">
                      <label>Model Seçiniz</label>
                      <ul class="nav">
                          <li><a href="#">Audi</a>
@@ -16,176 +28,140 @@
                              </ul>
                          </li>
                          <!--<li><a href="#">Mercedes</a><small class="gri">(52)</small></li>
-                         <li><a href="#">Opel</a><small class="gri">(52)</small></li>-->
+                         <li><a href="#">Opel</a><small class="gri">(52)</small></li>--> 
+                         <!--
                      </ul>
-                 </div>
+                 </div> -->
                  <div class="form-group gelismis">
                      <label for="exampleInputName2">Fiyat</label>
-                         <div id="slider-range"></div>   
-                         <input type="text" class="fiyat" id="amount" readonly>                                
+                         <div id="slider-range-fiyat"></div>   
+                         <input type="text" name="fiyat" class="range-value" id="amount" readonly>                                
                  </div>
                  <div class="form-group gelismis">
                      <label for="exampleInputName2">Yıl</label>
-                         <div id="yil"></div>
-                         <input type="text" class="fiyat" id="amount" readonly>                                
+                         <div id="slider-range-yil"></div>
+                         <input type="text" name="yil" class="range-value" id="yil" readonly>                                
                  </div>
                  <div class="form-group gelismis">
                      <label for="exampleInputName2">Km</label>
-                         <div id="yil"></div>
-                         <input type="text" class="fiyat" id="amount" readonly>                                
+                         <div id="slider-range-km"></div>
+                         <input type="text" name="km" class="range-value" id="km" readonly>                                
                  </div>
-                 <div class="form-group gelismis">
+                 <div class="form-group gelismis" id="yakit">
                      <label for="exampleInputName2">Yakıt</label><span class="pull-right arti">+</span>
                      <div class="checkbox">
                          <label>
-                             <input type="checkbox"> Hepsi
+                             <input type="checkbox" name="yakit[]" value="" > Hepsi
                          </label>
                      </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Benzin
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Benzin & LPG
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Dizel
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Hybrid
-                         </label>
-                     </div>
+                     {% for yakit in yakitlar %}
+	                     <div class="checkbox">
+	                         <label>
+	                             <input type="checkbox" name="yakit[]" value="{{yakit.permalink}}"> {{yakit.ad}}
+	                         </label>
+	                     </div>
+                     {% endfor %}
                  </div>
-                 <div class="form-group gelismis">
+                 <div class="form-group gelismis" id="vites">
                      <label for="exampleInputName2">Vites</label><span class="pull-right arti">+</span>
                      <div class="checkbox">
                          <label>
-                             <input type="checkbox"> Manuel
+                             <input type="checkbox" name="vites[]" value=""> Hepsi
                          </label>
                      </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Yarı Otomatik
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Otomatik
-                         </label>
-                     </div>
+                     {% for vites in vitesler %}
+	                     <div class="checkbox">
+	                         <label>
+	                             <input type="checkbox" name="vites[]" value="{{vites.permalink}}"> {{vites.ad}}
+	                         </label>
+	                     </div>
+                     {% endfor %}
 
-                 </div>
-                 <div class="form-group gelismis">
-                     <label for="exampleInputName2">Renk</label><span class="pull-right arti">+</span>
                  </div>
                  
                  <div class="form-group gelismis">
+                     <label for="exampleInputName2">Renk</label><span class="pull-right arti">+</span>
+                      <select class="form-control" id="renk" name="renk[]" multiple>
+                         <option value="">Hepsi</option>
+                          {% for renk in renkler %}
+                          	<option value="{{renk.permalink}}">{{renk.ad}}</option>
+                         {% endfor %}
+                     </select>
+                 </div>
+                 
+                 <div class="form-group gelismis" id="kasa">
                      <label for="exampleInputName2">Kasa Tipi</label><span class="pull-right arti">+</span>
                      <div class="checkbox">
                          <label>
-                             <input type="checkbox"> Hepsi
+                             <input type="checkbox" name="kasa[]"> Hepsi
                          </label>
                      </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Cabrio
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Coupe
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Hatchback 3 kapı
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Hatchback 5 kapı
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Sedan
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Staion Wagon
-                         </label>
-                     </div> 
-
+                     {% for kasa in kasalar %}
+	                     <div class="checkbox">
+	                         <label>
+	                             <input type="checkbox" name="kasa[]" value="{{kasa.permalink}}"> {{kasa.ad}}
+	                         </label>
+	                     </div>
+                     {% endfor %}
                  </div>
                  
                  <div class="form-group gelismis">
                      <label for="exampleInputName2">Motor Hacmi</label><span class="pull-right arti">+</span>
+                      <select class="form-control" id="hacim" name="hacim[]" multiple>
+                         <option value="">Hepsi</option>
+                          {% for hacim in hacimler %}
+                          	<option value="{{hacim.permalink}}">{{hacim.ad}}</option>
+                         {% endfor %}
+                     </select>
                  </div>
                  
-                 <div class="form-group gelismis">
+                 <div class="form-group gelismis" >
                      <label for="exampleInputName2">Motor Gücü</label><span class="pull-right arti">+</span>
-
+                      <select class="form-control" id="guc" name="guc[]" multiple>
+                         <option value="">Hepsi</option>
+                          {% for guc in gucler %}
+                          	<option value="{{guc.permalink}}">{{guc.ad}}</option>
+                         {% endfor %}
+                     </select>
                  </div>
                  
-                 <div class="form-group gelismis">
+                 <div class="form-group gelismis" id="cekis">
                      <label for="exampleInputName2">Çekiş</label><span class="pull-right arti">+</span>
                      <div class="checkbox">
                          <label>
-                             <input type="checkbox"> Hepsi
+                             <input type="checkbox" name="cekis[]" value=""> Hepsi
                          </label>
                      </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Önden Çekiş
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> Arkadan İtiş
-                         </label>
-                     </div>
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> 4WD (Sürekli)
-                         </label>
-                     </div> 
-                     <div class="checkbox">
-                         <label>
-                             <input type="checkbox"> AWD (Elektronik)
-                         </label>
-                     </div>
+                     {% for cekis in cekisler %}
+	                     <div class="checkbox">
+	                         <label>
+	                             <input type="checkbox" name="cekis[]" value="{{cekis.permalink}}"> {{cekis.ad}}
+	                         </label>
+	                     </div>
+                     {% endfor %}
                  </div>
                  
                  <div class="form-group gelismis">
                      <label>Garanti</label><span class="pull-right arti">+</span>
-                      <select class="form-control">
-                         <option>Hepsi</option>
-                         <option>Evet</option>
-                         <option>Hayır</option>
+                      <select class="form-control" id="garanti">
+                         <option value="" selected>Hepsi</option>
+                         <option value="1">Evet</option>
+                         <option value="0">Hayır</option>
                      </select>
                  </div>
                  
                  <div class="form-group gelismis">
                      <label>İlan Tarihi</label><span class="pull-right arti">+</span>
-                     <!--<select class="form-control">
-                         <option>Hepsi</option>
-                         <option>Son 24 saat</option>
-                         <option>Son 3 gün içinde</option>
-                         <option>Son 7 gün içinde</option>
-                         <option>Son 15 gün içinde</option>
-                         <option>Son 30 gün içinde</option>
-                     </select>-->
+                     <select class="form-control" name="tarih" id="tarih">
+                         <option value="">Hepsi</option>
+                         <option value="1">Son 24 saat</option>
+                         <option value="3">Son 3 gün içinde</option>
+                         <option value="7">Son 7 gün içinde</option>
+                         <option value="15">Son 15 gün içinde</option>
+                         <option value="30">Son 30 gün içinde</option>
+                     </select>
                  </div>
-               
                  <button class="btn listele-btn btn-default btn-md center-block padding-left-3 padding-right-3 margin-top-1">Ara</button>
-
              </form>
              
 
@@ -228,7 +204,8 @@
 	             <tbody id="aramaTable">
 	             {% if page.total_items != 0 %}
 	             	{% for item in  page.items %}
-	             	<tr>
+	             	{% set link = url('ilan/'~item.ilan_permalink ~ '-' ~ item.id)%}
+	             	<tr onClick="app.goPage('{{link}}')">
 	                     <td class="col-xs-4 col-sm-2 col-md-2 no-padding">
 	                        <img src="{{url(item.kapak_foto)}}" class="img-responsive col-md-12 col-sm-12 col-xs-12 no-padding">
 	                     </td>
@@ -279,21 +256,9 @@
 	    </div>           
 	</div>
 </div>
-    <script>
- 	window.onload = function (){
-        $(function() {
-            $( "#slider-range , #yil" ).slider({
-                range: true,
-                min: 0,
-                max: 500,
-                values: [ 75, 300 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-                }
-            });
-            $( "#amount" ).val( "$" + $( "#slider-range , #yil" ).slider( "values", 0 ) +
-            " - $" + $( "#slider-range , #yil" ).slider( "values", 1 ) );
-        });
-
- 	}
-    </script>
+<script>
+window.onload = function(){
+	ara.init();
+	ara.listele({{params | json_encode}});
+}
+</script>

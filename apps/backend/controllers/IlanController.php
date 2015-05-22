@@ -12,15 +12,20 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\ilanlar,
 	Modules\Backend\Models\ilanNotlari,
 	Modules\Backend\Models\ilanGorusmeleri,
+	Modules\Backend\Models\ilanResimleri,
 	Modules\Backend\Models\ilanKapora,
 	Modules\Backend\Models\satislar,
-	Modules\Backend\Models\ilanEkspertiz;
+	Modules\Backend\Models\ilanEkspertiz,
+	Modules\Backend\Models\seriler,
+	Modules\Backend\Models\modeller,
+	Modules\Backend\Models\kullanicilar;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
 		$this->view->setVars(array(
 				"title"			=> "İlan Ekle",
 				"kategoriler"	=> (new kategoriler)->tumunuGetir(),
 				"markalar" 		=> (new markalar)->tumunuGetir(),
+				"temsilciler"	=> (new kullanicilar)->tumunuGetir(),
 				"yakitlar" 		=> (new yakitlar)->tumunuGetir(),
 				"renkler" 		=> (new renkler)->tumunuGetir(),
 				"hacimler"		=> (new motorHacimleri)->tumunuGetir(),
@@ -48,7 +53,79 @@ class IlanController extends ControllerBase{
 		$ilan = new ilanlar();
 		echo $ilan->yeni($params);
 	}
-	
+	public function duzenleAction(){
+		$id = $this->dispatcher->getParam("id",null,null);
+		$ilan = (new ilanlar)->getir($id);
+		$this->view->setVars(array(
+				"title"			=> "İlan Düzenle",
+				"ilan"			=> $ilan,
+				"kategoriler"	=> (new kategoriler)->tumunuGetir(),
+				"markalar" 		=> (new markalar)->tumunuGetir(),
+				"seriler"		=> (new seriler)->markayaGoreGetir($ilan->marka_id),
+				"modeller"		=> (new modeller)->seriyeGoreGetir($ilan->seri_id),
+				"temsilciler"	=> (new kullanicilar)->tumunuGetir(),
+				"yakitlar" 		=> (new yakitlar)->tumunuGetir(),
+				"renkler" 		=> (new renkler)->tumunuGetir(),
+				"hacimler"		=> (new motorHacimleri)->tumunuGetir(),
+				"gucler"		=> (new motorGucleri)->tumunuGetir(),
+				"cekisler"		=> (new cekisler)->tumunuGetir(),
+				"vitesler"		=> (new vitesler)->tumunuGetir(),
+				"kasalar"		=> (new kasalar)->tumunuGetir()
+		));
+		$this->assets
+			->addCss("backend/assets/global/plugins/summernote/dist/summernote.css");
+		$this->assets
+			->addJs("backend/assets/js/ilanEkle.js")
+			->addJs("backend/assets/global/plugins/summernote/dist/summernote.js?ver=0.02")
+			->addJs("backend/assets/global/plugins/summernote/plugin/summernote-ext-fontstyle.js")
+			->addJs("backend/assets/global/plugins/summernote/lang/summernote-tr-TR.js");
+	}
+	public function duzenleAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		$ilan = new ilanlar();
+		echo $ilan->duzenle($params);
+	}
+	public function resimEkleAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->id = $id;
+	}
+	public function resimDuzenleAction(){
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->title = "Resimleri Düzenle";
+		$this->view->resimler = (new ilanResimleri)->getirByIlanId($id);
+		$this->view->id = $id;
+		$this->assets
+		->addCss('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css');
+		$this->assets
+		->addJs('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js');
+	}
+	public function resimEkleAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new ilanResimleri)->yeni($params);
+	}
+	public function resimSilAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->id = $id;
+	}
+	public function resimSilAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new ilanResimleri)->silTekil($params);
+	}
+	public function kapakDegistirAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->id = $id;
+	}
+	public function kapakDegistirAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new ilanResimleri)->kapakDegis($params);
+	}
 	public function yonetAction(){
 		$this->view->title= "İlan Yönetimi";
 	}
@@ -65,6 +142,11 @@ class IlanController extends ControllerBase{
 		endif;
 		$this->view->satis = (new satislar)->getir($id);
 		$this->view->ekspertiz = (new ilanEkspertiz)->getir($id);
+		
+		$this->assets
+		->addCss('backend/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')
+		->addJs('backend/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')
+		->addJs('backend/assets/js/pickers.js');
 		
 	}
 
@@ -135,6 +217,7 @@ class IlanController extends ControllerBase{
 		parent::disableMain();
 		$id = $this->dispatcher->getParam("id");
 		$this->view->id = $id;
+
 	}
 	public function ekleSatisAjaxAction(){
 		parent::ajaxForm();
@@ -150,6 +233,16 @@ class IlanController extends ControllerBase{
 		parent::ajaxForm();
 		$params = $this->request->getPost();
 		echo (new ilanEkspertiz)->yeni($params);
+	}
+	public function silAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->id = $id;
+	}
+	public function silAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new ilanlar)->sil($params);
 	}
 	
 }

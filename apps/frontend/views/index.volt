@@ -61,10 +61,10 @@
 
                             <div class="collapse navbar-collapse" id="menus">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="active"><a href="{{url('')}}">Anasayfa</a></li>
+                                    <li class=""><a href="{{url('')}}">Anasayfa</a></li>
                                     <li><a href="#">Hakkımızda</a></li>
-                                    <li><a href="#">Araba</a></li>
-                                    <li><a href="#">Ticari</a></li>
+                                    <li><a href="{{url('ara/listele/kategori:otomobil')}}">Araba</a></li>
+                                    <li><a href="{{url('ara/listele/kategori:ticari-araclar')}}">Ticari</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -98,10 +98,10 @@
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="active"><a href="{{url('')}}">Anasayfa</a></li>
+                                <li class=""><a href="{{url('')}}">Anasayfa</a></li>
                                 <li><a href="#">Hakkımızda</a></li>
-                                <li><a href="#">Araba</a></li>
-                                <li><a href="#">Ticari</a></li>
+                                <li><a href="{{url('ara/listele/kategori:otomobil')}}">Araba</a></li>
+                                <li><a href="{{url('ara/listele/kategori:ticari-araclar')}}">Ticari</a></li>
                             </ul>
 
 
@@ -314,9 +314,14 @@
             </nav>
         </div>
         
-
+		<div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModal" aria-hidden="true">
+	  		<div class="modal-dialog">
+	    		<div class="modal-content">
+			
+	    		</div><!-- /.modal-content -->
+	  		</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         {{assets.outputJs()}}
         <script>

@@ -217,6 +217,12 @@
 						</li>
 					</ul>
 				</li>
+				<li class="start ">
+					<a href="<?php echo $this->url->get('admin/mesaj/inbox'); ?>">
+						<i class="fa fa-inbox"></i>
+						<span class="title">Mesajlar</span>
+					</a>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

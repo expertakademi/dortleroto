@@ -28,7 +28,7 @@
      </div>
 
      <div class="col-md-12 no-padding mt-15 hidden-xs hidden-sm">
-         <img src="uploads/reklam.jpg" class="img-responsive">
+         <!-- <img src="{{url('frontend/uploads/reklam.jpg')}}" class="img-responsive"> -->
      </div>
      
  </div>

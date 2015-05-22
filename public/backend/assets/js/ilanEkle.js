@@ -7,9 +7,11 @@ var ilanEkle = function(){
 			jQuery('body').on("change",markaSelect,function(){
 				var secilen = jQuery(this).find("option:selected").val();
 				if(secilen== ""){
+					ilanEkle.selectSifirla(modelSelect,'Seri Seçiniz');
 					ilanEkle.selectSifirla(seriSelect,'Marka Seçiniz');
 				}else{
 					ilanEkle.seriGetir(secilen);
+					ilanEkle.selectSifirla(modelSelect,'Seri Seçiniz');
 				}
 			});
 		},

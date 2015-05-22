@@ -18,6 +18,7 @@ var modal = function () {
 					form.submitForm();
 				}
 				lastHref= data.href;
+				pickers.handleDatetimePicker();
 			});
 			jQuery(data.target).modal();
 			

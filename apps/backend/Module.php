@@ -72,7 +72,9 @@ class Module
 					"compiledExtension" => ".compiled",
 					"compileAlways" => true
 			));
-		
+			//load function php
+			$compiler = $volt->getCompiler();
+			$compiler->addFunction('in_array', 'in_array');
 			return $volt;
 		});
 		/**
