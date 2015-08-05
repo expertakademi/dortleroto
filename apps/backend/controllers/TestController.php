@@ -33,11 +33,10 @@ class TestController extends ControllerBase{
 	}
     public function sahibindenAction(){
         $sahibinden = new sahibinden();
-        $user = 'PrinceAli';
-        $pass = 'impossible';
-
+        $user = 'sonmez_22_33';
+        $pass = 'dortler987';
         $sahibinden->login($user, $pass);
- 
+        $sahibinden->publish("Bmw 3 Serisi","Some test car Bmw","Sahibinden satılık kazasız boyasız performans canavarı aracımı ihtiyaçtan dolayı satıyorum.", 55000, 1, 110000, array("/var/www/public/uploads/ilan/2015/04/552848c36f2d4.jpg"));
 
         //$newMessages = $sahibinden->getMessages();
         //$sahibinden->reply($newMessages[0]['thread'],"Levent hoja da selam söyledi");

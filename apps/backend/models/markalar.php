@@ -89,5 +89,6 @@ class markalar extends ModelBase{
 	private function afterValidationOnCreate(){
 		$this->permalink = parent::diGet('helper')->permalink($this->ad);
 	}
+
 }
 ?>

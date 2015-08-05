@@ -3,6 +3,8 @@ namespace Modules\Backend\Models;
 use Modules\Common\Components\imageUpload,
 	Modules\Backend\Models\ilanResimleri;
 class ilanlar extends ModelBase{
+    public $imageNames = array('5555');
+
 	protected function initialize(){
 		parent::initialize();
 		$this->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
@@ -36,7 +38,7 @@ class ilanlar extends ModelBase{
 	}
 	public function yeni($params){
 		try {
-			//Transaction Başlat
+            //Transaction Başlat
 			$manager = parent::diGet('transactions');
 			$transaction = $manager->get();
 			// İlan Ekle
@@ -85,8 +87,6 @@ class ilanlar extends ModelBase{
 			if($ilanAciklama->create() == false ):
 				$transaction->rollback(parent::mesajParcala($ilanAciklama));
 			endif;
-			
-			
 			// Resimler
 			$files = parent::diGet('request')->getUploadedFiles();
 			$kapak = $params['kapak'];
@@ -95,9 +95,9 @@ class ilanlar extends ModelBase{
 			if($resimler['list'] == false):
 				$transaction->rollback("Resimler yüklenemedi.");
 			endif;
-			//Resimleri Ekle
+            //Resimleri Ekle
 			$resim = array();
-			foreach ($resimler['list'] as $key=>$item){
+            foreach ($resimler['list'] as $key=>$item){
 				$resim[$key] =  new ilanResimleri();
 				$resim[$key]->resim_link = $item;
 			}
@@ -105,8 +105,7 @@ class ilanlar extends ModelBase{
 			if($ilan->update() == false ):
 				$transaction->rollback(parent::mesajParcala($ilan));
 			endif;
-			
-			//Kapak Resmi
+            //Kapak Resmi
 			if($resimler['thumb']!=""):
 				$kapak = $imageUpload->thumbUpload($resimler['thumb'],'thumbnail',array("x"=>200,"y"=>200));
 			else:
@@ -120,7 +119,7 @@ class ilanlar extends ModelBase{
 					$transaction->rollback(parent::mesajParcala($ilan));
 				endif;
 			endif;
-			//Eklendi
+            //Eklendi
 			$transaction->commit();
 			$response['status']= 'success';
 			$response['message'] = parent::diGet('message')->_('succesAdd', array('name'=> 'ilan'));
@@ -129,7 +128,9 @@ class ilanlar extends ModelBase{
 				$response['status']='error';
 				$response['message']= $e->getMessage();
 			}
-			return json_encode($response);
+            $this->imageNames = $resimler;
+        return json_encode($response);
+
 	}
 	public function duzenle($params){
 		 try {

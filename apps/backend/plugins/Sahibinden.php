@@ -1,8 +1,8 @@
-<?php 
+<?php
 namespace Modules\Backend\Plugins;
 use ArrayObject;
-class Sahibinden{ 
-private $ch, $headers, $meta, $verbose;
+class Sahibinden{
+    private $ch, $headers, $meta, $verbose;
 
     function __construct () {
         $ch = curl_init();
@@ -39,11 +39,11 @@ private $ch, $headers, $meta, $verbose;
     }
 
     /**
-    * This function authenticates us
-    * 
-    * @param string $username
-    * @param string $password
-    */
+     * This function authenticates us
+     *
+     * @param string $username
+     * @param string $password
+     */
 
     public function login($username, $password){
 
@@ -87,49 +87,50 @@ private $ch, $headers, $meta, $verbose;
         if (!preg_match('/(\{"response.*?)$/s', $content, $m)) die('no response');
         $data = json_decode($m[1], true);
         $this->meta = $data['response']['meta'];
-    }  
+    }
     /**
-    * This function used to find category.
-    * populates input here http://prntscr.com/6tahdh
-    * returns the link that brings us to Ad details.
-    * Ex. search term : 2013 bmw 520i
-    * Pick the first URL
-    * @param string $key
-    * @return URL that we will 
-    */
+     * This function used to find category.
+     * populates input here http://prntscr.com/6tahdh
+     * returns the link that brings us to Ad details.
+     * Ex. search term : 2013 bmw 520i
+     * Pick the first URL
+     * @param string $key
+     * @return URL that we will
+     */
 
     private function findCategory($key) {
-        echo "searching: $key\n";   
+        echo "searching: $key\n";
         $key = urlencode($key);
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/searchSuggestions/autocomplete/categories?categoryId=3517&partialPhrase='.$key.'&size=20');
         $data = json_decode($content, true);
         if (!isset($data['response'])) return;
 
         // results array, pick first result
+        //print_r($data['response']['eurotaxSuggestions']);die;
         $pick = $data['response']['eurotaxSuggestions'][0];
         return $pick;
-    } 
+    }
 
-  /**
-  * This is our main buddy publishes Ad
-  * 
-  * @param mixed $ilanBaslik -> Ad title
-  * @param mixed $aciklama -> Ad description
-  * @param mixed $fiyat -> Ad price
-  * @param mixed $vites -> Gear
-  * @param mixed $km -> Km
-  * @param mixed $renk -> Color
-  * @param mixed $garanti -> Guarantee
-  * @param mixed $plaka -> License plate
-  * @param mixed $takasli -> Barter
-  * @param mixed $ulke -> Country
-  * @param mixed $il -> City
-  * @param mixed $ilce -> Town
-  * @param mixed $mah -> Street
-  * @param mixed $photos
-  */
-#$sahibinden->publish("mercedes 2008 e 200 dizel","Great car here","My car is great please buy it","50000","1","100000",array("myuploadedimage1.jpg","myuploadedimage2.jpg"));
-    public function publish($keyword, $ilanBaslik, $aciklama, $fiyat, $vites, $km, $photos, $garanti=1, $renk=0, $plaka=0, $takasli=1, $ulke=0, $il=3, $ilce=11, $mah = 55){
+    /**
+     * This is our main buddy publishes Ad
+     *
+     * @param mixed $ilanBaslik -> Ad title
+     * @param mixed $aciklama -> Ad description
+     * @param mixed $fiyat -> Ad price
+     * @param mixed $vites -> Gear
+     * @param mixed $km -> Km
+     * @param mixed $renk -> Color
+     * @param mixed $garanti -> Guarantee
+     * @param mixed $plaka -> License plate
+     * @param mixed $takasli -> Barter
+     * @param mixed $ulke -> Country
+     * @param mixed $il -> City
+     * @param mixed $ilce -> Town
+     * @param mixed $mah -> Street
+     * @param mixed $photos
+     */
+
+    public function publish($keyword, $ilanBaslik, $aciklama, $fiyat, $vites, $km, $photos, $garanti=1, $renk=0, $plaka=0, $takasli=1, $ulke=0, $il=3, $ilce=11, $mah = 55, $motor_hacmi, $motor_gucu, $yakit){
         $resp = $this->findCategory($keyword);
         if (!$resp) die('no results');
 
@@ -152,6 +153,10 @@ private $ch, $headers, $meta, $verbose;
             'garanti' => 'a4054',
             'vites'   => 'a6',
             'plaka'   => 'a9620',
+            'yakit'   => 'a17',
+
+            'motor_gucu'  => 'a2320',
+            'motor_hacmi' => 'a1864',
         );
 
         $elements = array();
@@ -179,16 +184,21 @@ private $ch, $headers, $meta, $verbose;
             $p['garanti']      => $enums[$p['garanti']][$garanti]['id'],
             $p['vites']        => $enums[$p['vites']][$vites]['id'],
             $p['plaka']        => $enums[$p['plaka']][$plaka]['id'],
+
+            $p['yakit']        => $enums[$p['yakit']][$yakit]['id'],
+            $p['motor_hacmi']  => $enums[$p['motor_hacmi']][$motor_hacmi]['id'],
+            $p['motor_gucu']   => $enums[$p['motor_gucu']][$motor_gucu]['id'],
+
             'exchange'         => $enums['exchange'][$takasli]['id'],
 
             'price'            => (int) $fiyat,
             'price_currency'   => 1,
-    
+
             'address_country'  => (int) $ulke,
             'address_city'     => (int) $il,
             'address_town'     => (int) $ilce,
             'address_quarter'  => (int) $mah,
-    
+
             'title'            => $ilanBaslik,
             'description'      => "<p>$aciklama<br/></p>",
             'classifiedNote'   => '',
@@ -243,17 +253,17 @@ private $ch, $headers, $meta, $verbose;
         // step 2, submit
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/classifieds?language=tr', json_encode($ad));
         $data = json_decode($content, true);
-        echo "err:".$content;
+
         if (!isset($data['success']) || $data['success'] != true) {
-            die('error: '.$data['error']);
+            die('error: '.$data['errorDescription']);
         }
 
         // step 3, finalize
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/classifieds/'.$id.'/finalize', '');
         $data = json_decode($content, true);
-       
+
         if (!isset($data['success']) || $data['success'] != true) {
-            die('error: '.$data['error']);
+            die('error: '.$data['errorDescription']);
         }
 
         // done
@@ -262,7 +272,7 @@ private $ch, $headers, $meta, $verbose;
     }
 
 
-    
+
     private function image_resize($file) {
         $width = 800;
         $image = imagecreatefromjpeg($file);
@@ -274,9 +284,9 @@ private $ch, $headers, $meta, $verbose;
 
         $resized = imagecreatetruecolor($width, $height);
         imagecopyresampled($resized, $image, 0, 0, 0, 0, $width, $height, $orig_width, $orig_height);
-        ob_start(); 
+        ob_start();
         imagejpeg($resized, null, 100);
-        $buffer = ob_get_clean(); 
+        $buffer = ob_get_clean();
         return array(
             's1' => filesize($file),
             's2' => strlen($buffer),
@@ -284,10 +294,10 @@ private $ch, $headers, $meta, $verbose;
         );
     }
     /**
-    * This function used to find unread messages.
-    * returns the link that brings us to message details.
-    * @return array of URLS that we will iterate 
-    */
+     * This function used to find unread messages.
+     * returns the link that brings us to message details.
+     * @return array of URLS that we will iterate
+     */
     private function findUnreadMessages(){
         $content = $this->http_req('https://banaozel.sahibinden.com/sahibinden-ral/rest/my/topics?viewType=LIST');
         $data = json_decode($content, true);
@@ -301,18 +311,18 @@ private $ch, $headers, $meta, $verbose;
         return $new;
     }
     /**
-    * This function will visit the URL given and
-    * gather the message details.  
-    * @param mixed $url
-    * @return array(
-    *   "ilan"=>(string) Related Ad's title,
-    *   "gonderenAd"=>(string) Sender's name,
-    *   "gonderenTel"=>(string) Sender's phone,
-    *   "tarih"=>(string) Send time of latest message,
-    *   "message"=>(string) Message content,
-    *   "url"=>(string) this is the URL for conversation. You may need this for replying.
-    * )
-    */
+     * This function will visit the URL given and
+     * gather the message details.
+     * @param mixed $url
+     * @return array(
+     *   "ilan"=>(string) Related Ad's title,
+     *   "gonderenAd"=>(string) Sender's name,
+     *   "gonderenTel"=>(string) Sender's phone,
+     *   "tarih"=>(string) Send time of latest message,
+     *   "message"=>(string) Message content,
+     *   "url"=>(string) this is the URL for conversation. You may need this for replying.
+     * )
+     */
     private function getMessageContent($url){
         $content = $this->http_req($url);
         $data = json_decode($content, true);
@@ -320,7 +330,7 @@ private $ch, $headers, $meta, $verbose;
         $resp = $data['response'];
 
         // 1 last message, stub for multiple?
-        $msg_num = 1; 
+        $msg_num = 1;
         $msg_new = array_slice($resp['messages'], $msg_num * -1);
 
         $result = array();
@@ -341,10 +351,10 @@ private $ch, $headers, $meta, $verbose;
         return $result;
     }
     /**
-    * This dude runs our findUnreadMessages and then iterates urls,
-    * runs getMessageContent for each url and returns 2D array as result set.
-    * Last function for message pulling.
-    */
+     * This dude runs our findUnreadMessages and then iterates urls,
+     * runs getMessageContent for each url and returns 2D array as result set.
+     * Last function for message pulling.
+     */
     public function getMessages(){
         $messageLinks = $this->findUnreadMessages();
         $result = array();
@@ -354,10 +364,10 @@ private $ch, $headers, $meta, $verbose;
         return $result;
     }
     /**
-    * We will use this function to reply incoming messages.
-    * http://prntscr.com/6urcvn
-    * @param string $url this is the value we gathered from getMessageContent
-    */
+     * We will use this function to reply incoming messages.
+     * http://prntscr.com/6urcvn
+     * @param string $url this is the value we gathered from getMessageContent
+     */
     public function reply($thread, $message){
         echo "replying...\n";
         if (!$thread['rel_type']) die('something is wrong');

@@ -18,9 +18,13 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\ilanEkspertiz,
 	Modules\Backend\Models\seriler,
 	Modules\Backend\Models\modeller,
-	Modules\Backend\Models\kullanicilar;
+	Modules\Backend\Models\kullanicilar,
+    Modules\Backend\Plugins\Sahibinden;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
+        if(isset($_POST['marka'])){
+            echo 'test';die;
+        }
 		$this->view->setVars(array(
 				"title"			=> "İlan Ekle",
 				"kategoriler"	=> (new kategoriler)->tumunuGetir(),
@@ -47,12 +51,43 @@ class IlanController extends ControllerBase{
 			->addJs("backend/assets/global/plugins/summernote/lang/summernote-tr-TR.js");
 		
 	}
+    public function publishSahibinden($params){
+        // getting the names of params
+        /*$kategori = new Kategoriler();
+        $kategoriName = $kategori->getir($params['kategori']);*/
+        $markalar = new markalar();
+        $markalarName = $markalar->getir($params['marka']);
+        $seriler = new seriler();
+        $serilerName = $seriler->getir($params['seri']);
+        $carModel = new modeller();
+        $craModelName = $carModel->getir($params['model']);
+        $motorHacim = new motorHacimleri();
+        $motorHacimValue = $motorHacim->getir($params['hacim']);
+        $motorGucu = new motorGucleri();
+        $motorGucuValue = $motorGucu->getir($params['guc']);
+        $yakit = new yakitlar();
+        $yakitValue = $yakit->getir($params['yakit']);
+
+        //logging in
+        $sahibinden = new sahibinden();
+        $user = 'sonmez_22_33';
+        $pass = 'dortler987';
+        $sahibinden->login($user, $pass);
+        // publishing data
+        print_r($params);
+        $sahibinden->publish($markalarName->ad . " " . $serilerName->ad . " " . $craModelName->ad . " " . $params['yil'] , $params['baslik'], $params['aciklama'], $params['fiyat'], $params['vites'],$params['kilometre'], "/var/www/public/uploads/ilan/2015/05/554a0c3ce44ce.jpg", $params['garanti'], $params['renk'], 0, 1, 0, 3, 11, 55, $params['hacim'], $params['guc'], $params['yakit']);
+
+    }
 	public function ekleAjaxAction(){
 		parent::ajaxForm();
 		$params = $this->request->getPost();
+        $this->publishSahibinden($params);
 		$ilan = new ilanlar();
 		echo $ilan->yeni($params);
-	}
+        $images = new ilanlar();
+        print_r($images->imageNames);exit;
+
+    }
 	public function duzenleAction(){
 		$id = $this->dispatcher->getParam("id",null,null);
 		$ilan = (new ilanlar)->getir($id);
