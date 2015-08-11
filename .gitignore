@@ -1,2 +1,4 @@
 *.volt.compiled
 composer.lock
+*.jpeg
+*.jpg
