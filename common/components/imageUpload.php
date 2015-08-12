@@ -49,9 +49,9 @@ class imageUpload extends Component{
 			if($thumbName == $file->getName()):
 				$isThumb = true;
 			endif;
-
+            //print_r($file->getFilename());exit;
 			$directory = $this->getDirectory($prefix);
-			$upload = new \upload($file);
+			$upload = new \upload($file->getTempName());
 			//Yeni İsim;
 			$newName = uniqid();
 			$upload->file_new_name_body = $newName;
@@ -106,7 +106,7 @@ class imageUpload extends Component{
 		//Yeniden Boyutlandır;
 		if($resize != null):
 		$upload->image_resize          = true;
-		//$upload->image_ratio_crop      = true;
+		$upload->image_ratio_crop      = true;
 		$upload->image_y               = $resize['y'];
 		$upload->image_x               = $resize['x'];
 		endif;

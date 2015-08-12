@@ -99,17 +99,23 @@ class ilanlar extends ModelBase{
 			$resim = array();
             foreach ($resimler['list'] as $key=>$item){
 				$resim[$key] =  new ilanResimleri();
+                $resim[$key]->setTransaction($transaction);
 				$resim[$key]->resim_link = $item;
+                $resim[$key]->ilan_id = $ilan->id;
+                if($resim[$key]->create() == false ):
+                    $transaction->rollback(parent::mesajParcala($resim[$key]));
+                endif;
 			}
-			$ilan->ilanResimleri = $resim;
+			/*$ilan->ilanResimleri = $resim;
 			if($ilan->update() == false ):
 				$transaction->rollback(parent::mesajParcala($ilan));
-			endif;
+			endif;*/
+            
             //Kapak Resmi
 			if($resimler['thumb']!=""):
-				$kapak = $imageUpload->thumbUpload($resimler['thumb'],'thumbnail',array("x"=>200,"y"=>200));
+				$kapak = $imageUpload->thumbUpload($resimler['thumb'],'thumbnail',array("x"=>200,"y"=>165));
 			else:
-				$kapak = $imageUpload->thumbUpload($resimler['list'][0],'thumbnail',array("x"=>200,"y"=>200));
+				$kapak = $imageUpload->thumbUpload($resimler['list'][0],'thumbnail',array("x"=>200,"y"=>165));
 			endif;
 			if($kapak['status']!="success"):
 				$transaction->rollback("Kapak Resmi Yüklenemedi");

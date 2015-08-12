@@ -84,10 +84,11 @@ class IlanController extends ControllerBase{
         $this->publishSahibinden($params);
 		$ilan = new ilanlar();
 		echo $ilan->yeni($params);
-        $images = new ilanlar();
-        print_r($images->imageNames);exit;
-
+        //$images = new ilanlar();
+        //print_r($images->imageNames);
+        exit;
     }
+    
 	public function duzenleAction(){
 		$id = $this->dispatcher->getParam("id",null,null);
 		$ilan = (new ilanlar)->getir($id);
