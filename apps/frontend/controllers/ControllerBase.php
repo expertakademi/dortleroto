@@ -15,7 +15,12 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addCss('frontend/assets/css/font-awesome.min.css')
 			->addCss('frontend/assets/css/jquery-ui.css')
 			->addCss('frontend/assets/plugins/formvalidation/dist/css/formValidation.min.css')
-			->addCss('frontend/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css');;
+			->addCss('frontend/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+            ->addCss('frontend/assets/css/bootstrap-modal.css')
+            ->addCss('frontend/assets/css/bootstrap-modal-bs3patch.css')
+            ->addCss('frontend/assets/css/bootstrap-modal-bs3patch.css')
+            ->addCss('frontend/assets/css/plugins-md.css')
+            ->addCss('frontend/assets/css/components-md.css');
 		$this->assets
 			->addJs('frontend/assets/js/jquery-1.11.2.min.js')
 			->addJs('frontend/assets/js/jquery-ui.js')
@@ -26,7 +31,9 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			->addJs('frontend/assets/plugins/formvalidation/dist/js/language/tr_TR.js')
 			->addJs('frontend/assets/js/app.js')
 			->addJs('frontend/assets/js/form.js')
-			->addJs('frontend/assets/js/modal.js');
+            ->addJs('frontend/assets/js/bootstrap-modal.js')
+            ->addJs('frontend/assets/js/bootstrap-modalmanager.js');
+			//->addJs('frontend/assets/js/modal.js');
 	}
 	protected function checkAjaxReq(){
 		if ($this->request->isAjax() != true) :

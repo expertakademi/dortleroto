@@ -6,11 +6,11 @@
                       <a class="pull-right"><i class="fa fa-share-alt padding-right-05"></i>Paylaş</a> 
 
                     </ol>-->
-                    <h3  class="margin-bottom-05 pull-left no-margin">
+                    <h3  class="margin-bottom-05 pull-left mt-15">
                         <span class="detay-baslik">{{ilan.baslik}}</span>
                         <strong class="kirmizi">{{ilan.fiyat}} TL</strong>
                     </h3> 
-                    <p class="pull-right padding-top-05">İlan No:<span class="kirmizi"> <b>{{ilan.id}}</b></span></p>
+                    <p class="pull-right padding-top-05 mt-15">İlan No:<span class="kirmizi"> <b>{{ilan.id}}</b></span></p>
 
                     <div class="col-md-12 col-xs-12 col-sm-12 border-bottom-e5"></div>
                     <div class="clearfix"></div> 
@@ -153,9 +153,9 @@
                     </div>
                     <div class="col-md-12 col-sm-6 no-padding sahip-bilgi margin-top-1 sm-margin">
                         <ul class="list-group margin-bottom-10">
-                            <li class="list-group-item"><i class="fa fa-print fa-lg"></i><a href="#">İlanı Yazdır</a></li>
+                            <li class="list-group-item"><i class="fa fa-print fa-lg"></i><a href="javascript: window.print()">İlanı Yazdır</a></li>
                             <li class="list-group-item"><i class="fa fa-flag fa-lg"></i><a href="#">Hatalı İlan Bildir</a></li>
-                            <li class="list-group-item"><i class="fa  fa-exclamation-triangle fa-lg"></i><a href="#">Güvenlik Hatırlatmaları</a></li>
+                            <li class="list-group-item"><i class="fa  fa-exclamation-triangle fa-lg"></i><a data-target="#hatir" data-toggle="modal">Güvenlik Hatırlatmaları</a></li>
                         </ul>                      
                     </div>
                     <div class="col-md-12 hidden-xs hidden-sm avantajli-ilan no-padding">
@@ -413,3 +413,34 @@
                         
                     </div>
                 </div>
+
+<div id="hatir" class="modal fade modal-scroll modal-overflow container" tabindex="-1" aria-hidden="true" style="display: none; margin-top: -120.5px;">
+    <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Güvenlik Hatırlatmaları</h4>
+    </div>
+    <div class="modal-body">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. <br/>
+                In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. <br/>
+                Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. <br/> 
+                Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. <br/>
+                Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium. <br/>
+                
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. <br/>
+                In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. <br/>
+                Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. <br/> 
+                Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. <br/>
+                Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium. <br/>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. <br/>
+                In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. <br/>
+                Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. <br/> 
+                Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. <br/>
+                Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium. <br/>
+            </p>
+    </div>
+    <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+    </div>
+</div>
