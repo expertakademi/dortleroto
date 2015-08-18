@@ -154,7 +154,7 @@
                     <div class="col-md-12 col-sm-6 no-padding sahip-bilgi margin-top-1 sm-margin">
                         <ul class="list-group margin-bottom-10">
                             <li class="list-group-item"><i class="fa fa-print fa-lg"></i><a href="javascript: window.print()">İlanı Yazdır</a></li>
-                            <li class="list-group-item"><i class="fa fa-flag fa-lg"></i><a href="#">Hatalı İlan Bildir</a></li>
+                            <li class="list-group-item"><i class="fa fa-flag fa-lg"></i><a data-target="#complaint" data-toggle="modal">Hatalı İlan Bildir</a></li>
                             <li class="list-group-item"><i class="fa  fa-exclamation-triangle fa-lg"></i><a data-target="#hatir" data-toggle="modal">Güvenlik Hatırlatmaları</a></li>
                         </ul>                      
                     </div>
@@ -413,6 +413,35 @@
                         
                     </div>
                 </div>
+
+
+<div id="complaint" class="modal green fade modal-scroll modal-overflow container" tabindex="-1" aria-hidden="true" style="display: none; margin-top: -120.5px;">
+    <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Hatalı İlan Bildir</h4>
+    </div>
+    <form class="form-fv " method="post" action="{{url('ilan/sikayetlerAjax')}}" >
+    <div class="modal-body">
+        
+            <div class="form-body">
+                <div class="form-group">
+                        <label>Mesaj</label>
+                        <textarea name="mesaj" class="form-control" rows="10" required></textarea>
+                </div>
+            </div>
+
+            <div class="alert hide">
+                <span class="alert-message"></span>
+            </div>
+    </div>
+    <div class="modal-footer">
+            <input type="hidden" name="{{this.csrf.name}}" value="{{this.csrf.token}}"/>
+            <input type="hidden" name="ilan_id" value="{{ilan.id}}"/>
+            <button type="submit" class="btn blue">Posta</button>
+            <button type="button" data-dismiss="modal" class="btn btn-default">Kapat</button>
+    </div>
+    </form>
+</div>
 
 <div id="hatir" class="modal fade modal-scroll modal-overflow container" tabindex="-1" aria-hidden="true" style="display: none; margin-top: -120.5px;">
     <div class="modal-header">

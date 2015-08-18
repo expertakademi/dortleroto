@@ -170,6 +170,13 @@
                         </li>
 					</ul>
 				</li>
+
+                                <li>
+					<a href="{{url('admin/ilan/sikayetler')}}">
+					<i class="fa fa-bookmark"></i>
+					<span class="title">Tanıtım Şikayet</span>
+					</a>
+				</li>
 				<li>
 					<a href="javascript:;">
 					<i class="fa fa-picture-o"></i>

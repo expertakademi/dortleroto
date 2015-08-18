@@ -19,6 +19,7 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\seriler,
 	Modules\Backend\Models\modeller,
 	Modules\Backend\Models\kullanicilar,
+    Modules\Backend\Models\sikayetler,
     Modules\Backend\Plugins\Sahibinden;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
@@ -281,5 +282,24 @@ class IlanController extends ControllerBase{
 		echo (new ilanlar)->sil($params);
 	}
 	
+    public function sikayetlerAction(){
+		$this->view->title= "İlan Sikayetler";
+	}
+    
+    public function dataTableSkiayetlerListeleAction(){
+		$this->view->disable();
+		echo (new sikayetler)->dataTable();
+	}
+    
+    public function sikayetlerSilAction(){
+		parent::disableMain();
+		$id = $this->dispatcher->getParam("id",null,null);
+		$this->view->id = $id;
+	}
+	public function sikayetlerSilAjaxAction(){
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		echo (new sikayetler)->sil($params);
+	}
 }
 ?>

@@ -11,5 +11,13 @@ class IlanController extends ControllerBase{
 		$this->view->ilan = $ilan;
 		$this->view->ilanResimleri = $ilanResimleri;
 	}
+    
+    public function sikayetlerAjaxAction(){
+        //echo 's';exit;
+		parent::ajaxForm();
+		$params = $this->request->getPost();
+		$sikayat = new \Modules\Frontend\Models\sikayetler();
+		echo $sikayat->yeni($params);
+	}
 }
 ?>

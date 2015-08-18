@@ -37,13 +37,16 @@ class Acl extends Plugin
 			$acl->addRole($role);
 		}
 		/*Kaynakları tanımlıyoruz*/
+        
 		switch($sessionRole){
+            
 			case "guest":
+                
 				$controllers = array(
 					'index'     => array('*'),
 					'seri'		=> array('markayaPermalinkGoreGetir'),
 					'ara'		=> array('listele','aramaYap','ustAra'),
-					'ilan'		=> array('goruntule'),
+					'ilan'		=> array('goruntule', 'sikayetlerAjax'),
 					'mesaj'		=> array('gonder','ekleAjax'),
 					'test'		=> array('*')
 				);
@@ -60,7 +63,7 @@ class Acl extends Plugin
 				'index'		=> array('*'),
 				'seri'		=> array('markayaPermalinkGoreGetir'),
 				'ara'		=> array('listele','aramaYap','ustAra'),
-				'ilan'		=> array('goruntule'),
+				'ilan'		=> array('goruntule', 'sikayetlerAjax'),
 				'mesaj'		=> array('gonder','ekleAjax'),
 				'test'		=> array('*')
 				);

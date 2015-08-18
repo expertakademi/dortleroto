@@ -311,6 +311,48 @@ var dataTables = function (){
 		        ]
 		    });
 		},
+                skiayetler : function (id){
+		    jQuery('#skiayetlerTable').dataTable( {
+		        "ajax": app.getBase() + "admin/ilan/dataTableSkiayetlerListele",
+	            "language": {
+	                "url":"//cdn.datatables.net/plug-ins/1.10.6/i18n/Turkish.json"
+	            },
+		        "deferRender": true,
+		        "aaSorting": [],
+		        "aoColumns": [
+		                      {
+					               "sTitle" : "İlan No",
+					               "mData": "ilan_id" 
+					               
+					          },
+                                                  {
+					               "sTitle" : "Baslik",
+					               "mData": "baslik" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Mesaj",
+					               "mData": "mesaj" 
+					               
+					          },
+		                      {
+					               "sTitle" : "Tarih",
+					               "mData": "tarih" 
+					               
+					          },
+		                      
+					          {
+					        	  "sTitle" : "Yönet",
+					        	  "bSearchable": false,
+					        	  "bSortable"  : false,
+					        	  "sClass": 'col-md-1',
+					        	  "mData": function (data){
+					        		  return '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/ilan/sikayetlerSil/id:'+data.id+'" data-form="true">Sil</button>';
+					        	  }
+					          }
+		        ]
+		    });
+		},
 		ilanNotlari : function (id){
 		    jQuery('#ilanNotlariTable').dataTable( {
 		        "ajax": app.getBase() + "admin/ilan/ilanNotDataTable/id:"+id,
