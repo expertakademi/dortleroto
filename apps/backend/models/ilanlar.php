@@ -7,7 +7,7 @@ class ilanlar extends ModelBase{
 
 	protected function initialize(){
 		parent::initialize();
-		$this->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
+		$his->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
 				array(
 						"alias"=>"ilanResimleri"
 				));

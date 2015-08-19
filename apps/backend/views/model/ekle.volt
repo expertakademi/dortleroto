@@ -31,6 +31,36 @@
 				</select>
 			</div>
 		</div>
+                
+                <div class="offset-1 portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-green-haze">
+                            <i class="icon-check font-red-sunglo"></i>
+                            <span class="caption-subject bold uppercase"> Özellikler</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        {% for facilityCode, facility in facilities %}
+                            <div class="form-group form-md-checkboxes">
+                                <label><b>{{ facility }}<b/></label>
+                                <div class="md-checkbox-list">
+                                    <div class="row">
+                                        {% for featureId, feature in facilityFeatures[facilityCode] %}
+                                            <div class="col-md-3" >
+                                                <div class="md-checkbox">
+                                                    <label>
+                                                        <input type="checkbox" class="md-check" name="facilityFeatures[{{featureId}}]" value="1">
+                                                        {{feature}} 
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endfor  %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor  %}
+                    </div>
+                </div>
 	</div>
 </div>
 <div class="modal-footer">
@@ -45,7 +75,7 @@
 				<input type="hidden" name="{{this.csrf.name}}"
 				value="{{this.csrf.token}}"/>
 				<button type="submit" class="btn green">Gönder</button>
-				<button type="reset" class="btn default">Sıfırla</button>
+				<button type="reset" class="btn default close">Sıfırla</button>
 			</div>
 	</div>
 </div>

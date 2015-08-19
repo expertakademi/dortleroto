@@ -4,7 +4,7 @@
 			Modeller
 		</div>
 		<div class="tools">
-			<button class="btn green load-modal" data-target="#generalModal" data-href="{{url('admin/model/ekle')}}" data-form="true">Yeni Model</button>
+			<button class="btn green load-modal" data-target="#containerModal" data-href="{{url('admin/model/ekle')}}" data-form="true">Yeni Model</button>
 		</div>
 	</div>
 	<div class="portlet-body">

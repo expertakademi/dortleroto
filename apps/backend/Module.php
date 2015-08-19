@@ -94,9 +94,9 @@ class Module
 		 */
 		$di->set('db', function() {
 			return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-				"host" => '31.210.54.34',
-				"username" => 'publicUsr',
-				"password" => 'public@123**',
+				"host" => 'localhost',
+				"username" => 'root',
+				"password" => '',
 				"dbname" => 'dortlerOto',
 				"charset" => 'utf8'
 			));

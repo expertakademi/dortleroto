@@ -13,6 +13,12 @@ class modeller extends ModelBase{
 						"message" => parent::diGet('message')->_("foreignKeyDelete",array("name"=>"model","table"=>"ilanlar"))
 				)
 		));
+        
+        $this->hasMany("id","Modules\Backend\Models\modellerFacilityFeatures", "modeller_id",
+            array(
+                "alias" => "modellerFacilityFeatures"
+            )
+        );
 	}
 	public function getir($id){
 		return self::findFirst(array(
@@ -22,9 +28,32 @@ class modeller extends ModelBase{
 				)
 		));
 	}
+    
+    public function getParsedFacilities() {
+        $facilityRowset = $this->modellerFacilityFeatures;
+        $facilitesIds = array();
+        foreach($facilityRowset as $facilityRow) {
+            $facilitesIds[$facilityRow->facility_feature_id] = $facilityRow->facility_feature_id;
+        }
+        
+        return $facilitesIds;
+    }
+    
 	public function yeni($params){
 		$this->ad = $params['modelAdi'];
 		$this->seri_id = $params['seri'];
+        
+        $facilityFeatures = array();
+        if(isset($params['facilityFeatures'])) {
+            foreach($params['facilityFeatures'] as $key => $value) {
+                $facFeature = new modellerFacilityFeatures();
+                $facFeature->facility_feature_id = $key;
+                
+                $facilityFeatures[] = $facFeature;
+            }
+        }
+        $this->modellerFacilityFeatures = $facilityFeatures;
+        
 		if($this->create() == false ):
 			$response['status'] = 'error';
 			$response['message'] = parent::mesajParcala($this);
@@ -38,6 +67,27 @@ class modeller extends ModelBase{
 		$model = $this->getir($params['id']);
 		$model->ad = $params['modelAdi'];
 		$model->seri_id = $params['seri'];
+        
+        $facilityFeatures = array();
+        if(isset($params['facilityFeatures'])) {
+            foreach($params['facilityFeatures'] as $key => $value) {
+                $facFeature = new modellerFacilityFeatures();
+                $facFeature->facility_feature_id = $key;
+                
+                $facilityFeatures[] = $facFeature;
+            }
+        }
+        
+        /**
+         * Deletting Old facilites
+         */
+        foreach ($model->modellerFacilityFeatures as $facModel) {
+            $facModel->delete();
+        }
+        
+        $model->modellerFacilityFeatures = $facilityFeatures;
+        
+        
 		if($model->update() == false ):
 			$response['status'] = 'error';
 			$response['message'] = parent::mesajParcala($model);

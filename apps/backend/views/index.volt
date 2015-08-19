@@ -270,6 +270,13 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal fade in" id="containerModal" tabindex="-1" role="dialog" aria-labelledby="containerModal" aria-hidden="true">
+  <div class="modal-dialog modal-full">
+    <div class="modal-content">
+		
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {{assets.outputJs()}}
 <script>
       jQuery(document).ready(function() {    

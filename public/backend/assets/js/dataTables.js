@@ -132,7 +132,7 @@ var dataTables = function (){
 					        	  "bSortable"  : false,
 					        	  "sClass": 'col-md-2',
 					        	  "mData": function (data){
-					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/model/duzenle/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
+					        		  var duzenle = '<button class="btn yellow load-modal" data-target="#containerModal" data-href="'+app.getBase()+'admin/model/duzenle/id:'+data.DT_RowId+'" data-form="true">Düzenle</button>';
 					        		  var sil = '<button class="btn red load-modal" data-target="#generalModal" data-href="'+app.getBase()+'admin/model/sil/id:'+data.DT_RowId+'" data-form="true">Sil</button>';
 					        		  return duzenle + sil;
 					        	  }
