@@ -189,215 +189,33 @@
                                 </div>  
                                 <h3 class="tab-baslik">Özellikler</h3>
                                 <div class="padding-15">
-                                    <p class="kirmizi font-weight6">Güvenlik</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                         <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                         <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table>
-                                    
-                                    <p class="kirmizi font-weight6">İç Donanım</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table>   
-                                    
-                                    <p class="kirmizi font-weight6">Dış Donanım</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table>   
-                                    
-                                    <p class="kirmizi font-weight6">Multimedya</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table> 
-                                    
-                                    <p class="kirmizi font-weight6">Boyalı Parça</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table>  
-                                    
-                                    <p class="kirmizi font-weight6">Değişen Parça</p>
-                                    <table class="table checks">
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>ABC</td>
-                                            <td><i class="fa fa-check"></i>ABS</td>
-                                            <td><i class="fa fa-check"></i>ASR</td>
-                                            <td><i class="fa fa-check"></i>ESP</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-check"></i>Airmatic</td>
-                                            <td><i class="fa fa-check"></i>EDL</td>
-                                            <td><i class="fa fa-check"></i>EBD</td>
-                                            <td><i class="fa fa-check"></i>TCS</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times "></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pasif"><i class="fa fa-times"></i>BAS</td>
-                                            <td><i class="fa fa-check"></i>Distronic</td>
-                                            <td><i class="fa fa-check"></i>Yokuş Kalkış Desteği</td>
-                                            <td><i class="fa fa-check"></i>Gece Görüş</td>
-                                        </tr>
-                                    
-                                    </table>                           
+                                    {% for facilityCode, facility in facilities %}
+                                        <p class="kirmizi font-weight6">{{ facility }}</p>
+                                        <table class="table checks">
+                                            <colgroup>
+                                                <col style="width: 25%" />
+                                                <col style="width: 25%"  />
+                                                <col style="width: 25%"  />
+                                                <col style="width: 25%"  />
+                                            </colgroup>
+                                            <tr>
+                                                    {% set counter = -1 %}
+                                                    {% for featureId, feature in facilityFeatures[facilityCode] %}
+                                                        {% if counter % 4 == 3 %}
+                                                            </tr>
+                                                            <tr>
+                                                        {% endif %}
+
+                                                        {% set counter = counter + 1 % 4 %}
+                                                        {% if selectedFacilities[featureId]  is defined %}
+                                                            <td {% if loop.last %} colspan={{ counter - 4  }} {% endif %}><i class="fa fa-check"></i>{{feature}}</td>                                                                    
+                                                        {% else %}
+                                                            <td class="pasif" {% if loop.last %} colspan={{ counter - 4 }} {% endif %}><i class="fa fa-times"></i>{{feature}}</td>
+                                                        {% endif %}
+                                                    {% endfor  %}
+                                            </tr>
+                                        </table>
+                                    {% endfor  %}
                                 </div> 
                             </div>
                             <div class="tab-pane padding-15" id="tab_default_2">

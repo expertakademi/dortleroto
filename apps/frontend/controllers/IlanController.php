@@ -1,13 +1,21 @@
 <?php 
 namespace Modules\Frontend\Controllers;
 use Modules\Frontend\Models\ilanlar,
-	Modules\Frontend\Models\ilanResimleri;
+	Modules\Frontend\Models\ilanResimleri,
+    Modules\Frontend\Models\facilities,
+	Modules\Frontend\Models\facilityFeatures;
 class IlanController extends ControllerBase{
 	public function goruntuleAction(){
 		$permalink = $this->dispatcher->getParam("permalink");
 		$id = $this->dispatcher->getParam("id");
 		$ilan = (new ilanlar)->ilanGetir($permalink,$id);
 		$ilanResimleri = (new ilanResimleri)->ilanaGoreGetir($ilan->id);
+        
+        $this->view->selectedFacilities = (new \Modules\Frontend\Models\modellerFacilityFeatures)->getSelectFacilites($ilan->model_id);
+        
+        $this->view->facilities = (new facilities)->getList();
+        $this->view->facilityFeatures = (new facilityFeatures)->getList();
+        
 		$this->view->ilan = $ilan;
 		$this->view->ilanResimleri = $ilanResimleri;
 	}
