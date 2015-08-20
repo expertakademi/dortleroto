@@ -42,5 +42,7 @@ class ilanlar extends ModelBase{
 		endif;
 		return $result;
 	}
+    
+    
 }
 ?>

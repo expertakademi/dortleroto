@@ -3,7 +3,8 @@ namespace Modules\Frontend\Controllers;
 use Modules\Frontend\Models\ilanlar,
 	Modules\Frontend\Models\ilanResimleri,
     Modules\Frontend\Models\facilities,
-	Modules\Frontend\Models\facilityFeatures;
+	Modules\Frontend\Models\facilityFeatures,
+    Modules\Frontend\Models\ilanDamages;
 class IlanController extends ControllerBase{
 	public function goruntuleAction(){
 		$permalink = $this->dispatcher->getParam("permalink");
@@ -15,6 +16,10 @@ class IlanController extends ControllerBase{
         
         $this->view->facilities = (new facilities)->getList();
         $this->view->facilityFeatures = (new facilityFeatures)->getList();
+        
+        $this->view->damageValues = (new ilanDamages)->getDamageValues();
+        $this->view->selectedDamages = (new ilanDamages)->getSelectedDamagesById($id);
+		
         
 		$this->view->ilan = $ilan;
 		$this->view->ilanResimleri = $ilanResimleri;

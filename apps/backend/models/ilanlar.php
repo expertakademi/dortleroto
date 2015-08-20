@@ -7,7 +7,7 @@ class ilanlar extends ModelBase{
 
 	protected function initialize(){
 		parent::initialize();
-		$his->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
+		$this->hasMany("id","Modules\Backend\Models\ilanResimleri","ilan_id",
 				array(
 						"alias"=>"ilanResimleri"
 				));
@@ -27,6 +27,10 @@ class ilanlar extends ModelBase{
 				array(
 						"alias"=>"modeller"
 				));
+        $this->hasMany("id","Modules\Backend\Models\ilanDamages","ilan_id",
+				array(
+						"alias"=>"ilanDamages"
+				));
 		$this->hasOne("id","Modules\Backend\Models\ilanKapora","ilan_id",
 				array(
 						"alias"=>"ilanKapora"
@@ -36,6 +40,25 @@ class ilanlar extends ModelBase{
 	public function getir($id){
 		return self::findFirst($id);
 	}
+    
+    public function getSelectedDamages() {
+        $damagesRowset = $this->ilanDamages;
+        $damages = array();
+        foreach($damagesRowset as $damagesRow) {
+            $damages[$damagesRow->area_no] = $damagesRow->value;
+        }
+        //print_r($damages);exit;
+        return $damages;
+    }
+    
+    public function getSelectedDamagesById($ilanId) {
+        $ilan = (new ilanlar)->getir($ilanId);
+        if($ilan) {
+            return $ilan->getSelectedDamages();
+        }
+        return array();
+    }
+    
 	public function yeni($params){
 		try {
             //Transaction Başlat
@@ -65,6 +88,22 @@ class ilanlar extends ModelBase{
 			$ilan->hasarsiz = $params['hasar'];
 			$ilan->eklenme_tarihi = date('Y-m-d H:i:s');
 			$ilan->aktif=1;
+            
+            /**
+             * Updating Damages
+             */
+            $ilanDamages = array();
+            if(isset($params['ilanDamages'])) {
+                foreach($params['ilanDamages'] as $key => $value) {
+                    $ilanDam = new ilanDamages();
+                    $ilanDam->setTransaction($transaction);
+                    $ilanDam->area_no = $key;
+                    $ilanDam->value = $value;
+                    $ilanDamages[] = $ilanDam;
+                }
+            }
+            $ilan->ilanDamages = $ilanDamages;
+            
 			if($ilan->create() == false):
 				$transaction->rollback(parent::mesajParcala($ilan));
 			endif;
@@ -125,6 +164,12 @@ class ilanlar extends ModelBase{
 					$transaction->rollback(parent::mesajParcala($ilan));
 				endif;
 			endif;
+            
+            /**
+             * Updating Damages
+             */
+            
+            
             //Eklendi
 			$transaction->commit();
 			$response['status']= 'success';
@@ -164,9 +209,37 @@ class ilanlar extends ModelBase{
 		 $ilan->kasa_id =$params['kasa'];
 		 $ilan->hasarsiz = $params['hasar'];
 		 $ilan->guncellenme_tarihi = date('Y-m-d H:i:s');
-		 if($ilan->update() == false):
+         
+         /**
+           * Updating Damages
+           */
+        $ilanDamages = array();
+        if(isset($params['ilanDamages'])) {
+            foreach($params['ilanDamages'] as $key => $value) {
+                $ilanDam = new ilanDamages();
+                $ilanDam->setTransaction($transaction);
+                $ilanDam->area_no = $key;
+                $ilanDam->value = $value;
+                $ilanDamages[] = $ilanDam;
+            }
+        }
+        
+        foreach($ilan->ilanDamages as $model) {
+            $model->setTransaction($transaction);
+            $model->delete();
+        }
+        
+        $ilan->ilanDamages = $ilanDamages;
+           
+		if($ilan->update() == false):
 		 	$transaction->rollback(parent::mesajParcala($ilan));
-		 endif;
+		endif;
+         
+         /**
+          * Setting Up
+          */
+         
+         
 		 //İlan Log
 		 $ilanLog = new ilanLoglari();
 		 $ilanLog->setTransaction($transaction);

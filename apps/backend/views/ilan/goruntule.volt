@@ -212,6 +212,46 @@
 		</div>
 	</div>
 </div>
+<div class="row">  
+<div class="col-md-12 no-padding-right">
+	<div class="portlet light bg-inverse">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="caption-subject bold font-red-flamingo uppercase">
+				Hasar </span>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="row text-center">
+                            <div class="form-group">
+                            <img src="{{url('frontend/assets/img/expertiz.jpg')}}" alt="logo" style="width: 500px;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% set areaNos = [1,2,3,4,5,6,7,8,9,10,11,12,13], counters = 1 %}
+                            {% for areaNo in areaNos %}
+                                {% if selectedDamages[areaNo] is defined and selectedDamages[areaNo] != 0 %}
+                                    {% set counters = 1 %}
+                                    <div class="col-md-1 text-right">
+                                        <b>{{areaNo}}:</b>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                                {{damageValues[selectedDamages[areaNo]]}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {% if counters == 0 %}
+                                <div class="text-center">
+                                <b>Müsait değil</b>
+                                </div>
+                            {% endif %}
+                        </div>
+		</div>
+	</div>
+</div>
+</div>
 <script type="text/javascript">
 window.onload = function() {
 	  dataTables.ilanNotlari({{ilan.id}});

@@ -20,7 +20,8 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\modeller,
 	Modules\Backend\Models\kullanicilar,
     Modules\Backend\Models\sikayetler,
-    Modules\Backend\Plugins\Sahibinden;
+    Modules\Backend\Plugins\Sahibinden,
+    Modules\Backend\Models\ilanDamages;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
         if(isset($_POST['marka'])){
@@ -37,7 +38,8 @@ class IlanController extends ControllerBase{
 				"gucler"		=> (new motorGucleri)->tumunuGetir(),
 				"cekisler"		=> (new cekisler)->tumunuGetir(),
 				"vitesler"		=> (new vitesler)->tumunuGetir(),
-				"kasalar"		=> (new kasalar)->tumunuGetir()
+				"kasalar"		=> (new kasalar)->tumunuGetir(),
+                "damageValues"  => (new ilanDamages)->getDamageValues()
 		));
 		$this->assets
 			->addCss('backend/assets/global/plugins/bootstrap-fileinput2/css/fileinput.min.css')
@@ -82,7 +84,7 @@ class IlanController extends ControllerBase{
 	public function ekleAjaxAction(){
 		parent::ajaxForm();
 		$params = $this->request->getPost();
-        $this->publishSahibinden($params);
+        //$this->publishSahibinden($params);
 		$ilan = new ilanlar();
 		echo $ilan->yeni($params);
         //$images = new ilanlar();
@@ -94,20 +96,22 @@ class IlanController extends ControllerBase{
 		$id = $this->dispatcher->getParam("id",null,null);
 		$ilan = (new ilanlar)->getir($id);
 		$this->view->setVars(array(
-				"title"			=> "İlan Düzenle",
-				"ilan"			=> $ilan,
-				"kategoriler"	=> (new kategoriler)->tumunuGetir(),
-				"markalar" 		=> (new markalar)->tumunuGetir(),
-				"seriler"		=> (new seriler)->markayaGoreGetir($ilan->marka_id),
-				"modeller"		=> (new modeller)->seriyeGoreGetir($ilan->seri_id),
-				"temsilciler"	=> (new kullanicilar)->tumunuGetir(),
-				"yakitlar" 		=> (new yakitlar)->tumunuGetir(),
-				"renkler" 		=> (new renkler)->tumunuGetir(),
-				"hacimler"		=> (new motorHacimleri)->tumunuGetir(),
-				"gucler"		=> (new motorGucleri)->tumunuGetir(),
-				"cekisler"		=> (new cekisler)->tumunuGetir(),
-				"vitesler"		=> (new vitesler)->tumunuGetir(),
-				"kasalar"		=> (new kasalar)->tumunuGetir()
+				"title"			  => "İlan Düzenle",
+				"ilan"			  => $ilan,
+				"kategoriler"	  => (new kategoriler)->tumunuGetir(),
+				"markalar" 		  => (new markalar)->tumunuGetir(),
+				"seriler"		  => (new seriler)->markayaGoreGetir($ilan->marka_id),
+				"modeller"		  => (new modeller)->seriyeGoreGetir($ilan->seri_id),
+				"temsilciler"	  => (new kullanicilar)->tumunuGetir(),
+				"yakitlar" 		  => (new yakitlar)->tumunuGetir(),
+				"renkler" 		  => (new renkler)->tumunuGetir(),
+				"hacimler"		  => (new motorHacimleri)->tumunuGetir(),
+				"gucler"		  => (new motorGucleri)->tumunuGetir(),
+				"cekisler"		  => (new cekisler)->tumunuGetir(),
+				"vitesler"		  => (new vitesler)->tumunuGetir(),
+				"kasalar"		  => (new kasalar)->tumunuGetir(),
+                "damageValues"    => (new ilanDamages)->getDamageValues(),
+                "selectedDamages" => $ilan->getSelectedDamages()
 		));
 		$this->assets
 			->addCss("backend/assets/global/plugins/summernote/dist/summernote.css");
@@ -179,6 +183,9 @@ class IlanController extends ControllerBase{
 		endif;
 		$this->view->satis = (new satislar)->getir($id);
 		$this->view->ekspertiz = (new ilanEkspertiz)->getir($id);
+        
+        $this->view->damageValues = (new ilanDamages)->getDamageValues();
+        $this->view->selectedDamages = (new ilanlar)->getSelectedDamagesById($id);
 		
 		$this->assets
 		->addCss('backend/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')

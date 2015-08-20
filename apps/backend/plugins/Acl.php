@@ -35,6 +35,7 @@ class Acl extends Plugin
 		foreach($roles as $role){
 			$acl->addRole($role);
 		}
+        
 		/*Kaynakları tanımlıyoruz*/
 		switch($sessionRole){
 			case "guest":
@@ -56,7 +57,7 @@ class Acl extends Plugin
 				'ilan'		=> array ('ekle', 'ekleAjax','yonet','dataTableListele','hesapla','goruntule','ilanNotDataTable', 
 					'ekleNot', 'ekleNotAjax','ekleGorusme','ekleGorusmeAjax','ilanGorusmeDataTable','kaporaGoruntule',
 					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis','ekleEkspertiz','ekleEkspertizAjax',
-					'duzenle',' duzenleAjax', 'resimEkle', 'resimDuzenle','resimEkleAjax','resimSil','resimSilAjax','sikayetler',
+					'duzenle','duzenleAjax', 'resimEkle', 'resimDuzenle','resimEkleAjax','resimSil','resimSilAjax','sikayetler',
 					'kapakDegistir','kapakDegistirAjax','sil', 'silAjax', 'dataTableSkiayetlerListele','sikayetlerSil', 'sikayetlerSilAjax'),
 				'musteri'	=> array ('ekle','ekleAjax','duzenle','duzenleAjax','sil',
 					'silAjax', 'yonet','dataTableListele', 'goruntule', 'musteriNotDataTable',
@@ -91,7 +92,7 @@ class Acl extends Plugin
 		$action = $dispatcher->getActionName();
 		 
 		$allowed = $acl->isAllowed($sessionRole, $controller, $action);
-		 
+		//echo $sessionRole . ' ' . $controller . ' ' . $action;exit;
 		if($allowed != \Phalcon\Acl::ALLOW) {
 			$this->response->redirect('');
 			return false;

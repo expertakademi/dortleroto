@@ -180,6 +180,10 @@
                                 <a href="#tab_default_2" data-toggle="tab">
                                 Kredi Teklifleri </a>
                             </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">
+                                Expertiz Raporu </a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_default_1">
@@ -225,6 +229,35 @@
                                 <p>
                                     Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
                                 </p>
+                            </div>
+                            <div class="tab-pane" id="tab_default_3">
+                                <h3 class="tab-baslik">Hasar</h3>
+                                <div class="row text-center">
+                                    <div class="form-group">
+                                    <img src="{{url('frontend/assets/img/expertiz.jpg')}}" alt="logo" style="width: 500px;"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {% set areaNos = [1,2,3,4,5,6,7,8,9,10,11,12,13], counters = 1 %}
+                                    {% for areaNo in areaNos %}
+                                        {% if selectedDamages[areaNo] is defined and selectedDamages[areaNo] != 0 %}
+                                            {% set counters = 1 %}
+                                            <div class="col-md-1 text-right">
+                                                <b>{{areaNo}}:</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                        {{damageValues[selectedDamages[areaNo]]}}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if counters == 0 %}
+                                        <div class="text-center">
+                                        <b>Müsait değil</b>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                             
                         </div>

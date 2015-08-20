@@ -197,6 +197,31 @@
 	               		</div>
 					</div>
 				</div><!-- row -->
+                                <h3 class="form-section">Hasar</h3>
+                                <div class="row text-center">
+                                    <div class="form-group">
+                                    <img src="{{url('frontend/assets/img/expertiz.jpg')}}" alt="logo" style="width: 500px;"/>
+                                    </div>
+                                </div>
+				<div class="row">
+                                    {% set areaNos = [1,2,3,4,5,6,7,8,9,10,11,12,13] %}
+                                    {% for areaNo in areaNos %}
+                                        <div class="col-md-1 text-right">
+                                            {{areaNo}}:
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <select name="ilanDamages[{{areaNo}}]">
+                                                    <option value="0">Seçiniz</option>
+                                                    {% for damageIndex,damageValue in damageValues %}
+                                                        <option value="{{damageIndex}}">{{damageValue}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
 				<h3 class="form-section">Resimler</h3>
 				<div class="row">
 					<div class="col-md-12">
