@@ -238,7 +238,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    {% set areaNos = [1,2,3,4,5,6,7,8,9,10,11,12,13], counters = 1 %}
+                                    {% set areaNos = [1,2,3,4,5,6,7,8,9,10,11,12,13], counters = 0 %}
                                     {% for areaNo in areaNos %}
                                         {% if selectedDamages[areaNo] is defined and selectedDamages[areaNo] != 0 %}
                                             {% set counters = 1 %}
