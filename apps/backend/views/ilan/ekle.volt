@@ -197,6 +197,8 @@
 	               		</div>
 					</div>
 				</div><!-- row -->
+
+
                                 <h3 class="form-section">Hasar</h3>
                                 <div class="row text-center">
                                     <div class="form-group">
@@ -222,18 +224,50 @@
                                     {% endfor %}
                                 </div>
 
-				<h3 class="form-section">Resimler</h3>
+				
+
+                                <div class="offset-1 portlet light bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption font-green-haze">
+                                            <i class="icon-check font-red-sunglo"></i>
+                                            <span class="caption-subject bold uppercase"> Özellikler</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        {% for facilityCode, facility in facilities %}
+                                            <div class="form-group form-md-checkboxes">
+                                                <label><b>{{ facility }}<b/></label>
+                                                <div class="md-checkbox-list">
+                                                    <div class="row">
+                                                        {% for featureId, feature in facilityFeatures[facilityCode] %}
+                                                            <div class="col-md-3" >
+                                                                <div class="md-checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" class="md-check features-list" id="feature-{{featureId}}" name="facilityFeatures[{{featureId}}]" value="1">
+                                                                        {{feature}} 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor  %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor  %}
+                                    </div>
+                                </div>
+
+                                <h3 class="form-section">Resimler</h3>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="form-group">
-	                    	<input id="resimler" name="resim[]" type="file" multiple="true" 
-	                    	data-fv-file="true" 
-	                    	data-fv-file-maxsize="1048576"
-	                    	data-fv-file-message="Her bir resim max 1 MB olabilir ve en fazla 10 resim yüklenebilir."
-	                    	data-fv-file-maxfiles="10"	
-	                    	required>
-	                    	<input type="hidden" name="kapak" value="">
-	               		</div>
+                                            <div class="form-group">
+                                            <input id="resimler" name="resim[]" type="file" multiple="true" 
+                                            data-fv-file="true" 
+                                            data-fv-file-maxsize="1048576"
+                                            data-fv-file-message="Her bir resim max 1 MB olabilir ve en fazla 10 resim yüklenebilir."
+                                            data-fv-file-maxfiles="10"	
+                                            required>
+                                            <input type="hidden" name="kapak" value="">
+                                            </div>
 					</div>
 				</div><!-- row -->
 			</div>

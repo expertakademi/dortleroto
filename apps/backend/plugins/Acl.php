@@ -53,7 +53,7 @@ class Acl extends Plugin
 				'kategori'  => array ('ekle','ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'yonet', 'dataTableListele'),
 				'marka' 	=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'dataTableListele'),
 				'seri' 		=> array ('yonet', 'ekle', 'ekleAjax','duzenle', 'duzenleAjax', 'sil', 'silAjax', 'markayaGoreGetir', 'dataTableListele'),
-				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele'),
+				'model'		=> array ('yonet', 'ekle', 'ekleAjax', 'duzenle', 'duzenleAjax', 'sil', 'silAjax', 'seriyeGoreGetir', 'dataTableListele', 'selectedFacilities'),
 				'ilan'		=> array ('ekle', 'ekleAjax','yonet','dataTableListele','hesapla','goruntule','ilanNotDataTable', 
 					'ekleNot', 'ekleNotAjax','ekleGorusme','ekleGorusmeAjax','ilanGorusmeDataTable','kaporaGoruntule',
 					'kaporaDuzenleAjax','ekleSatis','ekleSatisAjax','goruntuleSatis','ekleEkspertiz','ekleEkspertizAjax',

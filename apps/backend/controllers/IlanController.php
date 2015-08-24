@@ -21,7 +21,9 @@ use Modules\Backend\Models\kategoriler,
 	Modules\Backend\Models\kullanicilar,
     Modules\Backend\Models\sikayetler,
     Modules\Backend\Plugins\Sahibinden,
-    Modules\Backend\Models\ilanDamages;
+    Modules\Backend\Models\ilanDamages,
+    Modules\Backend\Models\facilities,
+    Modules\Backend\Models\facilityFeatures;
 class IlanController extends ControllerBase{
 	public function ekleAction(){
         if(isset($_POST['marka'])){
@@ -39,7 +41,9 @@ class IlanController extends ControllerBase{
 				"cekisler"		=> (new cekisler)->tumunuGetir(),
 				"vitesler"		=> (new vitesler)->tumunuGetir(),
 				"kasalar"		=> (new kasalar)->tumunuGetir(),
-                "damageValues"  => (new ilanDamages)->getDamageValues()
+                "damageValues"  => (new ilanDamages)->getDamageValues(),
+                "facilities"    => (new facilities)->getList(),
+                "facilityFeatures" => (new facilityFeatures)->getList()
 		));
 		$this->assets
 			->addCss('backend/assets/global/plugins/bootstrap-fileinput2/css/fileinput.min.css')
@@ -96,22 +100,25 @@ class IlanController extends ControllerBase{
 		$id = $this->dispatcher->getParam("id",null,null);
 		$ilan = (new ilanlar)->getir($id);
 		$this->view->setVars(array(
-				"title"			  => "İlan Düzenle",
-				"ilan"			  => $ilan,
-				"kategoriler"	  => (new kategoriler)->tumunuGetir(),
-				"markalar" 		  => (new markalar)->tumunuGetir(),
-				"seriler"		  => (new seriler)->markayaGoreGetir($ilan->marka_id),
-				"modeller"		  => (new modeller)->seriyeGoreGetir($ilan->seri_id),
-				"temsilciler"	  => (new kullanicilar)->tumunuGetir(),
-				"yakitlar" 		  => (new yakitlar)->tumunuGetir(),
-				"renkler" 		  => (new renkler)->tumunuGetir(),
-				"hacimler"		  => (new motorHacimleri)->tumunuGetir(),
-				"gucler"		  => (new motorGucleri)->tumunuGetir(),
-				"cekisler"		  => (new cekisler)->tumunuGetir(),
-				"vitesler"		  => (new vitesler)->tumunuGetir(),
-				"kasalar"		  => (new kasalar)->tumunuGetir(),
-                "damageValues"    => (new ilanDamages)->getDamageValues(),
-                "selectedDamages" => $ilan->getSelectedDamages()
+				"title"			   => "İlan Düzenle",
+				"ilan"			   => $ilan,
+				"kategoriler"	   => (new kategoriler)->tumunuGetir(),
+				"markalar" 		   => (new markalar)->tumunuGetir(),
+				"seriler"		   => (new seriler)->markayaGoreGetir($ilan->marka_id),
+				"modeller"		   => (new modeller)->seriyeGoreGetir($ilan->seri_id),
+				"temsilciler"	   => (new kullanicilar)->tumunuGetir(),
+				"yakitlar" 		   => (new yakitlar)->tumunuGetir(),
+				"renkler" 		   => (new renkler)->tumunuGetir(),
+				"hacimler"		   => (new motorHacimleri)->tumunuGetir(),
+				"gucler"		   => (new motorGucleri)->tumunuGetir(),
+				"cekisler"		   => (new cekisler)->tumunuGetir(),
+				"vitesler"		   => (new vitesler)->tumunuGetir(),
+				"kasalar"		   => (new kasalar)->tumunuGetir(),
+                "damageValues"     => (new ilanDamages)->getDamageValues(),
+                "selectedDamages"  => $ilan->getSelectedDamages(),
+                "facilities"       => (new facilities)->getList(),
+                "facilityFeatures" => (new facilityFeatures)->getList(),
+                "selectedFacilites" => $ilan->getParsedFacilities()
 		));
 		$this->assets
 			->addCss("backend/assets/global/plugins/summernote/dist/summernote.css");

@@ -232,6 +232,35 @@
                                     {% endfor %}
                                 </div>
 			</div>
+                        <div class="offset-1 portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption font-green-haze">
+                                    <i class="icon-check font-red-sunglo"></i>
+                                    <span class="caption-subject bold uppercase"> Özellikler</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                {% for facilityCode, facility in facilities %}
+                                    <div class="form-group form-md-checkboxes">
+                                        <label><b>{{ facility }}<b/></label>
+                                        <div class="md-checkbox-list">
+                                            <div class="row">
+                                                {% for featureId, feature in facilityFeatures[facilityCode] %}
+                                                    <div class="col-md-3" >
+                                                        <div class="md-checkbox">
+                                                            <label>
+                                                                <input type="checkbox" class="md-check features-list" id="feature-{{featureId}}" name="facilityFeatures[{{featureId}}]" value="1" {% if selectedFacilites[featureId]  is defined %} checked="checked" {% endif %} >
+                                                                {{feature}} 
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                {% endfor  %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor  %}
+                            </div>
+                        </div>
 			<div class="form-actions">
 				<div class="row">
 						<div class="alert alert-dismissible hide col-md-offset-2 col-md-7" role="alert">

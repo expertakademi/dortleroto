@@ -2,6 +2,7 @@ var ilanEkle = function(){
 	var markaSelect = "[name='marka']";
 	var seriSelect = "[name='seri']";
 	var modelSelect = "[name='model']";
+        
 	return{
 		markaSec: function(){
 			jQuery('body').on("change",markaSelect,function(){
@@ -36,6 +37,7 @@ var ilanEkle = function(){
 				}
 			});
 		},
+                
 		modelGetir : function (seriId){
 			ilanEkle.selectSifirla(modelSelect,'Seçiniz');
 			$.getJSON( app.getBase()+'admin/model/seriyeGoreGetir/seriId:'+seriId, function( data ) {
@@ -44,6 +46,28 @@ var ilanEkle = function(){
 			         .append($("<option></option>")
 			         .attr("value",value.id)
 			         .text(value.ad));	
+				});
+			});
+		},
+                modelSec : function (){
+			jQuery(modelSelect).click(function(){
+				var secilen = jQuery(modelSelect).find("option:selected").val();
+                                
+                                $(".features-list").removeAttr('checked');
+                                $(".features-list").each(function() {
+                                   $(this).parent().removeClass('checked');
+                                });
+                        
+				if(secilen != ""){
+                                      ilanEkle.facilityGetir(secilen);
+				}
+			});
+		},
+                facilityGetir : function (secilen){
+			$.getJSON( app.getBase()+'admin/model/selectedFacilities/modelId:'+secilen, function( data ) {
+				$.each(data, function(key,value) {   
+                                      $('#feature-' + value).attr('checked', 'checked');
+				      $('#feature-' + value).parent().addClass('checked');
 				});
 			});
 		},
@@ -66,6 +90,7 @@ var ilanEkle = function(){
 		init :  function(){
 			ilanEkle.markaSec();
 			ilanEkle.seriSec();
+                        ilanEkle.modelSec();
 			ilanEkle.kapakSec();
 		}
 	}

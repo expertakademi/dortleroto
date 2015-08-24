@@ -12,7 +12,7 @@ class IlanController extends ControllerBase{
 		$ilan = (new ilanlar)->ilanGetir($permalink,$id);
 		$ilanResimleri = (new ilanResimleri)->ilanaGoreGetir($ilan->id);
         
-        $this->view->selectedFacilities = (new \Modules\Frontend\Models\modellerFacilityFeatures)->getSelectFacilites($ilan->model_id);
+        $this->view->selectedFacilities = (new \Modules\Frontend\Models\ilanFacilityFeatures)->getSelectFacilites($id);
         
         $this->view->facilities = (new facilities)->getList();
         $this->view->facilityFeatures = (new facilityFeatures)->getList();

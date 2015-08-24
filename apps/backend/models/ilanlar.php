@@ -35,6 +35,10 @@ class ilanlar extends ModelBase{
 				array(
 						"alias"=>"ilanKapora"
 				));
+        $this->hasMany("id","Modules\Backend\Models\ilanFacilityFeatures","ilan_id",
+				array(
+						"alias"=>"ilanFacilityFeatures"
+				));
 		
 	}
 	public function getir($id){
@@ -57,6 +61,16 @@ class ilanlar extends ModelBase{
             return $ilan->getSelectedDamages();
         }
         return array();
+    }
+    
+    public function getParsedFacilities() {
+        $facilityRowset = $this->ilanFacilityFeatures;
+        $facilitesIds = array();
+        foreach($facilityRowset as $facilityRow) {
+            $facilitesIds[$facilityRow->facility_feature_id] = $facilityRow->facility_feature_id;
+        }
+        
+        return $facilitesIds;
     }
     
 	public function yeni($params){
@@ -88,6 +102,18 @@ class ilanlar extends ModelBase{
 			$ilan->hasarsiz = $params['hasar'];
 			$ilan->eklenme_tarihi = date('Y-m-d H:i:s');
 			$ilan->aktif=1;
+            
+            $facilityFeatures = array();
+            if(isset($params['facilityFeatures'])) {
+                foreach($params['facilityFeatures'] as $key => $value) {
+                    $facFeature = new ilanFacilityFeatures();
+                    $facFeature->setTransaction($transaction);
+                    $facFeature->facility_feature_id = $key;
+
+                    $facilityFeatures[] = $facFeature;
+                }
+            }
+            $ilan->ilanFacilityFeatures = $facilityFeatures;
             
             /**
              * Updating Damages
@@ -198,17 +224,37 @@ class ilanlar extends ModelBase{
 		 $ilan->model_id = $params['model'];
 		 $ilan->yil = $params['yil'];
 		 $ilan->fiyat = $params['fiyat'];
-		 $ilan->kilometre = $params['kilometre'];
-		 $ilan->garanti = $params['garanti'];
-		 $ilan->yakit_id = $params['yakit'];
-		 $ilan->renk_id = $params ['renk'];
-		 $ilan->motor_hacim_id = $params['hacim'];
-		 $ilan->motor_guc_id = $params['guc'];
-		 $ilan->cekis_id = $params['cekis'];
-		 $ilan->vites_id = $params['vites'];
-		 $ilan->kasa_id =$params['kasa'];
-		 $ilan->hasarsiz = $params['hasar'];
-		 $ilan->guncellenme_tarihi = date('Y-m-d H:i:s');
+		$ilan->kilometre = $params['kilometre'];
+		$ilan->garanti = $params['garanti'];
+		$ilan->yakit_id = $params['yakit'];
+		$ilan->renk_id = $params ['renk'];
+		$ilan->motor_hacim_id = $params['hacim'];
+		$ilan->motor_guc_id = $params['guc'];
+		$ilan->cekis_id = $params['cekis'];
+		$ilan->vites_id = $params['vites'];
+		$ilan->kasa_id =$params['kasa'];
+		$ilan->hasarsiz = $params['hasar'];
+		$ilan->guncellenme_tarihi = date('Y-m-d H:i:s');
+         
+        $facilityFeatures = array();
+        if(isset($params['facilityFeatures'])) {
+            foreach($params['facilityFeatures'] as $key => $value) {
+                $facFeature = new ilanFacilityFeatures();
+                $facFeature->setTransaction($transaction);
+                $facFeature->facility_feature_id = $key;
+
+                $facilityFeatures[] = $facFeature;
+            }
+        }
+        /**
+         * Deletting Old facilites
+         */
+        foreach ($ilan->ilanFacilityFeatures as $facModel) {
+            $facModel->setTransaction($transaction);
+            $facModel->delete();
+        }
+        
+        $ilan->ilanFacilityFeatures = $facilityFeatures;
          
          /**
            * Updating Damages

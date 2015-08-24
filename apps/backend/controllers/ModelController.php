@@ -43,6 +43,21 @@ class ModelController extends ControllerBase{
         $this->view->facilities = (new facilities)->getList();
         $this->view->facilityFeatures = (new facilityFeatures)->getList();
 	}
+    
+    public function selectedFacilitiesAction() {
+        parent::checkAjaxReq();
+        $this->view->disable();
+		$modelId = $this->dispatcher->getParam("modelId");
+		if(isset($modelId)):
+			$model = (new modeller)->getir($modelId);
+            
+			$this->response->setJsonContent($model->getParsedFacilities());
+            return $this->response;
+		else:
+			die($this->message->_('accessDenied'));
+		endif;
+    }
+    
 	public function duzenleAjaxAction(){
 		parent::ajaxForm();
 		$params = $this->request->getPost();
